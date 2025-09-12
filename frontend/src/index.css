@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Inter, system-ui, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus:outline-none disabled:opacity-50 disabled:pointer-events-none px-4 py-2;
+  }
+  
+  .btn-primary {
+    @apply bg-primary text-white hover:bg-green-600;
+  }
+  
+  .btn-secondary {
+    @apply bg-gray-200 text-gray-900 hover:bg-gray-300;
+  }
+  
+  .btn-outline {
+    @apply border border-gray-300 bg-transparent hover:bg-gray-100;
+  }
+  
+  .btn-ghost {
+    @apply hover:bg-gray-100;
+  }
+  
+  .input {
+    @apply flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-primary disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  
+  .card {
+    @apply rounded-lg border bg-white shadow-sm;
+  }
+  
+  .dot-pulse {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 30px;
+  }
+  
+  .dot-pulse::before,
+  .dot-pulse::after {
+    content: '';
+    display: block;
+    width: 8px;
+    height: 8px;
+    background-color: #ccc;
+    border-radius: 50%;
+    animation: dotPulse 1.5s infinite ease-in-out;
+  }
+  
+  .dot-pulse::before {
+    animation-delay: 0s;
+  }
+  
+  .dot-pulse::after {
+    animation-delay: 0.5s;
+  }
+  
+  @keyframes dotPulse {
+    0%, 100% {
+      transform: scale(0.8);
+      opacity: 0.5;
+    }
+    50% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+}
