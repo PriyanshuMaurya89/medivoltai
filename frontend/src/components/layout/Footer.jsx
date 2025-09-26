@@ -1,33 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
-import aiModel from '../../assets/3d-ai-model.svg';
-import medicalDataModel from '../../assets/3d-medical-data.svg';
-import robotAssistantModel from '../../assets/3d-robot-assistant.svg';
-import './3DAIAnimations.css';
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-white py-12 relative overflow-hidden">
-      {/* 3D Models Animation Container */}
-      <div className="ai-models-wrapper">
-        {/* 3D AI Model Animation */}
-        <div className="ai-model-container">
-          <img src={aiModel} alt="3D AI Model" className="ai-model" />
-        </div>
-        
-        {/* 3D Medical Data Model Animation */}
-        <div className="ai-model-container medical-data-container">
-          <img src={medicalDataModel} alt="3D Medical Data Model" className="ai-model medical-data-model" />
-        </div>
-        
-        {/* 3D Robot Assistant Model Animation */}
-        <div className="ai-model-container robot-assistant-container">
-          <img src={robotAssistantModel} alt="3D Robot Assistant Model" className="ai-model robot-assistant-model" />
-        </div>
+    <footer className="bg-black text-white py-12 relative overflow-hidden">
+      {/* Purple Glow Effect */}
+      <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full max-w-4xl h-60 z-0">
+        <div className="w-full h-full bg-gradient-to-b from-primary-500/30 via-accent-500/20 to-transparent rounded-full blur-3xl"></div>
       </div>
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
         {/* Logo and Message */}
         <div className="flex flex-col md:flex-row justify-between items-start mb-12">
           <div className="mb-8 md:mb-0">
@@ -47,9 +30,9 @@ export default function Footer() {
                 <input 
                   type="email" 
                   placeholder="Enter your email..." 
-                  className="px-4 py-2 rounded-l-md bg-gray-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full md:w-64"
+                  className="px-4 py-2 rounded-l-md bg-gray-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary w-full md:w-64"
                 />
-                <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-r-md">
+                <button className="bg-primary hover:bg-primary-600 text-white px-4 py-2 rounded-r-md">
                   →
                 </button>
               </div>

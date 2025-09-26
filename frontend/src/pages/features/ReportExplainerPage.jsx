@@ -120,39 +120,44 @@ export default function ReportExplainerPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50 py-12">
+    <div className="min-h-screen bg-black text-white py-12">
       <div className="container mx-auto px-4 max-w-4xl">
+        {/* Purple Glow Effect */}
+        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full max-w-6xl h-80 z-0">
+          <div className="w-full h-full bg-gradient-to-t from-primary-500/40 via-accent-500/30 to-transparent rounded-full blur-3xl"></div>
+        </div>
+        
         {/* Header */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-12 relative z-10">
           <div className="flex justify-center mb-4">
-            <div className="p-4 bg-blue-100 rounded-full">
-              <FileText className="h-12 w-12 text-blue-600" />
+            <div className="p-4 bg-gradient-to-r from-primary-500/20 to-accent-500/20 rounded-full border border-primary-500/30">
+              <FileText className="h-12 w-12 text-primary-400" />
             </div>
           </div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+          <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-white via-primary-200 to-accent-300 bg-clip-text text-transparent">
             🩺 AI Medical Report Explainer
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
             Upload your medical report and get AI-powered explanations in simple Hindi or English
           </p>
           <div className="flex justify-center gap-4 mt-6">
-            <span className="px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
+            <span className="px-4 py-2 bg-primary-500/20 text-primary-300 border border-primary-500/30 rounded-full text-sm font-medium">
               📝 Upload Any Report
             </span>
-            <span className="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-medium">
+            <span className="px-4 py-2 bg-accent-500/20 text-accent-300 border border-accent-500/30 rounded-full text-sm font-medium">
               🇮🇳 Hindi Support
             </span>
-            <span className="px-4 py-2 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">
+            <span className="px-4 py-2 bg-gradient-to-r from-primary-500/20 to-accent-500/20 text-primary-200 border border-primary-500/30 rounded-full text-sm font-medium">
               🤖 AI Powered
             </span>
           </div>
         </div>
 
         {/* Language Selection */}
-        <Card className="mb-8">
+        <div className="mb-8 p-6 bg-gradient-to-r from-gray-900/50 to-gray-800/50 border border-gray-700/50 rounded-2xl backdrop-blur-sm relative z-10">
           <div className="flex items-center gap-4 mb-4">
-            <Languages className="h-5 w-5 text-primary" />
-            <h3 className="text-lg font-semibold">Choose Language / भाषा चुनें</h3>
+            <Languages className="h-5 w-5 text-primary-400" />
+            <h3 className="text-lg font-semibold text-white">Choose Language / भाषा चुनें</h3>
           </div>
           <div className="flex gap-4">
             <Button
@@ -170,28 +175,28 @@ export default function ReportExplainerPage() {
               हिंदी (Hindi)
             </Button>
           </div>
-        </Card>
+        </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 gap-8 relative z-10">
           {/* File Upload Section */}
           <div>
-            <Card className="mb-6">
-              <h3 className="text-xl font-semibold mb-4">Upload Your Report</h3>
+            <div className="mb-6 p-6 bg-gradient-to-r from-gray-900/50 to-gray-800/50 border border-gray-700/50 rounded-2xl backdrop-blur-sm">
+              <h3 className="text-xl font-semibold mb-4 text-white">Upload Your Report</h3>
               
               {/* Drag and Drop Area */}
               <div
                 className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors ${
                   dragActive 
-                    ? 'border-primary bg-primary/5' 
-                    : 'border-gray-300 hover:border-primary/50'
+                    ? 'border-primary-400 bg-primary-500/10' 
+                    : 'border-gray-600 hover:border-primary-500/50'
                 }`}
                 onDragEnter={handleDrag}
                 onDragLeave={handleDrag}
                 onDragOver={handleDrag}
                 onDrop={handleDrop}
               >
-                <Upload className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                <p className="text-gray-600 mb-4">
+                <Upload className="h-12 w-12 text-primary-400 mx-auto mb-4" />
+                <p className="text-gray-300 mb-4">
                   Drag & drop your medical report here, or click to select
                 </p>
                 <Input
@@ -206,16 +211,16 @@ export default function ReportExplainerPage() {
                     Choose File
                   </label>
                 </Button>
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-gray-400">
                   Supports PDF, JPG, PNG files up to 10MB
                 </p>
               </div>
 
               {selectedFile && (
-                <div className="mt-4 p-4 bg-green-50 border border-green-200 rounded-lg">
+                <div className="mt-4 p-4 bg-green-500/20 border border-green-500/30 rounded-lg">
                   <div className="flex items-center gap-2">
-                    <CheckCircle className="h-5 w-5 text-green-600" />
-                    <span className="font-medium text-green-800">
+                    <CheckCircle className="h-5 w-5 text-green-400" />
+                    <span className="font-medium text-green-300">
                       File Selected: {selectedFile.name}
                     </span>
                   </div>
@@ -224,7 +229,7 @@ export default function ReportExplainerPage() {
 
               {selectedFile && (
                 <Button 
-                  className="w-full mt-4" 
+                  className="w-full mt-4 bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-400 hover:to-primary-500" 
                   onClick={analyzeReport}
                   disabled={isAnalyzing}
                 >
@@ -241,20 +246,20 @@ export default function ReportExplainerPage() {
                   )}
                 </Button>
               )}
-            </Card>
+            </div>
 
             {/* Sample Reports */}
-            <Card>
-              <h3 className="text-xl font-semibold mb-4">Try Sample Reports</h3>
+            <div className="p-6 bg-gradient-to-r from-gray-900/50 to-gray-800/50 border border-gray-700/50 rounded-2xl backdrop-blur-sm">
+              <h3 className="text-xl font-semibold mb-4 text-white">Try Sample Reports</h3>
               <div className="space-y-3">
                 {sampleReports.map((sample, index) => (
                   <div 
                     key={index}
-                    className="flex items-center justify-between p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+                    className="flex items-center justify-between p-3 border border-gray-600/50 rounded-lg hover:bg-gray-700/30 transition-colors"
                   >
                     <div>
-                      <p className="font-medium text-gray-900">{sample.name}</p>
-                      <p className="text-sm text-gray-500">{sample.type}</p>
+                      <p className="font-medium text-white">{sample.name}</p>
+                      <p className="text-sm text-gray-400">{sample.type}</p>
                     </div>
                     <Button 
                       size="sm" 
@@ -267,31 +272,31 @@ export default function ReportExplainerPage() {
                   </div>
                 ))}
               </div>
-            </Card>
+            </div>
           </div>
 
           {/* Analysis Results */}
           <div>
             {analysisResult ? (
-              <Card>
+              <div className="p-6 bg-gradient-to-r from-gray-900/50 to-gray-800/50 border border-gray-700/50 rounded-2xl backdrop-blur-sm">
                 <div className="flex items-center gap-2 mb-6">
-                  <CheckCircle className="h-6 w-6 text-green-600" />
-                  <h3 className="text-xl font-semibold">
+                  <CheckCircle className="h-6 w-6 text-green-400" />
+                  <h3 className="text-xl font-semibold text-white">
                     {language === 'hindi' ? 'रिपोर्ट विश्लेषण' : 'Report Analysis'}
                   </h3>
                 </div>
 
                 {/* Summary */}
-                <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                  <h4 className="font-semibold text-blue-900 mb-2">
+                <div className="mb-6 p-4 bg-primary-500/20 border border-primary-500/30 rounded-lg">
+                  <h4 className="font-semibold text-primary-200 mb-2">
                     {language === 'hindi' ? 'सारांश' : 'Summary'}
                   </h4>
-                  <p className="text-blue-800">{analysisResult.summary}</p>
+                  <p className="text-primary-100">{analysisResult.summary}</p>
                 </div>
 
                 {/* Key Findings */}
                 <div className="mb-6">
-                  <h4 className="font-semibold text-gray-900 mb-4">
+                  <h4 className="font-semibold text-white mb-4">
                     {language === 'hindi' ? 'मुख्य परिणाम' : 'Key Findings'}
                   </h4>
                   <div className="space-y-3">
@@ -299,22 +304,22 @@ export default function ReportExplainerPage() {
                       <div 
                         key={index}
                         className={`p-4 border rounded-lg ${
-                          finding.status === 'high' ? 'bg-red-50 border-red-200' :
-                          finding.status === 'low' ? 'bg-yellow-50 border-yellow-200' :
-                          'bg-green-50 border-green-200'
+                          finding.status === 'high' ? 'bg-red-500/20 border-red-500/30' :
+                          finding.status === 'low' ? 'bg-yellow-500/20 border-yellow-500/30' :
+                          'bg-green-500/20 border-green-500/30'
                         }`}
                       >
                         <div className="flex items-start justify-between mb-2">
-                          <span className="font-medium">{finding.parameter}</span>
+                          <span className="font-medium text-white">{finding.parameter}</span>
                           <span className={`text-sm px-2 py-1 rounded ${
-                            finding.status === 'high' ? 'bg-red-200 text-red-800' :
-                            finding.status === 'low' ? 'bg-yellow-200 text-yellow-800' :
-                            'bg-green-200 text-green-800'
+                            finding.status === 'high' ? 'bg-red-400/30 text-red-200' :
+                            finding.status === 'low' ? 'bg-yellow-400/30 text-yellow-200' :
+                            'bg-green-400/30 text-green-200'
                           }`}>
                             {finding.value}
                           </span>
                         </div>
-                        <p className="text-sm text-gray-700">{finding.explanation}</p>
+                        <p className="text-gray-300 text-sm mt-2">{finding.explanation}</p>
                       </div>
                     ))}
                   </div>
@@ -369,11 +374,11 @@ export default function ReportExplainerPage() {
                   <Download className="h-4 w-4 mr-2" />
                   {language === 'hindi' ? 'रिपोर्ट डाउनलोड करें' : 'Download Analysis Report'}
                 </Button>
-              </Card>
+              </div>
             ) : (
-              <Card className="text-center py-12">
-                <Brain className="h-16 w-16 text-gray-300 mx-auto mb-4" />
-                <h3 className="text-xl font-semibold text-gray-500 mb-2">
+              <div className="text-center py-12 p-6 bg-gradient-to-r from-gray-900/50 to-gray-800/50 border border-gray-700/50 rounded-2xl backdrop-blur-sm">
+                <Brain className="h-16 w-16 text-gray-400 mx-auto mb-4" />
+                <h3 className="text-xl font-semibold text-gray-300 mb-2">
                   {language === 'hindi' ? 'AI विश्लेषण के लिए तैयार' : 'Ready for AI Analysis'}
                 </h3>
                 <p className="text-gray-400">
@@ -382,7 +387,7 @@ export default function ReportExplainerPage() {
                     : 'Upload your report or try a sample report to get started'
                   }
                 </p>
-              </Card>
+              </div>
             )}
           </div>
         </div>

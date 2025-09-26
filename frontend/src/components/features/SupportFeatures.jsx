@@ -4,30 +4,34 @@ import React from 'react';
  
  const supportOptions = [
    {
-     icon: <Shield size={24} className="text-orange-500" />,
-     title: 'Instant Answers:',
-     description: 'Pre-trip, itinerary tweaks, visa & document guidance',
+     icon: <Shield size={24} className="text-primary-400" />,
+     title: 'Instant Health Answers:',
+     description: 'Medical reports, symptoms, medicine info & emergency guidance',
    },
    {
-     icon: <CheckCircle size={24} className="text-green-500" />,
-     title: 'On-the-Go Replans:',
-     description: 'Weather-aware replans & live confirms',
+     icon: <CheckCircle size={24} className="text-accent-400" />,
+     title: 'AI Health Monitoring:',
+     description: 'Real-time health tracking & personalized recommendations',
    },
    {
-     icon: <MessageCircle size={24} className="text-blue-500" />,
-     title: '24/7 Support:',
-     description: 'Get instant help via WhatsApp or Call',
+     icon: <MessageCircle size={24} className="text-primary-500" />,
+     title: '24/7 Medical Support:',
+     description: 'Get instant help via AI chat or emergency hotline',
    },
    {
-     icon: <Lock size={24} className="text-purple-500" />,
-     title: 'Travelers\' Choice:',
-     description: '3M+ Travellers • 97% satisfaction • 4.6★ smiles',
+     icon: <Lock size={24} className="text-accent-500" />,
+     title: 'Patients\' Choice:',
+     description: '50K+ Users • 98% satisfaction • 4.8★ health rating',
    },
  ];
  
  const SupportFeatures = () => {
    return (
-     <section className="relative py-16 bg-gradient-to-br from-white to-orange-50 overflow-hidden">
+     <section className="relative py-16 bg-black overflow-hidden">
+      {/* Purple Glow Effect */}
+      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-4xl h-60 z-0">
+        <div className="w-full h-full bg-gradient-to-t from-primary-500/30 via-accent-500/20 to-transparent rounded-full blur-3xl"></div>
+      </div>
        <div className="relative container mx-auto px-4 z-10">
          <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
            {/* Mobile Chat Interface */}
@@ -41,10 +45,10 @@ import React from 'react';
            >
              <div className="w-full h-full flex flex-col">
                {/* Chat Header */}
-               <div className="flex items-center justify-between p-4 bg-orange-500 text-white shadow-md">
+               <div className="flex items-center justify-between p-4 bg-primary text-white shadow-md">
                  <div className="flex items-center space-x-3">
                    <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
-                     <MessageCircle size={20} className="text-orange-500" />
+                     <MessageCircle size={20} className="text-primary" />
                    </div>
                    <span className="font-semibold">Medivolt Support</span>
                  </div>
@@ -73,8 +77,8 @@ import React from 'react';
                    transition={{ duration: 0.5, delay: 0.2 }}
                    className="flex justify-end"
                  >
-                   <div className="bg-orange-500 text-white p-3 rounded-xl max-w-[80%] shadow-sm">
-                     <p className="text-sm">I'm having trouble logging into my account.</p>
+                   <div className="bg-primary text-white p-3 rounded-xl max-w-[80%] shadow-sm">
+                     <p className="text-sm">Can you explain my blood test results?</p>
                    </div>
                  </motion.div>
  
@@ -87,7 +91,7 @@ import React from 'react';
                  >
                    <div className="bg-gray-100 text-gray-800 p-3 rounded-xl max-w-[80%] shadow-sm">
                      <p className="font-semibold text-sm">Medivolt Support</p>
-                     <p className="text-sm mt-1">No worries! Let's get that sorted. Have you tried resetting your password?</p>
+                     <p className="text-sm mt-1">Absolutely! I can help explain your results in simple terms. Please upload your report.</p>
                    </div>
                  </motion.div>
  

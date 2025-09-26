@@ -1,14 +1,26 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { Brain, Menu, X, ChevronDown } from "lucide-react";
-import { Button } from "../ui/Button";
-import { useAuth } from "../../contexts/AuthContext";
+import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import { Brain, Menu, X, ChevronDown } from 'lucide-react';
+import { Button } from '../ui/Button';
+import { useAuth } from '../../contexts/AuthContext';
 
 export default function Navbar() {
   const { isAuthenticated, user, logout } = useAuth();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isFeaturesDropdownOpen, setIsFeaturesDropdownOpen] = useState(false);
+  const featuresDropdownRef = useRef(null);
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (featuresDropdownRef.current && !featuresDropdownRef.current.contains(event.target)) {
+        setIsFeaturesDropdownOpen(false);
+      }
+    };
+    document.addEventListener('click', handleClickOutside);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [featuresDropdownRef]);
   const handleLogout = async () => {
     await logout();
   };
@@ -27,21 +39,22 @@ export default function Navbar() {
   ];
 
   return (
-    <header className="bg-white shadow-sm sticky top-0 z-50">
-      <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
-        <Link className="flex items-center gap-2 text-lg font-semibold" to="/">
-          <Brain className="h-8 w-8 text-primary" />
-          <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">
+    <header className="responsive-nav">
+      <div className="responsive-nav-container">
+        {/* Logo - Left Side - Mobile Optimized */}
+        <Link className="flex items-center gap-2 sm:gap-3 touch-manipulation" to="/">
+          <div className="w-8 h-8 sm:w-10 sm:h-10 bg-primary rounded-lg flex items-center justify-center">
+            <Brain className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
+          </div>
+          <span className="text-lg sm:text-xl font-bold text-white">
             MediVolt
-          </span>
-          <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full font-medium hidden sm:block">
-            AI Health
           </span>
         </Link>
 
-        <nav className="hidden lg:flex items-center gap-6 text-sm font-medium">
+        {/* Navigation Links - Center */}
+        <nav className="hidden lg:flex items-center gap-8">
           <Link
-            className="text-gray-700 hover:text-primary transition-colors font-medium"
+            className="text-gray-300 hover:text-white transition-colors font-medium text-sm"
             to="/"
           >
             Home
@@ -53,18 +66,18 @@ export default function Navbar() {
             onMouseEnter={() => setIsFeaturesDropdownOpen(true)}
             onMouseLeave={() => setIsFeaturesDropdownOpen(false)}
           >
-            <button className="flex items-center gap-1 text-gray-700 hover:text-primary transition-colors font-medium">
-              Healthcare Intelligence
-              <ChevronDown className="h-4 w-4" />
+            <button className="flex items-center gap-1 text-gray-300 hover:text-white transition-colors font-medium text-sm">
+              About
+              <ChevronDown className="h-3 w-3" />
             </button>
 
             {isFeaturesDropdownOpen && (
-              <div className="absolute top-full left-0 mt-1 w-64 bg-white border border-gray-200 rounded-lg shadow-xl py-2">
+              <div className="absolute top-full left-0 mt-2 w-64 bg-gray-900 border border-gray-700 rounded-lg shadow-xl py-2">
                 {aiFeatures.map((feature, index) => (
                   <Link
                     key={index}
                     to={feature.path}
-                    className="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-primary transition-colors hover:font-medium"
+                    className="flex items-center gap-3 px-4 py-3 text-sm text-gray-300 hover:bg-gray-800 hover:text-white transition-colors"
                   >
                     <span className="text-base">{feature.icon}</span>
                     {feature.name}
@@ -75,35 +88,30 @@ export default function Navbar() {
           </div>
 
           <Link
-            className="text-gray-700 hover:text-primary transition-colors font-medium"
-            to="/emergency-sos"
-          >
-            Emergency Response
-          </Link>
-          <Link
-            className="text-gray-700 hover:text-primary transition-colors font-medium"
-            to="/fitness-planner"
-          >
-            Fitness Intelligence
-          </Link>
-          <Link
-            className="text-gray-700 hover:text-primary transition-colors font-medium"
+            className="text-gray-300 hover:text-white transition-colors font-medium text-sm"
             to="/pricing"
           >
             Pricing
           </Link>
           <Link
-            className="text-gray-700 hover:text-primary transition-colors font-medium"
-            to="/admin"
+            className="text-gray-300 hover:text-white transition-colors font-medium text-sm"
+            to="/emergency-sos"
           >
-            Admin Panel
+            Emergency
+          </Link>
+          <Link
+            className="bg-gradient-to-r from-purple-600 to-purple-700 text-white px-4 py-2 rounded-lg hover:from-purple-500 hover:to-purple-600 transition-all duration-300 font-medium text-sm shadow-lg hover:shadow-purple-500/25"
+            to="/hire-doctors"
+          >
+            👨‍⚕️ Hire Doctors & Nurses
           </Link>
         </nav>
 
+        {/* Right Side - Get In Touch Button */}
         <div className="flex items-center gap-4">
           {/* Mobile menu button */}
           <button
-            className="lg:hidden p-2"
+            className="lg:hidden p-2 text-gray-300 hover:text-white"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? (
@@ -113,84 +121,81 @@ export default function Navbar() {
             )}
           </button>
 
-          {/* Get Started Button */}
+          {/* Register Button - Properly Sized */}
           <Button
             size="sm"
-            className="bg-gradient-to-r from-blue-600 to-green-600 hover:from-blue-700 hover:to-green-700"
+            className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white px-4 py-2 rounded-full font-medium text-sm transition-all duration-300 shadow-lg hover:shadow-purple-500/25 min-h-[40px]"
             asChild
           >
-            <Link to="/dashboard">Get Health Score</Link>
+            <Link to="/registration" className="touch-manipulation">Register</Link>
           </Button>
 
-          {isAuthenticated ? (
+          {isAuthenticated && (
             <div className="hidden md:flex items-center gap-2">
-              <span className="text-sm text-gray-700">
+              <span className="text-sm text-gray-300">
                 {user?.name || user?.email}
               </span>
-              <Button variant="ghost" size="sm" onClick={handleLogout}>
+              <Button variant="ghost" size="sm" onClick={handleLogout} className="text-gray-300 hover:text-white">
                 Logout
               </Button>
-            </div>
-          ) : (
-            <div className="hidden md:flex items-center gap-2">
-              <Link to="/login" className="text-gray-700 hover:text-primary transition-colors font-medium">
-                Login
-              </Link>
             </div>
           )}
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu - Touch-Friendly */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden bg-white border-t border-gray-200">
-          <div className="px-4 py-4 space-y-3">
+        <div className="lg:hidden bg-gray-900/95 backdrop-blur-lg border-t border-gray-700">
+          <div className="responsive-container py-6 space-y-6">
             <Link
-              className="block text-gray-700 hover:text-primary transition-colors font-medium"
+              className="block responsive-text text-gray-300 hover:text-white transition-colors font-medium py-3 touch-manipulation"
               to="/"
+              onClick={() => setIsMobileMenuOpen(false)}
             >
               Home
             </Link>
-            {aiFeatures.map((feature, index) => (
-              <Link
-                key={index}
-                to={feature.path}
-                className="flex items-center gap-2 text-gray-700 hover:text-primary transition-colors"
-              >
-                <span>{feature.icon}</span>
-                {feature.name}
-              </Link>
-            ))}
             <Link
-              className="block text-gray-700 hover:text-primary transition-colors"
-              to="/emergency-sos"
-            >
-              🚨 Emergency SOS
-            </Link>
-            <Link
-              className="block text-gray-700 hover:text-primary transition-colors"
-              to="/fitness-planner"
-            >
-              Fitness Planner
-            </Link>
-            <Link
-              className="block text-gray-700 hover:text-primary transition-colors"
+              className="block responsive-text text-gray-300 hover:text-white transition-colors font-medium py-3 touch-manipulation"
               to="/pricing"
+              onClick={() => setIsMobileMenuOpen(false)}
             >
-              💰 Pricing Plans
+              Pricing
             </Link>
             <Link
-              className="block text-gray-700 hover:text-primary transition-colors"
-              to="/login"
+              className="block responsive-text text-gray-300 hover:text-white transition-colors font-medium py-3 touch-manipulation"
+              to="/emergency-sos"
+              onClick={() => setIsMobileMenuOpen(false)}
             >
-              Login
+              Emergency
             </Link>
-            <Link
-              className="block text-gray-700 hover:text-primary transition-colors"
-              to="/admin"
-            >
-              🔐 Admin Panel
-            </Link>
+            
+            {/* Mobile AI Features */}
+            <div className="border-t border-gray-700 pt-4">
+              <p className="text-gray-400 text-xs uppercase tracking-wider mb-3">AI Features</p>
+              {aiFeatures.map((feature, index) => (
+                <Link
+                  key={index}
+                  to={feature.path}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center gap-3 py-3 text-gray-300 hover:text-white transition-colors touch-manipulation"
+                >
+                  <span>{feature.icon}</span>
+                  <span className="text-sm">{feature.name}</span>
+                </Link>
+              ))}
+            </div>
+
+            {/* Mobile Register Button - Properly Sized */}
+            <div className="pt-6 border-t border-gray-700">
+              <Button
+                className="w-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white rounded-full font-medium shadow-lg text-base py-3 min-h-[48px]"
+                asChild
+              >
+                <Link to="/registration" onClick={() => setIsMobileMenuOpen(false)} className="touch-manipulation">
+                  Register
+                </Link>
+              </Button>
+            </div>
           </div>
         </div>
       )}

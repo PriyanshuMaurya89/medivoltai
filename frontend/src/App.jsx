@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import Navbar from './components/layout/Navbar';
+import './styles/responsive.css';
 import Footer from './components/layout/Footer';
 import HomePage from './pages/HomePage';
 import ReportExplainerPage from './pages/features/ReportExplainerPage';
@@ -24,6 +25,9 @@ import PricingPage from './pages/PricingPage';
 import ContactUsPage from './pages/ContactUsPage';
 import AboutUsPage from './pages/AboutUsPage';
 import AdminPanel from './pages/AdminPanel';
+import HospitalAdminPanel from './pages/admin/HospitalAdminPanel';
+import HireDoctorsPage from './pages/HireDoctorsPage';
+import RegistrationSystemPage from './pages/RegistrationSystemPage';
 import TermsPage from './pages/TermsPage';
 import ShippingPolicyPage from './pages/ShippingPolicyPage';
 import TenAIFeaturesPage from './pages/TenAIFeaturesPage';
@@ -44,12 +48,14 @@ import WebinarsPage from './pages/WebinarsPage';
 import WorkspaceManagementPage from './pages/WorkspaceManagementPage';
 import GlossaryPage from './pages/GlossaryPage';
 import AIHealthDashboardPage from './pages/AIHealthDashboardPage';
+import AppointmentBookingPage from './pages/AppointmentBookingPage';
+import FAQPage from './pages/FAQPage';
 
 function App() {
   return (
     <AuthProvider>
       <Router>
-        <div className="flex flex-col min-h-screen">
+        <div className="flex flex-col min-h-screen bg-black">
           <Navbar />
           <main className="flex-1">
             <Routes>
@@ -75,6 +81,9 @@ function App() {
               <Route path="/cookies" element={<CookiesPage />} />
               <Route path="/pricing" element={<PricingPage />} />
               <Route path="/admin" element={<AdminPanel />} />
+              <Route path="/hospital-admin" element={<HospitalAdminPanel />} />
+              <Route path="/hire-doctors" element={<HireDoctorsPage />} />
+              <Route path="/registration" element={<RegistrationSystemPage />} />
               <Route path="/shipping" element={<ShippingPolicyPage />} />
               <Route path="/ai-features" element={<TenAIFeaturesPage />} />
               <Route path="/why-medivolt" element={<WhyMedivoltPage />} />
@@ -95,6 +104,8 @@ function App() {
               <Route path="/products" element={<ProductsPage />} />
               <Route path="/server-status" element={<ServerStatusPage />} />
               <Route path="/book-a-demo" element={<BookADemoPage />} />
+              <Route path="/book-appointment" element={<AppointmentBookingPage />} />
+              <Route path="/faq" element={<FAQPage />} />
             </Routes>
           </main>
           <Footer />

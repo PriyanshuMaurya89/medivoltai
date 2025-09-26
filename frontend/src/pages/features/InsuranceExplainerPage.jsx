@@ -36,39 +36,43 @@ export default function InsuranceExplainerPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 py-12">
+    <div className="min-h-screen bg-black text-white py-12">
       <div className="container mx-auto px-4 max-w-5xl">
-        <div className="text-center mb-10">
+        {/* Purple Glow Effect */}
+        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full max-w-6xl h-80 z-0">
+          <div className="w-full h-full bg-gradient-to-t from-primary-500/40 via-accent-500/30 to-transparent rounded-full blur-3xl"></div>
+        </div>
+        
+        <div className="text-center mb-10 relative z-10">
           <div className="flex justify-center mb-4">
-            <div className="p-4 bg-purple-100 rounded-full">
-              <Shield className="h-12 w-12 text-purple-600" />
+            <div className="p-4 bg-gradient-to-r from-primary-500/20 to-accent-500/20 rounded-full border border-primary-500/30">
+              <Shield className="h-12 w-12 text-primary-400" />
             </div>
           </div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">🛡️ AI Insurance Explainer</h1>
-          <p className="text-gray-600 max-w-2xl mx-auto">Upload a policy PDF or paste plan details. Get coverage, exclusions, waiting periods, and claim steps in plain words.</p>
+          <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-white via-primary-200 to-accent-300 bg-clip-text text-transparent">🛡️ AI Insurance Explainer</h1>
+          <p className="text-gray-300 max-w-2xl mx-auto">Upload a policy PDF or paste plan details. Get coverage, exclusions, waiting periods, and claim steps in plain words.</p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6">
-          <Card>
-            <h3 className="text-lg font-semibold mb-3">Upload Policy</h3>
-            <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
-              <Upload className="h-10 w-10 text-gray-400 mx-auto mb-3" />
+        <div className="grid md:grid-cols-2 gap-6 relative z-10">
+          <div className="p-6 bg-gradient-to-r from-gray-900/50 to-gray-800/50 border border-gray-700/50 rounded-2xl backdrop-blur-sm">
+            <h3 className="text-lg font-semibold mb-3 text-white">Upload Policy</h3>
+            <div className="border-2 border-dashed border-gray-600 rounded-lg p-6 text-center hover:border-primary-500/50 transition-colors">
+              <Upload className="h-10 w-10 text-primary-400 mx-auto mb-3" />
               <Input type="file" accept=".pdf" onChange={(e)=>setSelectedFile(e.target.files?.[0])} />
               {selectedFile && (
-                <p className="text-sm text-gray-600 mt-2">Selected: {selectedFile.name}</p>
+                <p className="text-sm text-gray-300 mt-2">Selected: {selectedFile.name}</p>
               )}
             </div>
+            <Button onClick={analyze} disabled={!selectedFile && !planText.trim()} className="w-full mt-4 bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-400 hover:to-primary-500">
+              {isAnalyzing ? 'Analyzing...' : 'Explain My Policy'}
+            </Button>
+          </div>
+          <div className="p-6 bg-gradient-to-r from-gray-900/50 to-gray-800/50 border border-gray-700/50 rounded-2xl backdrop-blur-sm">
+            <h3 className="text-lg font-semibold mb-3 text-white">Or Paste Plan Text</h3>
             <div className="mt-4">
               <h4 className="text-sm font-medium mb-2">Or paste plan details</h4>
               <textarea className="input h-32" value={planText} onChange={(e)=>setPlanText(e.target.value)} placeholder="Sum insured, premium, inclusions, exclusions..." />
             </div>
-            <Button className="w-full mt-4" onClick={analyze} disabled={isAnalyzing || (!selectedFile && !planText.trim())}>
-              {isAnalyzing ? 'Analyzing...' : 'Explain My Policy'}
-            </Button>
-          </Card>
-
-          <Card>
-            <h3 className="text-lg font-semibold mb-3">Result</h3>
             {result ? (
               <div className="space-y-4">
                 <div className="p-3 bg-blue-50 border border-blue-200 rounded">
@@ -107,7 +111,7 @@ export default function InsuranceExplainerPage() {
               <AlertCircle className="h-4 w-4 mt-0.5" />
               <p>We summarize publicly available information. Verify with insurer documents.</p>
             </div>
-          </Card>
+          </div>
         </div>
       </div>
     </div>

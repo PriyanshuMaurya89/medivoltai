@@ -96,7 +96,7 @@ export function ExpandableCard({
             </motion.div>
             <div className="flex-1">
               <motion.h3 
-                className="font-bold text-lg text-gray-800 mb-2 group-hover:text-primary transition-colors drop-shadow-sm"
+                className="font-bold text-lg text-white mb-2 group-hover:text-primary transition-colors drop-shadow-sm"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
@@ -104,7 +104,7 @@ export function ExpandableCard({
                 {title}
               </motion.h3>
               <motion.p 
-                className="text-gray-700 text-sm leading-relaxed mb-4 drop-shadow-sm"
+                className="text-neutral-300 text-sm leading-relaxed mb-4 drop-shadow-sm"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
@@ -133,7 +133,7 @@ export function ExpandableCard({
                 {/* Benefits Section */}
                 <div>
                   <motion.h4 
-                    className="font-semibold text-gray-800 mb-3"
+                    className="font-semibold text-white mb-3"
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1 }}

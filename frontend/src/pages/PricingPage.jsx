@@ -28,13 +28,13 @@ export default function PricingPage() {
       name: 'Pro',
       tagline: 'Most Popular',
       description: 'For serious health-conscious users.',
-      price: '₹299',
+      price: '₹149',
       period: 'month',
-      yearlyPrice: '₹2,999',
+      yearlyPrice: '₹1,499',
       yearlyPeriod: 'year',
       buttonText: 'Most Popular (Upgrade)',
       buttonLink: '/register?plan=pro',
-      buttonStyle: 'bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700',
+      buttonStyle: 'bg-gradient-to-r from-primary to-accent hover:bg-primary-600',
       highlight: true,
       icon: <Star className="h-8 w-8 text-yellow-400" />,
       features: [
@@ -52,9 +52,9 @@ export default function PricingPage() {
       name: 'Premium',
       tagline: 'For Families / Power Users',
       description: 'For families, chronic patients, or health professionals.',
-      price: '₹699',
+      price: '₹399',
       period: 'month',
-      yearlyPrice: '₹6,999',
+      yearlyPrice: '₹3,999',
       yearlyPeriod: 'year',
       buttonText: 'For Families (Best Value)',
       buttonLink: '/register?plan=premium',
@@ -73,24 +73,29 @@ export default function PricingPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-600 to-indigo-800 text-white p-4 py-20">
+    <div className="min-h-screen bg-black text-white p-4 py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h1 className="text-5xl font-extrabold mb-4">Pricing Plans</h1>
-          <p className="text-xl max-w-3xl mx-auto">Choose the perfect plan for your health needs. All plans include access to our core AI health tools.</p>
+        {/* Purple Glow Effect */}
+        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full max-w-6xl h-80 z-0">
+          <div className="w-full h-full bg-gradient-to-t from-primary-500/40 via-accent-500/30 to-transparent rounded-full blur-3xl"></div>
+        </div>
+        
+        <div className="text-center mb-16 relative z-10">
+          <h1 className="text-5xl font-extrabold mb-4 bg-gradient-to-r from-white via-primary-200 to-accent-300 bg-clip-text text-transparent">Pricing Plans</h1>
+          <p className="text-xl max-w-3xl mx-auto text-gray-300">Choose the perfect plan for your health needs. All plans include access to our core AI health tools.</p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-8 relative z-10">
           {pricingTiers.map((tier, index) => (
             <div 
               key={tier.name} 
-              className={`rounded-2xl overflow-hidden transform transition-all duration-300 hover:scale-105 ${tier.highlight ? 'ring-4 ring-blue-400 shadow-xl scale-105 z-10' : 'bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg'}`}
+              className={`rounded-2xl overflow-hidden transform transition-all duration-300 hover:scale-105 ${tier.highlight ? 'ring-4 ring-primary-400 shadow-2xl shadow-primary-500/30 scale-105 z-10' : 'bg-gray-900/50 border border-gray-700/50 backdrop-filter backdrop-blur-lg'}`}
             >
-              <div className={`p-8 ${tier.highlight ? 'bg-gradient-to-br from-blue-600 to-indigo-700' : ''}`}>
+              <div className={`p-8 ${tier.highlight ? 'bg-gradient-to-br from-primary-600 to-accent-600' : ''}`}>
                 <div className="flex justify-between items-start">
                   <div>
                     <h3 className="text-2xl font-bold">{tier.name}</h3>
-                    <p className="text-sm font-medium mt-1 text-blue-200">{tier.tagline}</p>
+                    <p className="text-sm font-medium mt-1 text-primary-200">{tier.tagline}</p>
                   </div>
                   {tier.icon}
                 </div>
@@ -104,7 +109,7 @@ export default function PricingPage() {
                   </div>
                   
                   {tier.yearlyPrice && (
-                    <div className="mt-1 text-sm text-blue-200">
+                    <div className="mt-1 text-sm text-primary-200">
                       or {tier.yearlyPrice}/{tier.yearlyPeriod}
                     </div>
                   )}
@@ -118,7 +123,7 @@ export default function PricingPage() {
                 </Link>
               </div>
               
-              <div className="p-8 bg-white bg-opacity-10 space-y-4">
+              <div className="p-8 bg-gray-800/30 space-y-4">
                 <h4 className="text-lg font-semibold">What's included:</h4>
                 <ul className="space-y-3">
                   {tier.features.map((feature, featureIndex) => (
@@ -135,7 +140,7 @@ export default function PricingPage() {
               </div>
               
               {tier.highlight && (
-                <div className="bg-blue-700 py-2 text-center">
+                <div className="bg-gradient-to-r from-primary-500 to-accent-500 py-2 text-center">
                   <span className="text-sm font-medium">⭐ Most Popular Choice</span>
                 </div>
               )}
@@ -143,12 +148,12 @@ export default function PricingPage() {
           ))}
         </div>
         
-        <div className="mt-16 text-center">
+        <div className="mt-16 text-center relative z-10">
           <h2 className="text-2xl font-bold mb-4">Need a custom plan for your organization?</h2>
-          <p className="mb-6">Contact us for enterprise pricing and custom solutions for healthcare providers.</p>
+          <p className="mb-6 text-gray-300">Contact us for enterprise pricing and custom solutions for healthcare providers.</p>
           <Link 
             to="/contact" 
-            className="inline-block bg-white text-blue-700 font-semibold px-8 py-3 rounded-full hover:bg-opacity-90 transition-all duration-300"
+            className="inline-block bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-400 hover:to-primary-500 text-white font-semibold px-8 py-3 rounded-full transition-all duration-300 shadow-lg shadow-primary-500/25"
           >
             Contact Sales
           </Link>

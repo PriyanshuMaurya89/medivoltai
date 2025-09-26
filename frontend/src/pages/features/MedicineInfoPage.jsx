@@ -117,39 +117,44 @@ export default function MedicineInfoPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 py-12">
+    <div className="min-h-screen bg-black text-white py-12">
       <div className="container mx-auto px-4 max-w-6xl">
+        {/* Purple Glow Effect */}
+        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full max-w-6xl h-80 z-0">
+          <div className="w-full h-full bg-gradient-to-t from-primary-500/40 via-accent-500/30 to-transparent rounded-full blur-3xl"></div>
+        </div>
+        
         {/* Header */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-12 relative z-10">
           <div className="flex justify-center mb-4">
-            <div className="p-4 bg-green-100 rounded-full">
-              <Pill className="h-12 w-12 text-green-600" />
+            <div className="p-4 bg-gradient-to-r from-primary-500/20 to-accent-500/20 rounded-full border border-primary-500/30">
+              <Pill className="h-12 w-12 text-primary-400" />
             </div>
           </div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+          <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-white via-primary-200 to-accent-300 bg-clip-text text-transparent">
             💊 AI Medicine Information
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Scan or search any medicine to get complete information in Hindi/English
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+            Get detailed information about medicines, side effects, dosage, and alternatives
           </p>
           <div className="flex justify-center gap-4 mt-6">
-            <span className="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-medium">
-              🔍 Smart Search
+            <span className="px-4 py-2 bg-primary-500/20 text-primary-300 border border-primary-500/30 rounded-full text-sm font-medium">
+              🔍 Search Any Medicine
             </span>
-            <span className="px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
+            <span className="px-4 py-2 bg-accent-500/20 text-accent-300 border border-accent-500/30 rounded-full text-sm font-medium">
               📱 Scan Medicine
             </span>
-            <span className="px-4 py-2 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">
-              💰 Find Cheaper Options
+            <span className="px-4 py-2 bg-gradient-to-r from-primary-500/20 to-accent-500/20 text-primary-200 border border-primary-500/30 rounded-full text-sm font-medium">
+              💰 Price Comparison
             </span>
           </div>
         </div>
 
         {/* Language Selection */}
-        <Card className="mb-8 max-w-2xl mx-auto">
+        <div className="mb-8 max-w-2xl mx-auto p-6 bg-gradient-to-r from-gray-900/50 to-gray-800/50 border border-gray-700/50 rounded-2xl backdrop-blur-sm relative z-10">
           <div className="flex items-center gap-4 mb-4">
-            <Pill className="h-5 w-5 text-primary" />
-            <h3 className="text-lg font-semibold">Choose Language / भाषा चुनें</h3>
+            <Pill className="h-5 w-5 text-primary-400" />
+            <h3 className="text-lg font-semibold text-white">Choose Language / भाषा चुनें</h3>
           </div>
           <div className="flex gap-4">
             <Button
@@ -167,16 +172,16 @@ export default function MedicineInfoPage() {
               हिंदी (Hindi)
             </Button>
           </div>
-        </Card>
+        </div>
 
         {/* Search/Scan Tabs */}
-        <Card className="mb-8 max-w-4xl mx-auto">
-          <div className="flex border-b border-gray-200">
+        <div className="mb-8 max-w-4xl mx-auto p-6 bg-gradient-to-r from-gray-900/50 to-gray-800/50 border border-gray-700/50 rounded-2xl backdrop-blur-sm relative z-10">
+          <div className="flex border-b border-gray-600/50">
             <button
               className={`flex-1 px-4 py-3 text-center font-medium transition-colors ${
                 selectedTab === 'search'
-                  ? 'border-b-2 border-primary text-primary'
-                  : 'text-gray-500 hover:text-gray-700'
+                  ? 'border-b-2 border-primary-400 text-primary-300'
+                  : 'text-gray-400 hover:text-gray-200'
               }`}
               onClick={() => setSelectedTab('search')}
             >
@@ -186,8 +191,8 @@ export default function MedicineInfoPage() {
             <button
               className={`flex-1 px-4 py-3 text-center font-medium transition-colors ${
                 selectedTab === 'scan'
-                  ? 'border-b-2 border-primary text-primary'
-                  : 'text-gray-500 hover:text-gray-700'
+                  ? 'border-b-2 border-primary-400 text-primary-300'
+                  : 'text-gray-400 hover:text-gray-200'
               }`}
               onClick={() => setSelectedTab('scan')}
             >
@@ -227,19 +232,19 @@ export default function MedicineInfoPage() {
 
                 {/* Common Medicines */}
                 <div>
-                  <h4 className="font-medium mb-3">
+                  <h4 className="font-medium mb-3 text-white">
                     {language === 'hindi' ? 'आम दवाइयां:' : 'Common Medicines:'}
                   </h4>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                     {commonMedicines.map((medicine, index) => (
                       <button
                         key={index}
-                        className="p-3 text-left border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+                        className="p-3 text-left border border-gray-600/50 rounded-lg hover:bg-gray-700/30 hover:border-primary-500/50 transition-colors"
                         onClick={() => searchMedicine(medicine.name)}
                       >
-                        <p className="font-medium text-sm">{medicine.name}</p>
-                        <p className="text-xs text-gray-500">{medicine.category}</p>
-                        <p className="text-xs text-primary font-medium">{medicine.price}</p>
+                        <p className="font-medium text-sm text-white">{medicine.name}</p>
+                        <p className="text-xs text-gray-400">{medicine.category}</p>
+                        <p className="text-xs text-primary-300 font-medium">{medicine.price}</p>
                       </button>
                     ))}
                   </div>
@@ -247,11 +252,11 @@ export default function MedicineInfoPage() {
               </div>
             ) : (
               <div className="text-center py-12">
-                <Camera className="h-24 w-24 text-gray-300 mx-auto mb-4" />
-                <h3 className="text-xl font-semibold text-gray-700 mb-2">
+                <Camera className="h-24 w-24 text-primary-400 mx-auto mb-4" />
+                <h3 className="text-xl font-semibold text-white mb-2">
                   {language === 'hindi' ? 'दवा का फोटो लें' : 'Take Medicine Photo'}
                 </h3>
-                <p className="text-gray-500 mb-6">
+                <p className="text-gray-300 mb-6">
                   {language === 'hindi'
                     ? 'दवा की पैकेजिंग या लेबल का फोटो लें'
                     : 'Take a photo of medicine packaging or label'
@@ -264,46 +269,46 @@ export default function MedicineInfoPage() {
               </div>
             )}
           </div>
-        </Card>
+        </div>
 
         {/* Medicine Information Display */}
         {medicineInfo && (
-          <div className="max-w-6xl mx-auto space-y-6">
+          <div className="max-w-6xl mx-auto space-y-6 relative z-10">
             {/* Basic Info */}
-            <Card>
+            <div className="p-6 bg-gradient-to-r from-gray-900/50 to-gray-800/50 border border-gray-700/50 rounded-2xl backdrop-blur-sm">
               <div className="flex items-center gap-3 mb-6">
-                <CheckCircle className="h-6 w-6 text-green-600" />
-                <h3 className="text-2xl font-bold text-gray-900">{medicineInfo.name}</h3>
+                <CheckCircle className="h-6 w-6 text-green-400" />
+                <h3 className="text-2xl font-bold text-white">{medicineInfo.name}</h3>
               </div>
 
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <div className="space-y-3">
                     <div className="flex justify-between">
-                      <span className="font-medium text-gray-700">
+                      <span className="font-medium text-gray-300">
                         {language === 'hindi' ? 'जेनेरिक नाम:' : 'Generic Name:'}
                       </span>
-                      <span className="text-gray-900">{medicineInfo.genericName}</span>
+                      <span className="text-white">{medicineInfo.genericName}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="font-medium text-gray-700">
+                      <span className="font-medium text-gray-300">
                         {language === 'hindi' ? 'खुराक:' : 'Strength:'}
                       </span>
-                      <span className="text-gray-900">{medicineInfo.strength}</span>
+                      <span className="text-white">{medicineInfo.strength}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="font-medium text-gray-700">
+                      <span className="font-medium text-gray-300">
                         {language === 'hindi' ? 'श्रेणी:' : 'Category:'}
                       </span>
-                      <span className="text-gray-900">{medicineInfo.category}</span>
+                      <span className="text-white">{medicineInfo.category}</span>
                     </div>
                   </div>
                 </div>
                 
-                <div className="bg-green-50 p-4 rounded-lg">
+                <div className="bg-primary-500/20 border border-primary-500/30 p-4 rounded-lg">
                   <div className="flex items-center gap-2 mb-2">
                     <IndianRupee className="h-5 w-5 text-green-600" />
-                    <h4 className="font-semibold text-green-800">
+                    <h4 className="font-semibold text-primary-200">
                       {language === 'hindi' ? 'कीमत तुलना' : 'Price Comparison'}
                     </h4>
                   </div>
@@ -323,28 +328,28 @@ export default function MedicineInfoPage() {
                   </div>
                 </div>
               </div>
-            </Card>
+            </div>
 
             {/* Usage */}
-            <Card>
+            <div className="p-6 bg-gradient-to-r from-gray-900/50 to-gray-800/50 border border-gray-700/50 rounded-2xl backdrop-blur-sm">
               <div className="flex items-center gap-2 mb-4">
-                <Heart className="h-5 w-5 text-red-500" />
-                <h4 className="text-lg font-semibold">
+                <Heart className="h-5 w-5 text-red-400" />
+                <h4 className="text-lg font-semibold text-white">
                   {language === 'hindi' ? 'उपयोग' : 'Uses'}
                 </h4>
               </div>
               <div className="grid md:grid-cols-2 gap-4">
                 {medicineInfo.usage.map((use, index) => (
-                  <div key={index} className="flex items-center gap-2 p-3 bg-blue-50 rounded-lg">
-                    <CheckCircle className="h-4 w-4 text-blue-600 flex-shrink-0" />
-                    <span className="text-blue-800">{use}</span>
+                  <div key={index} className="flex items-center gap-2 p-3 bg-primary-500/20 border border-primary-500/30 rounded-lg">
+                    <CheckCircle className="h-4 w-4 text-primary-400 flex-shrink-0" />
+                    <span className="text-primary-200">{use}</span>
                   </div>
                 ))}
               </div>
-            </Card>
+            </div>
 
             {/* Dosage */}
-            <Card>
+            <div className="p-6 bg-gradient-to-r from-gray-900/50 to-gray-800/50 border border-gray-700/50 rounded-2xl backdrop-blur-sm">
               <div className="flex items-center gap-2 mb-4">
                 <Clock className="h-5 w-5 text-orange-500" />
                 <h4 className="text-lg font-semibold">
@@ -371,11 +376,11 @@ export default function MedicineInfoPage() {
                   <p className="text-sm text-gray-600">{medicineInfo.dosage.elderly}</p>
                 </div>
               </div>
-            </Card>
+            </div>
 
             <div className="grid md:grid-cols-2 gap-6">
               {/* Side Effects */}
-              <Card>
+              <div className="p-6 bg-gradient-to-r from-gray-900/50 to-gray-800/50 border border-gray-700/50 rounded-2xl backdrop-blur-sm">
                 <div className="flex items-center gap-2 mb-4">
                   <AlertTriangle className="h-5 w-5 text-yellow-500" />
                   <h4 className="text-lg font-semibold">
@@ -412,10 +417,10 @@ export default function MedicineInfoPage() {
                     </div>
                   </div>
                 </div>
-              </Card>
+              </div>
 
               {/* Drug Interactions */}
-              <Card>
+              <div className="p-6 bg-gradient-to-r from-gray-900/50 to-gray-800/50 border border-gray-700/50 rounded-2xl backdrop-blur-sm">
                 <div className="flex items-center gap-2 mb-4">
                   <Shield className="h-5 w-5 text-purple-500" />
                   <h4 className="text-lg font-semibold">
@@ -431,11 +436,11 @@ export default function MedicineInfoPage() {
                     </div>
                   ))}
                 </div>
-              </Card>
+              </div>
             </div>
 
             {/* Cheaper Alternatives */}
-            <Card>
+            <div className="p-6 bg-gradient-to-r from-gray-900/50 to-gray-800/50 border border-gray-700/50 rounded-2xl backdrop-blur-sm">
               <div className="flex items-center gap-2 mb-4">
                 <IndianRupee className="h-5 w-5 text-green-500" />
                 <h4 className="text-lg font-semibold">
@@ -457,10 +462,10 @@ export default function MedicineInfoPage() {
                   </div>
                 ))}
               </div>
-            </Card>
+            </div>
 
             {/* Availability */}
-            <Card>
+            <div className="p-6 bg-gradient-to-r from-gray-900/50 to-gray-800/50 border border-gray-700/50 rounded-2xl backdrop-blur-sm">
               <div className="flex items-center gap-2 mb-4">
                 <Info className="h-5 w-5 text-blue-500" />
                 <h4 className="text-lg font-semibold">
@@ -502,7 +507,7 @@ export default function MedicineInfoPage() {
                   </div>
                 </div>
               </div>
-            </Card>
+            </div>
           </div>
         )}
 

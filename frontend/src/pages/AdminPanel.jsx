@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { Users, UserPlus, Search, Edit, Trash2, Shield, AlertCircle } from 'lucide-react';
-import { Button } from '../components/ui/Button';
 
 export default function AdminPanel() {
   const { isAuthenticated, user } = useAuth();
@@ -149,15 +149,15 @@ export default function AdminPanel() {
   const getStatusBadgeClass = (status) => {
     switch (status) {
       case 'active':
-        return 'bg-green-100 text-green-800';
+        return 'bg-green-500/20 text-green-300 border border-green-500/30';
       case 'inactive':
-        return 'bg-gray-100 text-gray-800';
+        return 'bg-gray-500/20 text-gray-300 border border-gray-500/30';
       case 'pending':
-        return 'bg-yellow-100 text-yellow-800';
+        return 'bg-yellow-500/20 text-yellow-300 border border-yellow-500/30';
       case 'blocked':
-        return 'bg-red-100 text-red-800';
+        return 'bg-red-500/20 text-red-300 border border-red-500/30';
       default:
-        return 'bg-gray-100 text-gray-800';
+        return 'bg-gray-500/20 text-gray-300 border border-gray-500/30';
     }
   };
 
@@ -165,13 +165,13 @@ export default function AdminPanel() {
   const getRoleBadgeClass = (role) => {
     switch (role) {
       case 'admin':
-        return 'bg-purple-100 text-purple-800';
+        return 'bg-purple-500/20 text-purple-300 border border-purple-500/30';
       case 'moderator':
-        return 'bg-blue-100 text-blue-800';
+        return 'bg-blue-500/20 text-blue-300 border border-blue-500/30';
       case 'user':
-        return 'bg-gray-100 text-gray-800';
+        return 'bg-primary-500/20 text-primary-300 border border-primary-500/30';
       default:
-        return 'bg-gray-100 text-gray-800';
+        return 'bg-gray-500/20 text-gray-300 border border-gray-500/30';
     }
   };
 
@@ -180,29 +180,89 @@ export default function AdminPanel() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="bg-white shadow">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-primary-900/10 to-gray-800 relative overflow-hidden">
+      {/* Background Effects */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-transparent"></div>
+      <div className="absolute top-20 left-20 w-72 h-72 bg-primary-500/10 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-20 right-20 w-96 h-96 bg-accent-500/10 rounded-full blur-3xl"></div>
+
+      {/* Header */}
+      <div className="bg-gradient-to-r from-gray-900/80 to-gray-800/80 backdrop-blur-sm border-b border-gray-700/50 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16 items-center">
-            <h1 className="text-2xl font-bold text-gray-900 flex items-center">
-              <Shield className="h-6 w-6 mr-2 text-blue-600" />
-              Admin Panel
+          <div className="flex justify-between h-20 items-center">
+            <h1 className="text-3xl font-bold text-white flex items-center">
+              <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center mr-4">
+                <Shield className="h-6 w-6 text-white" />
+              </div>
+              MediVolt Admin
             </h1>
-            <div className="flex items-center space-x-4">
-              <span className="text-sm text-gray-500">
-                Logged in as <span className="font-medium text-gray-900">{user?.name}</span>
-              </span>
+            <div className="flex items-center space-x-6">
+              <div className="text-right">
+                <div className="text-sm text-gray-400">Logged in as</div>
+                <div className="font-semibold text-white">{user?.name}</div>
+              </div>
+              <div className="w-10 h-10 bg-gradient-to-br from-accent-500 to-accent-600 rounded-full flex items-center justify-center text-white font-bold">
+                {user?.name?.charAt(0)}
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10">
+        {/* Stats Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+          <div className="bg-gradient-to-br from-gray-900/80 to-gray-800/80 backdrop-blur-sm rounded-2xl p-6 border border-gray-700/50">
+            <div className="flex items-center">
+              <div className="w-12 h-12 bg-primary-500/20 rounded-xl flex items-center justify-center">
+                <Users className="h-6 w-6 text-primary-400" />
+              </div>
+              <div className="ml-4">
+                <div className="text-2xl font-bold text-white">{users.length}</div>
+                <div className="text-gray-400 text-sm">Total Users</div>
+              </div>
+            </div>
+          </div>
+          <div className="bg-gradient-to-br from-gray-900/80 to-gray-800/80 backdrop-blur-sm rounded-2xl p-6 border border-gray-700/50">
+            <div className="flex items-center">
+              <div className="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center">
+                <Shield className="h-6 w-6 text-green-400" />
+              </div>
+              <div className="ml-4">
+                <div className="text-2xl font-bold text-white">{users.filter(u => u.status === 'active').length}</div>
+                <div className="text-gray-400 text-sm">Active Users</div>
+              </div>
+            </div>
+          </div>
+          <div className="bg-gradient-to-br from-gray-900/80 to-gray-800/80 backdrop-blur-sm rounded-2xl p-6 border border-gray-700/50">
+            <div className="flex items-center">
+              <div className="w-12 h-12 bg-accent-500/20 rounded-xl flex items-center justify-center">
+                <UserPlus className="h-6 w-6 text-accent-400" />
+              </div>
+              <div className="ml-4">
+                <div className="text-2xl font-bold text-white">{users.filter(u => u.role === 'admin').length}</div>
+                <div className="text-gray-400 text-sm">Admins</div>
+              </div>
+            </div>
+          </div>
+          <div className="bg-gradient-to-br from-gray-900/80 to-gray-800/80 backdrop-blur-sm rounded-2xl p-6 border border-gray-700/50">
+            <div className="flex items-center">
+              <div className="w-12 h-12 bg-yellow-500/20 rounded-xl flex items-center justify-center">
+                <AlertCircle className="h-6 w-6 text-yellow-400" />
+              </div>
+              <div className="ml-4">
+                <div className="text-2xl font-bold text-white">{users.filter(u => u.status === 'pending').length}</div>
+                <div className="text-gray-400 text-sm">Pending</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Tabs */}
-        <div className="border-b border-gray-200 mb-6">
+        <div className="border-b border-gray-700/50 mb-8">
           <nav className="-mb-px flex space-x-8">
             <button
-              className={`${activeTab === 'users' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'} whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
+              className={`${activeTab === 'users' ? 'border-primary-500 text-primary-400' : 'border-transparent text-gray-400 hover:text-gray-300 hover:border-gray-600'} whitespace-nowrap py-4 px-1 border-b-2 font-medium text-base transition-colors`}
               onClick={() => setActiveTab('users')}
             >
               <Users className="inline-block h-5 w-5 mr-2" />
@@ -217,120 +277,120 @@ export default function AdminPanel() {
           {activeTab === 'users' && (
             <div>
               {/* Header with search and add user */}
-              <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 space-y-4 md:space-y-0">
-                <div className="relative w-full md:w-64">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 space-y-4 md:space-y-0">
+                <div className="relative w-full md:w-80">
+                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                     <Search className="h-5 w-5 text-gray-400" />
                   </div>
                   <input
                     type="text"
-                    className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    className="block w-full pl-12 pr-4 py-3 border border-gray-600 rounded-xl leading-5 bg-gray-800/50 backdrop-blur-sm placeholder-gray-400 text-white focus:outline-none focus:placeholder-gray-500 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all"
                     placeholder="Search users..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                   />
                 </div>
-                <Button
+                <button
                   onClick={() => setIsAddUserModalOpen(true)}
-                  className="bg-blue-600 hover:bg-blue-700 text-white w-full md:w-auto"
+                  className="bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-500 hover:to-primary-600 text-white px-6 py-3 rounded-xl font-medium transition-all duration-300 flex items-center gap-2 w-full md:w-auto hover:scale-105"
                 >
-                  <UserPlus className="h-5 w-5 mr-2" />
+                  <UserPlus className="h-5 w-5" />
                   Add New User
-                </Button>
+                </button>
               </div>
 
               {/* Error message */}
               {error && (
-                <div className="rounded-md bg-red-50 p-4 mb-6">
+                <div className="rounded-xl bg-red-900/20 border border-red-500/30 p-4 mb-6">
                   <div className="flex">
                     <div className="flex-shrink-0">
                       <AlertCircle className="h-5 w-5 text-red-400" />
                     </div>
                     <div className="ml-3">
-                      <h3 className="text-sm font-medium text-red-800">{error}</h3>
+                      <h3 className="text-sm font-medium text-red-300">{error}</h3>
                     </div>
                   </div>
                 </div>
               )}
 
               {/* Users table */}
-              <div className="bg-white shadow overflow-hidden sm:rounded-lg">
+              <div className="bg-gradient-to-br from-gray-900/80 to-gray-800/80 backdrop-blur-sm border border-gray-700/50 overflow-hidden rounded-2xl">
                 {isLoading ? (
-                  <div className="p-6 text-center">
-                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto"></div>
-                    <p className="mt-4 text-gray-500">Loading users...</p>
+                  <div className="p-12 text-center">
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500 mx-auto"></div>
+                    <p className="mt-4 text-gray-300">Loading users...</p>
                   </div>
                 ) : filteredUsers.length === 0 ? (
-                  <div className="p-6 text-center">
-                    <p className="text-gray-500">No users found matching your search criteria.</p>
+                  <div className="p-12 text-center">
+                    <p className="text-gray-400">No users found matching your search criteria.</p>
                   </div>
                 ) : (
                   <div className="overflow-x-auto">
-                    <table className="min-w-full divide-y divide-gray-200">
-                      <thead className="bg-gray-50">
+                    <table className="min-w-full divide-y divide-gray-700/50">
+                      <thead className="bg-gray-800/50">
                         <tr>
-                          <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          <th scope="col" className="px-6 py-4 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
                             User
                           </th>
-                          <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          <th scope="col" className="px-6 py-4 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
                             Role
                           </th>
-                          <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          <th scope="col" className="px-6 py-4 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
                             Status
                           </th>
-                          <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          <th scope="col" className="px-6 py-4 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
                             Last Login
                           </th>
-                          <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          <th scope="col" className="px-6 py-4 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
                             Created At
                           </th>
-                          <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          <th scope="col" className="px-6 py-4 text-right text-xs font-medium text-gray-300 uppercase tracking-wider">
                             Actions
                           </th>
                         </tr>
                       </thead>
-                      <tbody className="bg-white divide-y divide-gray-200">
+                      <tbody className="bg-gray-900/20 divide-y divide-gray-700/30">
                         {filteredUsers.map((user) => (
-                          <tr key={user.id}>
-                            <td className="px-6 py-4 whitespace-nowrap">
+                          <tr key={user.id} className="hover:bg-gray-800/30 transition-colors">
+                            <td className="px-6 py-5 whitespace-nowrap">
                               <div className="flex items-center">
-                                <div className="flex-shrink-0 h-10 w-10 bg-blue-100 rounded-full flex items-center justify-center">
-                                  <span className="text-blue-800 font-medium text-sm">
+                                <div className="flex-shrink-0 h-12 w-12 bg-gradient-to-br from-primary-500 to-primary-600 rounded-full flex items-center justify-center">
+                                  <span className="text-white font-bold text-sm">
                                     {user.name.split(' ').map(n => n[0]).join('')}
                                   </span>
                                 </div>
                                 <div className="ml-4">
-                                  <div className="text-sm font-medium text-gray-900">{user.name}</div>
-                                  <div className="text-sm text-gray-500">{user.email}</div>
+                                  <div className="text-sm font-semibold text-white">{user.name}</div>
+                                  <div className="text-sm text-gray-400">{user.email}</div>
                                 </div>
                               </div>
                             </td>
-                            <td className="px-6 py-4 whitespace-nowrap">
-                              <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getRoleBadgeClass(user.role)}`}>
+                            <td className="px-6 py-5 whitespace-nowrap">
+                              <span className={`px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${getRoleBadgeClass(user.role)}`}>
                                 {user.role.charAt(0).toUpperCase() + user.role.slice(1)}
                               </span>
                             </td>
-                            <td className="px-6 py-4 whitespace-nowrap">
-                              <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusBadgeClass(user.status)}`}>
+                            <td className="px-6 py-5 whitespace-nowrap">
+                              <span className={`px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusBadgeClass(user.status)}`}>
                                 {user.status.charAt(0).toUpperCase() + user.status.slice(1)}
                               </span>
                             </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            <td className="px-6 py-5 whitespace-nowrap text-sm text-gray-300">
                               {formatDate(user.lastLogin)}
                             </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            <td className="px-6 py-5 whitespace-nowrap text-sm text-gray-300">
                               {formatDate(user.createdAt)}
                             </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                            <td className="px-6 py-5 whitespace-nowrap text-right text-sm font-medium">
                               <button
                                 onClick={() => handleEditUser(user)}
-                                className="text-blue-600 hover:text-blue-900 mr-4"
+                                className="text-primary-400 hover:text-primary-300 mr-4 p-2 rounded-lg hover:bg-primary-500/10 transition-all"
                               >
                                 <Edit className="h-5 w-5" />
                               </button>
                               <button
                                 onClick={() => handleDeleteUser(user)}
-                                className="text-red-600 hover:text-red-900"
+                                className="text-red-400 hover:text-red-300 p-2 rounded-lg hover:bg-red-500/10 transition-all"
                                 disabled={user.role === 'admin'}
                               >
                                 <Trash2 className={`h-5 w-5 ${user.role === 'admin' ? 'opacity-30 cursor-not-allowed' : ''}`} />
