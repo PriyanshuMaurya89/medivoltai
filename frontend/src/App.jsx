@@ -1,9 +1,11 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import Navbar from './components/layout/Navbar';
+import CustomCursor from './components/ui/CustomCursor';
 import './styles/responsive.css';
 import Footer from './components/layout/Footer';
+import ScrollToTop from './components/ScrollToTop';
 import HomePage from './pages/HomePage';
 import ReportExplainerPage from './pages/features/ReportExplainerPage';
 import MedicineInfoPage from './pages/features/MedicineInfoPage';
@@ -16,7 +18,6 @@ import EmergencySOSPage from './pages/features/EmergencySOSPage';
 import FitnessPlannerPage from './pages/features/FitnessPlannerPage';
 import HealthLiteracyPage from './pages/features/HealthLiteracyPage';
 import LoginPage from './pages/LoginPage';
-import RegisterPage from './pages/RegisterPage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import UserDashboardPage from './pages/UserDashboardPage';
 import PrivacyPage from './pages/PrivacyPage';
@@ -26,6 +27,9 @@ import ContactUsPage from './pages/ContactUsPage';
 import AboutUsPage from './pages/AboutUsPage';
 import AdminPanel from './pages/AdminPanel';
 import HospitalAdminPanel from './pages/admin/HospitalAdminPanel';
+import DoctorAdminPanel from './pages/admin/DoctorAdminPanel';
+import SuperAdminPanel from './pages/admin/SuperAdminPanel';
+import SmartRegistrationPage from './pages/SmartRegistrationPage';
 import HireDoctorsPage from './pages/HireDoctorsPage';
 import RegistrationSystemPage from './pages/RegistrationSystemPage';
 import TermsPage from './pages/TermsPage';
@@ -55,7 +59,9 @@ function App() {
   return (
     <AuthProvider>
       <Router>
+        <ScrollToTop />
         <div className="flex flex-col min-h-screen bg-black">
+          <CustomCursor />
           <Navbar />
           <main className="flex-1">
             <Routes>
@@ -71,7 +77,7 @@ function App() {
               <Route path="/fitness-planner" element={<FitnessPlannerPage />} />
               <Route path="/health-literacy" element={<HealthLiteracyPage />} />
               <Route path="/login" element={<LoginPage />} />
-              <Route path="/register" element={<RegisterPage />} />
+              <Route path="/register" element={<Navigate to="/registration" replace />} />
               <Route path="/forgot-password" element={<ForgotPasswordPage />} />
               <Route path="/dashboard" element={<UserDashboardPage />} />
               <Route path="/contact" element={<ContactUsPage />} />
@@ -82,6 +88,9 @@ function App() {
               <Route path="/pricing" element={<PricingPage />} />
               <Route path="/admin" element={<AdminPanel />} />
               <Route path="/hospital-admin" element={<HospitalAdminPanel />} />
+              <Route path="/doctor-admin" element={<DoctorAdminPanel />} />
+              <Route path="/super-admin" element={<SuperAdminPanel />} />
+              <Route path="/smart-registration" element={<SmartRegistrationPage />} />
               <Route path="/hire-doctors" element={<HireDoctorsPage />} />
               <Route path="/registration" element={<RegistrationSystemPage />} />
               <Route path="/shipping" element={<ShippingPolicyPage />} />

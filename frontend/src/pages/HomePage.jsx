@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { Plus } from "lucide-react";
 import { Button } from "../components/ui/Button";
 import { Card } from "../components/ui/Card";
 // import { PremiumCard, FeatureCard } from "../components/ui/PremiumCard";
@@ -37,10 +38,13 @@ import {
   AIProcessingIndicator,
 } from "../components/ui/AITypingAnimation";
 import { Apple, Play } from "lucide-react";
+import AboutButton from '../components/AboutButton';
 
 export default function HomePage() {
   // State to track which card is currently expanded
   const [expandedCardId, setExpandedCardId] = useState(null);
+  // State for FAQ section
+  const [activeFAQ, setActiveFAQ] = useState(null);
   // State for search input
   const [searchInput, setSearchInput] = useState("");
   const [isRecording, setIsRecording] = useState(false);
@@ -210,9 +214,9 @@ export default function HomePage() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="zoom-container">
       {/* Hero Section - Mobile-First Responsive */}
-      <section className="relative w-full min-h-screen flex items-center overflow-hidden bg-black">
+      <section className="hero-zoom-container bg-black">
         {/* 3D Medical Background */}
         <div className="absolute inset-0 opacity-30 sm:opacity-40">
           {/* <MedicalScene /> */}
@@ -238,7 +242,7 @@ export default function HomePage() {
         </div>
 
         {/* Main Content - Mobile-First Responsive */}
-        <div className="responsive-container relative z-20 py-8 sm:py-12">
+        <div className="hero-content-zoom relative z-20">
           <motion.div
             className="flex flex-col items-center justify-center space-y-8 sm:space-y-12"
             initial={{ opacity: 0, y: 30 }}
@@ -375,7 +379,7 @@ export default function HomePage() {
                 {/* MediVolt Medical Categories */}
                 <div className="flex flex-wrap justify-center gap-3 mt-6">
                   {[
-                    { icon: "🩺", text: "Diagnose" },
+                    { icon: "🩺", text: "Periods" },
                     { icon: "💊", text: "Medicine" },
                     { icon: "🤰", text: "Pregnancy" },
                     { icon: "📊", text: "Reports" },
@@ -652,12 +656,12 @@ export default function HomePage() {
       </section>
 
       {/* 10 AI Features with Premium 3D Background */}
-      <section className="w-full py-24 relative overflow-hidden bg-black">
+      <section className="section-zoom-container bg-black">
         {/* Purple Glow Effect */}
         <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full max-w-5xl h-80 z-5">
           <div className="w-full h-full bg-gradient-to-b from-primary-500/30 via-accent-500/20 to-transparent rounded-full blur-3xl"></div>
         </div>
-        <div className="container px-4 md:px-6 relative z-10">
+        <div className="section-content-zoom relative z-10">
           <motion.div
             className="text-center mb-20"
             initial={{ opacity: 0, y: 50 }}
@@ -730,7 +734,7 @@ export default function HomePage() {
 
               {/* Slowly Moving Circular App Icons */}
               <motion.div 
-                className="absolute inset-0 z-10"
+                className="absolute inset-0 z-10 flex items-center justify-center"
                 animate={{ rotate: 360 }}
                 transition={{
                   duration: 60,
@@ -738,6 +742,7 @@ export default function HomePage() {
                   ease: "linear"
                 }}
               >
+                <div className="relative w-full h-full max-w-2xl max-h-2xl">
                 {aiFeatures.map((feature, index) => {
                   const IconComponent = feature.icon;
                   // Position icons around the center in a circular pattern
@@ -746,18 +751,20 @@ export default function HomePage() {
                   const x = Math.cos((angle * Math.PI) / 180) * radius;
                   const y = Math.sin((angle * Math.PI) / 180) * radius;
                   
-                  // Medical/Health related images for each AI tool
+                  // Medical/Health related images for each AI tool (12 images for better spacing)
                   const medicalImages = [
-                    'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=120&h=120&fit=crop&crop=center', // Medical report/stethoscope
-                    'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=120&h=120&fit=crop&crop=center', // Pills/medicine
-                    'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=120&h=120&fit=crop&crop=center', // Insurance/documents
-                    'https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=120&h=120&fit=crop&crop=center', // Health dashboard/charts
-                    'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=120&h=120&fit=crop&crop=center', // Nutrition/food
-                    'https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=120&h=120&fit=crop&crop=center', // Government/hospital
-                    'https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=120&h=120&fit=crop&crop=center', // Symptom checker/doctor
-                    'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=120&h=120&fit=crop&crop=center', // Emergency/ambulance
-                    'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&h=120&fit=crop&crop=center', // Health education/learning
-                    'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=120&h=120&fit=crop&crop=center'  // Fitness/exercise
+                    'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=120&h=120&fit=crop', // Medical report/stethoscope
+                    'https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=120&h=120&fit=crop', // Insurance/shield
+                    'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=120&h=120&fit=crop', // Nutrition/food
+                    'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=120&h=120&fit=crop', // Government/building
+                    'https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=120&h=120&fit=crop', // Symptom checker/doctor
+                    'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=120&h=120&fit=crop', // Health education/books
+                    'https://images.unsplash.com/photo-1505751104628-5f2f4d0e5e0e?w=120&h=120&fit=crop', // Pills/medication
+                    'https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=120&h=120&fit=crop', // Hospital/medical care
+                    'https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?w=120&h=120&fit=crop', // Heart health/cardiology
+                    'https://images.unsplash.com/photo-1559757175-5700dde675bc?w=120&h=120&fit=crop', // Lab/testing
+                    'https://images.unsplash.com/photo-1551076805-e1869033e561?w=120&h=120&fit=crop', // Fitness/wellness
+                    'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=120&h=120&fit=crop' // Mental health/meditation
                   ];
 
                   return (
@@ -801,11 +808,12 @@ export default function HomePage() {
                     </motion.div>
                   );
                 })}
+                </div>
               </motion.div>
             </div>
 
             {/* Featured AI Tools Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16 max-w-6xl mx-auto">
+            <div className="grid-zoom-3 mb-16">
               {aiFeatures.slice(0, 6).map((feature, index) => {
                 const IconComponent = feature.icon;
                 return (
@@ -867,7 +875,7 @@ export default function HomePage() {
             </div>
 
             {/* Additional AI Tools Cards - Enhanced Design */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16 max-w-7xl mx-auto">
+            <div className="grid-zoom-4 mb-16">
               {aiFeatures.slice(6).map((feature, index) => {
                 const IconComponent = feature.icon;
                 return (
@@ -976,7 +984,7 @@ export default function HomePage() {
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-purple-400/5 rounded-full blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
         </div>
 
-        <div className="container mx-auto px-4 relative z-10">
+        <div className="section-content-zoom relative z-10">
           {/* Header */}
           <motion.div
             className="text-center mb-12"
@@ -1022,7 +1030,7 @@ export default function HomePage() {
           </motion.div>
 
           {/* Premium AI Tools Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto items-start">
+          <div className="grid-zoom-3">
             {/* AI Medicine Information */}
             <motion.div
               className="group relative bg-gradient-to-br from-gray-900/80 via-purple-900/20 to-gray-800/80 backdrop-blur-sm rounded-2xl p-6 border border-purple-500/20 hover:border-purple-400/40 transition-all duration-300 overflow-hidden h-full"
@@ -1245,11 +1253,11 @@ export default function HomePage() {
       {/* <SupportFeatures /> */}
 
       {/* Why MediVolt */}
-      <section className="w-full py-24 bg-black relative overflow-hidden">
+      <section className="section-zoom-container bg-black">
         <div className="absolute inset-0">
           <div className="absolute top-10 right-10 w-72 h-72 bg-gradient-to-r from-primary-500/20 to-accent-500/20 rounded-full blur-3xl"></div>
         </div>
-        <div className="container px-4 md:px-6 relative z-10">
+        <div className="section-content-zoom relative z-10">
           {/* Support Dot */}
           <motion.div
             className="flex justify-center mb-8"
@@ -1529,7 +1537,7 @@ export default function HomePage() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-20 bg-black relative overflow-hidden">
+      <section className="section-zoom-container bg-black">
         {/* Purple Flow Background Effects */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-500/8 via-transparent to-transparent"></div>
         <div className="absolute top-10 left-10 w-96 h-96 bg-purple-500/6 rounded-full blur-3xl animate-pulse"></div>
@@ -1537,7 +1545,7 @@ export default function HomePage() {
         <div className="absolute top-1/3 right-1/4 w-64 h-64 bg-purple-400/3 rounded-full blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
         <div className="absolute bottom-1/3 left-1/4 w-72 h-72 bg-purple-500/4 rounded-full blur-3xl animate-pulse" style={{animationDelay: '0.5s'}}></div>
 
-        <div className="container px-4 md:px-6 relative z-10">
+        <div className="section-content-zoom relative z-10">
           {/* Header */}
           <motion.div
             className="text-center mb-16"
@@ -1567,7 +1575,7 @@ export default function HomePage() {
           </motion.div>
 
           {/* Testimonials Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          <div className="grid-zoom-3 mb-12">
             {/* Testimonial 1 */}
             <motion.div
               className="group bg-black/90 backdrop-blur-sm rounded-2xl p-6 border border-gray-800 hover:border-purple-500/50 transition-all duration-500 hover:shadow-2xl hover:shadow-purple-500/20 relative overflow-hidden"
@@ -1764,15 +1772,15 @@ export default function HomePage() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20 bg-black relative overflow-hidden">
+      <section className="section-zoom-container bg-black">
         {/* Purple Flow Background Effects */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-500/8 via-transparent to-transparent"></div>
         <div className="absolute top-10 left-10 w-96 h-96 bg-purple-500/6 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-10 right-10 w-80 h-80 bg-purple-600/4 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
         <div className="absolute top-1/3 right-1/4 w-64 h-64 bg-purple-400/3 rounded-full blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
 
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-7xl mx-auto">
+        <div className="section-content-zoom relative z-10">
+          <div className="grid-zoom-2">
             {/* Left Side - Header */}
             <motion.div
               className="lg:sticky lg:top-12 h-fit"
@@ -1861,22 +1869,51 @@ export default function HomePage() {
               ].map((faq, index) => (
                 <motion.div
                   key={index}
-                  className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 hover:border-purple-500/50 rounded-2xl p-6 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/10"
+                  className="bg-gradient-to-r from-gray-900/90 to-gray-800/90 backdrop-blur-lg border border-gray-700/50 hover:border-purple-500/50 rounded-xl overflow-hidden transition-all duration-300"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.1 * index }}
-                  whileHover={{ scale: 1.01, y: -2 }}
+                  whileHover={{ scale: 1.01 }}
                 >
-                  <h3 className="text-white font-semibold text-lg mb-3 flex items-start gap-3">
-                    <div className="w-6 h-6 bg-purple-500/20 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
-                    </div>
-                    {faq.question}
-                  </h3>
-                  <p className="text-gray-300 leading-relaxed ml-9">
-                    {faq.answer}
-                  </p>
+                  <button
+                    onClick={() => setActiveFAQ(activeFAQ === index ? null : index)}
+                    className="w-full px-6 py-5 text-left flex items-center justify-between group hover:bg-purple-500/10 transition-colors focus:outline-none"
+                  >
+                    <span className="text-white font-medium text-lg pr-4 group-hover:text-purple-300 transition-colors">
+                      {faq.question}
+                    </span>
+                    <motion.div
+                      animate={{ rotate: activeFAQ === index ? 45 : 0 }}
+                      transition={{ duration: 0.2 }}
+                      className="flex-shrink-0 w-8 h-8 bg-purple-500/20 rounded-full flex items-center justify-center group-hover:bg-purple-500/30"
+                    >
+                      <Plus className="w-4 h-4 text-purple-400" />
+                    </motion.div>
+                  </button>
+                  
+                  <AnimatePresence>
+                    {activeFAQ === index && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                        className="overflow-hidden"
+                      >
+                        <div className="px-6 pb-5 border-t border-purple-500/20">
+                          <motion.p 
+                            className="text-gray-300 leading-relaxed pt-4"
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.3, delay: 0.1 }}
+                          >
+                            {faq.answer}
+                          </motion.p>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </motion.div>
               ))}
 
@@ -1916,3 +1953,4 @@ export default function HomePage() {
     </div>
   );
 }
+

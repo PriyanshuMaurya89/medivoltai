@@ -1,74 +1,155 @@
 import React from 'react';
-import { Video, Calendar, Users, PlayCircle } from 'lucide-react';
+import { Calendar, Clock, Users, Play, Video, Award } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export default function WebinarsPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-600 to-indigo-800 text-white p-4 py-20">
-      <div className="max-w-6xl mx-auto">
+    <div className="min-h-screen bg-black text-white relative overflow-hidden">
+      {/* Purple Background Effects */}
+      <div className="absolute inset-0">
+        <div className="absolute top-20 left-20 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-20 w-80 h-80 bg-purple-600/8 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-purple-400/5 rounded-full blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
+      </div>
+
+      <div className="section-content-zoom relative z-10 py-20">
         {/* Hero Section */}
-        <div className="text-center mb-16">
-          <Video size={64} className="mx-auto text-white mb-4 animate-bounce" />
-          <h1 className="text-5xl font-extrabold mb-4 drop-shadow-lg">Webinars</h1>
-          <p className="text-xl font-light opacity-90 max-w-3xl mx-auto">Join our expert-led webinars to gain deeper insights into AI in healthcare, product updates, and best practices for leveraging MediVolt.</p>
-        </div>
-        
+        <motion.div 
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <motion.div
+            className="inline-flex items-center gap-3 px-6 py-3 bg-purple-500/20 backdrop-blur-sm rounded-full border border-purple-500/30 mb-6"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            <Video className="h-5 w-5 text-purple-300" />
+            <span className="text-purple-200 font-semibold tracking-wide">WEBINARS</span>
+          </motion.div>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+            Learn from <span className="bg-gradient-to-r from-purple-400 to-purple-300 bg-clip-text text-transparent">Healthcare Experts</span>
+          </h1>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">Join our interactive webinars to stay updated with the latest healthcare trends, AI innovations, and expert insights from leading medical professionals.</p>
+        </motion.div>
+
         {/* Upcoming Webinars */}
-        <div className="grid md:grid-cols-2 gap-8 mb-16">
-          <div className="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl shadow-xl p-8 transform transition-all duration-500 ease-in-out hover:scale-105">
-            <Calendar size={48} className="text-white mb-4 animate-pulse" />
-            <h2 className="text-2xl font-semibold mb-4">AI in Preventive Healthcare</h2>
-            <p className="text-lg opacity-90 mb-4">Discover how AI is revolutionizing preventive healthcare by identifying risks early and enabling personalized interventions.</p>
-            <div className="flex items-center text-sm text-gray-300 mb-2">
-              <Calendar size={16} className="mr-2" /><span>November 15, 2023</span>
+        <div className="grid-zoom-2 mb-16">
+          <motion.div 
+            className="group bg-gradient-to-br from-gray-900/80 via-purple-900/20 to-gray-800/80 backdrop-blur-sm rounded-2xl p-8 border border-purple-500/20 hover:border-purple-400/40 transition-all duration-300 overflow-hidden"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            whileHover={{ y: -8, scale: 1.02 }}
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div className="relative z-10">
+              <div className="w-12 h-12 bg-gradient-to-br from-purple-500/30 to-purple-600/30 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-all duration-300">
+                <Calendar className="h-6 w-6 text-purple-300" />
+              </div>
+              <h2 className="text-2xl font-bold text-white mb-4 group-hover:text-purple-200 transition-colors">AI in Preventive Healthcare</h2>
+              <p className="text-gray-300 leading-relaxed mb-4">Discover how AI is revolutionizing preventive healthcare by identifying risks early and enabling personalized interventions.</p>
+              <div className="flex items-center text-sm text-purple-300 mb-2">
+                <Calendar className="h-4 w-4 mr-2" />
+                <span>November 15, 2024</span>
+              </div>
+              <div className="flex items-center text-sm text-purple-300">
+                <Users className="h-4 w-4 mr-2" />
+                <span>Dr. Anya Sharma, AI Health Specialist</span>
+              </div>
             </div>
-            <div className="flex items-center text-sm text-gray-300">
-              <Users size={16} className="mr-2" /><span>Dr. Anya Sharma, AI Health Specialist</span>
-            </div>
-          </div>
+          </motion.div>
           
-          <div className="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl shadow-xl p-8 transform transition-all duration-500 ease-in-out hover:scale-105">
-            <Calendar size={48} className="text-white mb-4 animate-pulse" />
-            <h2 className="text-2xl font-semibold mb-4">Maximizing Your MediVolt Experience</h2>
-            <p className="text-lg opacity-90 mb-4">A practical guide to utilizing all the features of MediVolt to manage your health data and insights effectively.</p>
-            <div className="flex items-center text-sm text-gray-300 mb-2">
-              <Calendar size={16} className="mr-2" /><span>December 2, 2023</span>
+          <motion.div 
+            className="group bg-gradient-to-br from-gray-900/80 via-purple-900/20 to-gray-800/80 backdrop-blur-sm rounded-2xl p-8 border border-purple-500/20 hover:border-purple-400/40 transition-all duration-300 overflow-hidden"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            whileHover={{ y: -8, scale: 1.02 }}
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div className="relative z-10">
+              <div className="w-12 h-12 bg-gradient-to-br from-purple-500/30 to-purple-600/30 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-all duration-300">
+                <Play className="h-6 w-6 text-purple-300" />
+              </div>
+              <h2 className="text-2xl font-bold text-white mb-4 group-hover:text-purple-200 transition-colors">Maximizing Your MediVolt Experience</h2>
+              <p className="text-gray-300 leading-relaxed mb-4">A practical guide to utilizing all the features of MediVolt to manage your health data and insights effectively.</p>
+              <div className="flex items-center text-sm text-purple-300 mb-2">
+                <Calendar className="h-4 w-4 mr-2" />
+                <span>December 2, 2024</span>
+              </div>
+              <div className="flex items-center text-sm text-purple-300">
+                <Users className="h-4 w-4 mr-2" />
+                <span>MediVolt Product Team</span>
+              </div>
             </div>
-            <div className="flex items-center text-sm text-gray-300">
-              <Users size={16} className="mr-2" /><span>MediVolt Product Team</span>
-            </div>
-          </div>
+          </motion.div>
         </div>
-        
+
         {/* On-Demand Webinars */}
-        <div className="mb-16">
-          <h2 className="text-3xl font-bold text-center mb-10">On-Demand Webinars</h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl shadow-xl p-6 text-center">
-              <PlayCircle size={40} className="mx-auto text-white mb-3" />
-              <h3 className="text-xl font-semibold mb-2">Understanding Your Genetic Data</h3>
-              <p className="opacity-90">Watch now to learn how AI interprets genetic information for personalized health.</p>
-            </div>
+        <motion.div 
+          className="mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
+          <h2 className="text-3xl font-bold text-center mb-10 text-white">On-Demand <span className="bg-gradient-to-r from-purple-400 to-purple-300 bg-clip-text text-transparent">Webinars</span></h2>
+          <div className="grid-zoom-3">
+            <motion.div 
+              className="group bg-gradient-to-br from-gray-900/80 via-purple-900/20 to-gray-800/80 backdrop-blur-sm rounded-2xl p-6 border border-purple-500/20 hover:border-purple-400/40 transition-all duration-300 text-center"
+              whileHover={{ y: -8, scale: 1.02 }}
+            >
+              <div className="w-12 h-12 bg-gradient-to-br from-purple-500/30 to-purple-600/30 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-all duration-300">
+                <Play className="h-6 w-6 text-purple-300" />
+              </div>
+              <h3 className="text-xl font-bold text-white mb-3 group-hover:text-purple-200 transition-colors">Understanding Your Genetic Data</h3>
+              <p className="text-gray-300">Watch now to learn how AI interprets genetic information for personalized health.</p>
+            </motion.div>
             
-            <div className="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl shadow-xl p-6 text-center">
-              <PlayCircle size={40} className="mx-auto text-white mb-3" />
-              <h3 className="text-xl font-semibold mb-2">The Ethics of AI in Medicine</h3>
-              <p className="opacity-90">Explore the ethical considerations and challenges of AI implementation in healthcare.</p>
-            </div>
+            <motion.div 
+              className="group bg-gradient-to-br from-gray-900/80 via-purple-900/20 to-gray-800/80 backdrop-blur-sm rounded-2xl p-6 border border-purple-500/20 hover:border-purple-400/40 transition-all duration-300 text-center"
+              whileHover={{ y: -8, scale: 1.02 }}
+            >
+              <div className="w-12 h-12 bg-gradient-to-br from-purple-500/30 to-purple-600/30 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-all duration-300">
+                <Award className="h-6 w-6 text-purple-300" />
+              </div>
+              <h3 className="text-xl font-bold text-white mb-3 group-hover:text-purple-200 transition-colors">The Ethics of AI in Medicine</h3>
+              <p className="text-gray-300">Explore the ethical considerations and challenges of AI implementation in healthcare.</p>
+            </motion.div>
             
-            <div className="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl shadow-xl p-6 text-center">
-              <PlayCircle size={40} className="mx-auto text-white mb-3" />
-              <h3 className="text-xl font-semibold mb-2">Data Security in Digital Health</h3>
-              <p className="opacity-90">Learn about the measures MediVolt takes to ensure the security and privacy of your health data.</p>
-            </div>
+            <motion.div 
+              className="group bg-gradient-to-br from-gray-900/80 via-purple-900/20 to-gray-800/80 backdrop-blur-sm rounded-2xl p-6 border border-purple-500/20 hover:border-purple-400/40 transition-all duration-300 text-center"
+              whileHover={{ y: -8, scale: 1.02 }}
+            >
+              <div className="w-12 h-12 bg-gradient-to-br from-purple-500/30 to-purple-600/30 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-all duration-300">
+                <Clock className="h-6 w-6 text-purple-300" />
+              </div>
+              <h3 className="text-xl font-bold text-white mb-3 group-hover:text-purple-200 transition-colors">Data Security in Digital Health</h3>
+              <p className="text-gray-300">Learn about the measures MediVolt takes to ensure the security and privacy of your health data.</p>
+            </motion.div>
           </div>
-        </div>
-        
+        </motion.div>
+
         {/* CTA */}
-        <div className="text-center">
-          <h2 className="text-3xl font-bold mb-4">Missed a Webinar?</h2>
-          <p className="text-xl mb-6 max-w-3xl mx-auto">Access our full library of past webinars on demand and catch up on valuable insights at your convenience.</p>
-          <a href="/webinars-archive" className="inline-block bg-white text-blue-700 font-semibold px-8 py-3 rounded-full hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105">View Archive</a>
-        </div>
+        <motion.div 
+          className="text-center"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+        >
+          <h2 className="text-3xl font-bold mb-4 text-white">Missed a <span className="bg-gradient-to-r from-purple-400 to-purple-300 bg-clip-text text-transparent">Webinar?</span></h2>
+          <p className="text-xl mb-8 max-w-3xl mx-auto text-gray-300">Access our full library of past webinars on demand and catch up on valuable insights at your convenience.</p>
+          <motion.a 
+            href="/webinars-archive" 
+            className="inline-block bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white font-semibold px-8 py-4 rounded-full shadow-lg shadow-purple-500/25 transition-all duration-300"
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            View Archive
+          </motion.a>
+        </motion.div>
       </div>
     </div>
   );

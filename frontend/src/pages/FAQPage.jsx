@@ -1,38 +1,42 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Plus, Minus, HelpCircle } from 'lucide-react';
+import { Plus, HelpCircle } from 'lucide-react';
 
 export default function FAQPage() {
-  const [openFAQ, setOpenFAQ] = useState(null);
+  const [activeQuestion, setActiveQuestion] = useState(null);
 
-  const toggleFAQ = (index) => {
-    setOpenFAQ(openFAQ === index ? null : index);
+  const toggleQuestion = (index) => {
+    setActiveQuestion(activeQuestion === index ? null : index);
   };
 
   const faqs = [
+    {
+      question: "How does MediVolt's AI analyze my medical reports?",
+      answer: "Our AI uses advanced machine learning algorithms and natural language processing to analyze medical reports. It extracts key information such as test results, diagnoses, and recommendations, then translates complex medical terminology into simple, understandable language. The AI cross-references your data with medical databases to provide personalized insights and health recommendations while maintaining complete privacy and security."
+    },
     {
       question: "What do I need to get started?",
       answer: "To get started with MediVolt, you just need to create a free account. No medical background required! Our AI will guide you through uploading your medical reports, symptoms, or health questions. You can start using basic features immediately, and premium features are available with a subscription."
     },
     {
-      question: "What kind of medical analysis is available?",
-      answer: "MediVolt offers comprehensive medical analysis including: blood test interpretation, X-ray and scan analysis, symptom checking, medication guidance, nutrition planning, and health risk assessment. Our AI can explain complex medical terms in simple language and provide personalized health recommendations."
+      question: "What kind of customization is available?",
+      answer: "MediVolt offers extensive customization options including: personalized health dashboards, custom medication reminders, tailored nutrition plans, preferred language settings (Hindi/English), notification preferences, family member profiles, and specialized health tracking for chronic conditions. You can also customize your AI assistant's communication style and complexity level."
     },
     {
-      question: "How easy is it to use for beginners?",
-      answer: "MediVolt is designed to be extremely user-friendly! Our AI speaks in simple Hindi and English, explains medical terms clearly, and guides you step-by-step. No technical knowledge needed - just ask questions naturally like you would to a doctor. We also provide video tutorials and 24/7 chat support."
+      question: "How easy is it to edit for beginners?",
+      answer: "MediVolt is designed to be extremely user-friendly! Our AI speaks in simple Hindi and English, explains medical terms clearly, and guides you step-by-step. No technical knowledge needed - just ask questions naturally like you would to a doctor. We also provide video tutorials and 24/7 chat support for any assistance you need."
     },
     {
-      question: "Tell me more about privacy and data security?",
-      answer: "Your health data is completely secure with bank-level encryption. We follow strict HIPAA compliance and Indian data protection laws. Your medical information is never shared without your consent. All data is stored securely in India, and you have full control to delete your data anytime."
+      question: "Let me know more about moneyback guarantee?",
+      answer: "We offer a 30-day money-back guarantee on all premium subscriptions. If you're not completely satisfied with MediVolt's AI analysis and features, simply contact our support team within 30 days of purchase for a full refund. No questions asked - we're confident you'll love the personalized healthcare insights our platform provides."
     },
     {
-      question: "Do I need medical knowledge to use this?",
-      answer: "Absolutely not! MediVolt is built for everyone - from patients to families to healthcare workers. Our AI translates complex medical information into easy-to-understand explanations. Whether you're checking symptoms, understanding reports, or managing medications, we make healthcare accessible to all."
+      question: "Do I need to know how to code?",
+      answer: "Absolutely not! MediVolt is built for everyone - patients, families, and healthcare workers. No coding or technical knowledge required. Our AI interface is designed like having a conversation with a knowledgeable doctor. Simply upload your reports, ask questions in plain language, and get instant, easy-to-understand medical insights."
     },
     {
-      question: "What will I get after using MediVolt?",
-      answer: "You'll receive: personalized health insights, easy-to-understand medical report explanations, symptom analysis with next steps, medication reminders and interactions, nutrition plans, emergency SOS features, and direct connections to verified doctors when needed. Plus lifetime access to your health history and trends."
+      question: "What will I get after purchasing the template?",
+      answer: "After subscribing to MediVolt Premium, you'll receive: unlimited AI medical report analysis, personalized health insights, symptom checker with recommendations, medication interaction alerts, nutrition planning, emergency SOS features, priority customer support, family member profiles, and lifetime access to your health history and trends with regular AI model updates."
     }
   ];
 
@@ -108,39 +112,38 @@ export default function FAQPage() {
             {faqs.map((faq, index) => (
               <motion.div
                 key={index}
-                className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 hover:border-purple-500/50 rounded-2xl overflow-hidden transition-all duration-300"
+                className="bg-gradient-to-r from-gray-900/90 to-gray-800/90 backdrop-blur-lg border border-gray-700/50 hover:border-purple-500/50 rounded-xl overflow-hidden transition-all duration-300"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 * index }}
                 whileHover={{ scale: 1.01 }}
               >
                 <button
-                  onClick={() => toggleFAQ(index)}
-                  className="w-full px-6 py-6 text-left flex items-center justify-between group focus:outline-none"
+                  onClick={() => toggleQuestion(index)}
+                  className="w-full px-6 py-5 text-left flex items-center justify-between group hover:bg-purple-500/10 transition-colors focus:outline-none"
                 >
-                  <span className="text-white font-medium text-lg group-hover:text-purple-300 transition-colors pr-4">
+                  <span className="text-white font-medium text-lg pr-4 group-hover:text-purple-300 transition-colors">
                     {faq.question}
                   </span>
-                  <div className="flex-shrink-0 w-8 h-8 bg-purple-500/20 rounded-full flex items-center justify-center group-hover:bg-purple-500/30 transition-all duration-300">
-                    <motion.div
-                      animate={{ rotate: openFAQ === index ? 45 : 0 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <Plus className="w-4 h-4 text-purple-400" />
-                    </motion.div>
-                  </div>
+                  <motion.div
+                    animate={{ rotate: activeQuestion === index ? 45 : 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="flex-shrink-0 w-8 h-8 bg-purple-500/20 rounded-full flex items-center justify-center group-hover:bg-purple-500/30"
+                  >
+                    <Plus className="w-4 h-4 text-purple-400" />
+                  </motion.div>
                 </button>
                 
                 <AnimatePresence>
-                  {openFAQ === index && (
+                  {activeQuestion === index && (
                     <motion.div
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3 }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
                       className="overflow-hidden"
                     >
-                      <div className="px-6 pb-6 border-t border-gray-800/50">
+                      <div className="px-6 pb-5 border-t border-purple-500/20">
                         <motion.p 
                           className="text-gray-300 leading-relaxed pt-4"
                           initial={{ opacity: 0, y: 10 }}
@@ -158,30 +161,40 @@ export default function FAQPage() {
 
             {/* Contact Section */}
             <motion.div
-              className="mt-12 p-8 bg-gradient-to-br from-purple-900/20 to-gray-900/50 border border-purple-500/30 rounded-2xl backdrop-blur-sm"
+              className="mt-12 p-8 bg-gradient-to-br from-purple-500/10 to-gray-900/90 border border-purple-500/30 rounded-xl backdrop-blur-lg"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.8 }}
             >
-              <h3 className="text-xl font-bold text-white mb-3">Still have questions?</h3>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 bg-purple-500/20 rounded-lg flex items-center justify-center">
+                  <HelpCircle className="h-5 w-5 text-purple-400" />
+                </div>
+                <h3 className="text-xl font-bold text-white">Still have questions?</h3>
+              </div>
               <p className="text-gray-400 mb-6">
-                Can't find the answer you're looking for? Our support team is here to help 24/7.
+                Can't find the answer you're looking for? Our support team is here to help 24/7 with any questions about MediVolt.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <motion.button
-                  className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white px-6 py-3 rounded-xl font-medium transition-all duration-300 shadow-lg shadow-purple-500/25"
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
+                  className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 shadow-lg shadow-purple-500/25"
+                  whileHover={{ scale: 1.02, y: -1 }}
+                  whileTap={{ scale: 0.98 }}
                 >
                   Contact Support
                 </motion.button>
                 <motion.button
-                  className="border border-purple-500/50 hover:bg-purple-500/10 text-purple-300 hover:text-purple-200 px-6 py-3 rounded-xl font-medium transition-all duration-300"
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
+                  className="border border-purple-500/50 hover:bg-purple-500/10 text-purple-300 hover:text-purple-200 px-6 py-3 rounded-lg font-medium transition-all duration-300"
+                  whileHover={{ scale: 1.02, y: -1 }}
+                  whileTap={{ scale: 0.98 }}
                 >
                   Live Chat
                 </motion.button>
+              </div>
+              <div className="mt-4 pt-4 border-t border-purple-500/20">
+                <p className="text-gray-500 text-sm">
+                  Average response time: <span className="text-purple-400 font-medium">Under 2 minutes</span>
+                </p>
               </div>
             </motion.div>
           </motion.div>

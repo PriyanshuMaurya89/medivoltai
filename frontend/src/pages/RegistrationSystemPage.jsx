@@ -19,180 +19,222 @@ const RegistrationSystemPage = () => {
   const AccountTypeSelection = () => (
     <div className="min-h-screen bg-black flex items-center justify-center px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
       <div className="w-full max-w-7xl mx-auto">
-        {/* Header Section */}
+        {/* Header Section - Enhanced */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-8 sm:mb-12 lg:mb-16"
         >
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 lg:mb-6 leading-tight">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 leading-tight">
             Join MediVolt
           </h1>
-          <p className="text-base sm:text-lg lg:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed px-2">
-            Choose your account type to get started with our comprehensive healthcare platform
+          <p className="text-lg sm:text-xl lg:text-2xl text-purple-300 font-medium mb-4 sm:mb-6">
+            One platform. Three ways to connect. Choose your role and get started.
+          </p>
+          <p className="text-base sm:text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed px-2">
+            Experience the future of healthcare with AI-powered tools, seamless connections, and premium medical services
           </p>
         </motion.div>
 
         {/* Cards Grid - Mobile-First Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
-          {/* Patient Card */}
+          {/* User Card - Enhanced */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            whileHover={{ y: -4, scale: 1.02 }}
+            whileHover={{ 
+              y: -8, 
+              scale: 1.02,
+              boxShadow: "0 20px 40px rgba(147, 51, 234, 0.3)"
+            }}
             whileTap={{ scale: 0.98 }}
-            onClick={() => { setAccountType('patient'); setStep('form'); }}
-            className="relative bg-gradient-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-lg rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 border border-gray-700/50 cursor-pointer hover:border-purple-500/50 transition-all duration-300 touch-manipulation"
+            onClick={() => { setAccountType('User'); setStep('form'); }}
+            className="group relative bg-gradient-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-lg rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 border border-gray-700/50 cursor-pointer hover:border-purple-500/70 transition-all duration-500 touch-manipulation overflow-hidden"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-600/10 to-blue-600/10 rounded-2xl sm:rounded-3xl"></div>
+            {/* Animated Glow Effect */}
+            <div className="absolute inset-0 bg-gradient-to-br from-purple-600/0 to-blue-600/0 group-hover:from-purple-600/20 group-hover:to-blue-600/20 rounded-2xl sm:rounded-3xl transition-all duration-500"></div>
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-gradient-to-r from-purple-500/10 via-transparent to-purple-500/10 transition-opacity duration-500"></div>
+            
             <div className="relative z-10">
-              {/* Icon */}
-              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-purple-500/20 rounded-full flex items-center justify-center mb-6 sm:mb-8 mx-auto">
-                <User className="h-8 w-8 sm:h-10 sm:w-10 text-purple-400" />
+              {/* Icon with Glow */}
+              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-purple-500/20 group-hover:bg-purple-500/30 rounded-full flex items-center justify-center mb-6 sm:mb-8 mx-auto transition-all duration-300 group-hover:shadow-lg group-hover:shadow-purple-500/25">
+                <User className="h-8 w-8 sm:h-10 sm:w-10 text-purple-400 group-hover:text-purple-300 transition-colors duration-300" />
               </div>
               
               {/* Title */}
-              <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-4 sm:mb-6 text-center leading-tight">
-                👤 Patient
+              <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-4 sm:mb-6 text-center leading-tight group-hover:text-purple-100 transition-colors duration-300">
+                👤 User
               </h3>
               
               {/* Description */}
-              <p className="text-sm sm:text-base text-gray-300 text-center mb-6 sm:mb-8 leading-relaxed">
-                For individuals using MediVolt's AI tools & booking appointments
+              <p className="text-sm sm:text-base text-gray-300 group-hover:text-gray-200 text-center mb-6 sm:mb-8 leading-relaxed transition-colors duration-300">
+                For individuals seeking AI-powered healthcare solutions and medical consultations
               </p>
               
-              {/* Features List */}
-              <ul className="space-y-3 sm:space-y-4 text-sm sm:text-base text-gray-400 mb-6 sm:mb-8">
-                <li className="flex items-center">
-                  <span className="w-2 h-2 bg-purple-400 rounded-full mr-3 flex-shrink-0"></span>
-                  AI Health Tools
-                </li>
-                <li className="flex items-center">
-                  <span className="w-2 h-2 bg-purple-400 rounded-full mr-3 flex-shrink-0"></span>
-                  Book Appointments
-                </li>
-                <li className="flex items-center">
-                  <span className="w-2 h-2 bg-purple-400 rounded-full mr-3 flex-shrink-0"></span>
+              {/* Premium Features with Icons */}
+              <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-6 sm:mb-8">
+                <div className="flex items-center text-sm sm:text-base text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
+                  <span className="text-lg mr-2">🧠</span>
+                  AI Tools
+                </div>
+                <div className="flex items-center text-sm sm:text-base text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
+                  <span className="text-lg mr-2">📅</span>
+                  Appointments
+                </div>
+                <div className="flex items-center text-sm sm:text-base text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
+                  <span className="text-lg mr-2">🚨</span>
                   Emergency SOS
-                </li>
-                <li className="flex items-center">
-                  <span className="w-2 h-2 bg-purple-400 rounded-full mr-3 flex-shrink-0"></span>
+                </div>
+                <div className="flex items-center text-sm sm:text-base text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
+                  <span className="text-lg mr-2">❤️</span>
                   Health Tracking
-                </li>
-              </ul>
+                </div>
+              </div>
+
+              {/* Trust Badge */}
+              <div className="flex items-center justify-center mb-6 sm:mb-8 p-3 bg-gray-800/50 rounded-lg border border-gray-700/50">
+                <Shield className="h-4 w-4 text-green-400 mr-2" />
+                <span className="text-xs sm:text-sm text-gray-300">Your data is encrypted & private</span>
+              </div>
               
-              {/* CTA */}
-              <div className="flex items-center justify-center text-purple-400 font-semibold text-sm sm:text-base">
-                Get Started <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 ml-2" />
+              {/* Consistent CTA */}
+              <div className="flex items-center justify-center text-purple-400 group-hover:text-purple-300 font-semibold text-sm sm:text-base bg-purple-500/10 group-hover:bg-purple-500/20 py-3 px-6 rounded-xl transition-all duration-300">
+                Register as New User <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
               </div>
             </div>
           </motion.div>
 
-          {/* Freelancer Card */}
+          {/* Doctor/Nurse Card - Enhanced */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            whileHover={{ y: -4, scale: 1.02 }}
+            whileHover={{ 
+              y: -8, 
+              scale: 1.02,
+              boxShadow: "0 20px 40px rgba(34, 197, 94, 0.3)"
+            }}
             whileTap={{ scale: 0.98 }}
             onClick={() => { setAccountType('freelancer'); setStep('form'); }}
-            className="relative bg-gradient-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-lg rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 border border-gray-700/50 cursor-pointer hover:border-green-500/50 transition-all duration-300 touch-manipulation"
+            className="group relative bg-gradient-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-lg rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 border border-gray-700/50 cursor-pointer hover:border-green-500/70 transition-all duration-500 touch-manipulation overflow-hidden"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-green-600/10 to-purple-600/10 rounded-2xl sm:rounded-3xl"></div>
+            {/* Animated Glow Effect */}
+            <div className="absolute inset-0 bg-gradient-to-br from-green-600/0 to-emerald-600/0 group-hover:from-green-600/20 group-hover:to-emerald-600/20 rounded-2xl sm:rounded-3xl transition-all duration-500"></div>
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-gradient-to-r from-green-500/10 via-transparent to-green-500/10 transition-opacity duration-500"></div>
+            
             <div className="relative z-10">
-              {/* Icon */}
-              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-green-500/20 rounded-full flex items-center justify-center mb-6 sm:mb-8 mx-auto">
-                <Stethoscope className="h-8 w-8 sm:h-10 sm:w-10 text-green-400" />
+              {/* Icon with Glow */}
+              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-green-500/20 group-hover:bg-green-500/30 rounded-full flex items-center justify-center mb-6 sm:mb-8 mx-auto transition-all duration-300 group-hover:shadow-lg group-hover:shadow-green-500/25">
+                <Stethoscope className="h-8 w-8 sm:h-10 sm:w-10 text-green-400 group-hover:text-green-300 transition-colors duration-300" />
               </div>
               
               {/* Title */}
-              <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-4 sm:mb-6 text-center leading-tight">
+              <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-4 sm:mb-6 text-center leading-tight group-hover:text-green-100 transition-colors duration-300">
                 👨‍⚕️ Doctor/Nurse
               </h3>
               
               {/* Description */}
-              <p className="text-sm sm:text-base text-gray-300 text-center mb-6 sm:mb-8 leading-relaxed">
-                For healthcare experts offering consultations or seeking employment
+              <p className="text-sm sm:text-base text-gray-300 group-hover:text-gray-200 text-center mb-6 sm:mb-8 leading-relaxed transition-colors duration-300">
+                For healthcare professionals offering consultations and seeking opportunities
               </p>
               
-              {/* Features List */}
-              <ul className="space-y-3 sm:space-y-4 text-sm sm:text-base text-gray-400 mb-6 sm:mb-8">
-                <li className="flex items-center">
-                  <span className="w-2 h-2 bg-green-400 rounded-full mr-3 flex-shrink-0"></span>
-                  Freelancer Marketplace
-                </li>
-                <li className="flex items-center">
-                  <span className="w-2 h-2 bg-green-400 rounded-full mr-3 flex-shrink-0"></span>
-                  Set Consultation Fees
-                </li>
-                <li className="flex items-center">
-                  <span className="w-2 h-2 bg-green-400 rounded-full mr-3 flex-shrink-0"></span>
-                  Hospital Hiring
-                </li>
-                <li className="flex items-center">
-                  <span className="w-2 h-2 bg-green-400 rounded-full mr-3 flex-shrink-0"></span>
-                  Professional Verification
-                </li>
-              </ul>
+              {/* Premium Features with Icons */}
+              <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-6 sm:mb-8">
+                <div className="flex items-center text-sm sm:text-base text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
+                  <span className="text-lg mr-2">💼</span>
+                  Freelance Work
+                </div>
+                <div className="flex items-center text-sm sm:text-base text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
+                  <span className="text-lg mr-2">💰</span>
+                  Set Your Rates
+                </div>
+                <div className="flex items-center text-sm sm:text-base text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
+                  <span className="text-lg mr-2">🏥</span>
+                  Hospital Jobs
+                </div>
+                <div className="flex items-center text-sm sm:text-base text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
+                  <span className="text-lg mr-2">⭐</span>
+                  Build Reputation
+                </div>
+              </div>
+
+              {/* Trust Badge */}
+              <div className="flex items-center justify-center mb-6 sm:mb-8 p-3 bg-gray-800/50 rounded-lg border border-gray-700/50">
+                <Shield className="h-4 w-4 text-green-400 mr-2" />
+                <span className="text-xs sm:text-sm text-gray-300">Documents required for verification</span>
+              </div>
               
-              {/* CTA */}
-              <div className="flex items-center justify-center text-green-400 font-semibold text-sm sm:text-base">
-                Join as Professional <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 ml-2" />
+              {/* Consistent CTA */}
+              <div className="flex items-center justify-center text-green-400 group-hover:text-green-300 font-semibold text-sm sm:text-base bg-green-500/10 group-hover:bg-green-500/20 py-3 px-6 rounded-xl transition-all duration-300">
+                Register as Doctor/Nurse <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
               </div>
             </div>
           </motion.div>
 
-          {/* Hospital Card */}
+          {/* Hospital/Clinic Card - Enhanced */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            whileHover={{ y: -4, scale: 1.02 }}
+            whileHover={{ 
+              y: -8, 
+              scale: 1.02,
+              boxShadow: "0 20px 40px rgba(59, 130, 246, 0.3)"
+            }}
             whileTap={{ scale: 0.98 }}
             onClick={() => { setAccountType('hospital'); setStep('form'); }}
-            className="relative bg-gradient-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-lg rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 border border-gray-700/50 cursor-pointer hover:border-blue-500/50 transition-all duration-300 touch-manipulation lg:col-span-1 lg:mx-auto lg:max-w-md xl:max-w-none xl:mx-0"
+            className="group relative bg-gradient-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-lg rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 border border-gray-700/50 cursor-pointer hover:border-blue-500/70 transition-all duration-500 touch-manipulation lg:col-span-1 lg:mx-auto lg:max-w-md xl:max-w-none xl:mx-0 overflow-hidden"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 to-purple-600/10 rounded-2xl sm:rounded-3xl"></div>
+            {/* Animated Glow Effect */}
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-600/0 to-cyan-600/0 group-hover:from-blue-600/20 group-hover:to-cyan-600/20 rounded-2xl sm:rounded-3xl transition-all duration-500"></div>
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-gradient-to-r from-blue-500/10 via-transparent to-blue-500/10 transition-opacity duration-500"></div>
+            
             <div className="relative z-10">
-              {/* Icon */}
-              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-blue-500/20 rounded-full flex items-center justify-center mb-6 sm:mb-8 mx-auto">
-                <Building className="h-8 w-8 sm:h-10 sm:w-10 text-blue-400" />
+              {/* Icon with Glow */}
+              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-blue-500/20 group-hover:bg-blue-500/30 rounded-full flex items-center justify-center mb-6 sm:mb-8 mx-auto transition-all duration-300 group-hover:shadow-lg group-hover:shadow-blue-500/25">
+                <Building className="h-8 w-8 sm:h-10 sm:w-10 text-blue-400 group-hover:text-blue-300 transition-colors duration-300" />
               </div>
               
               {/* Title */}
-              <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-4 sm:mb-6 text-center leading-tight">
+              <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-4 sm:mb-6 text-center leading-tight group-hover:text-blue-100 transition-colors duration-300">
                 🏥 Hospital/Clinic
               </h3>
               
               {/* Description */}
-              <p className="text-sm sm:text-base text-gray-300 text-center mb-6 sm:mb-8 leading-relaxed">
-                For institutions managing appointments & hiring freelancers
+              <p className="text-sm sm:text-base text-gray-300 group-hover:text-gray-200 text-center mb-6 sm:mb-8 leading-relaxed transition-colors duration-300">
+                For healthcare institutions managing operations and hiring professionals
               </p>
               
-              {/* Features List */}
-              <ul className="space-y-3 sm:space-y-4 text-sm sm:text-base text-gray-400 mb-6 sm:mb-8">
-                <li className="flex items-center">
-                  <span className="w-2 h-2 bg-blue-400 rounded-full mr-3 flex-shrink-0"></span>
-                  Admin Panel Access
-                </li>
-                <li className="flex items-center">
-                  <span className="w-2 h-2 bg-blue-400 rounded-full mr-3 flex-shrink-0"></span>
-                  Hire Freelancers
-                </li>
-                <li className="flex items-center">
-                  <span className="w-2 h-2 bg-blue-400 rounded-full mr-3 flex-shrink-0"></span>
-                  Patient Management
-                </li>
-                <li className="flex items-center">
-                  <span className="w-2 h-2 bg-blue-400 rounded-full mr-3 flex-shrink-0"></span>
-                  Appointment System
-                </li>
-              </ul>
+              {/* Premium Features with Icons */}
+              <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-6 sm:mb-8">
+                <div className="flex items-center text-sm sm:text-base text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
+                  <span className="text-lg mr-2">⚙️</span>
+                  Admin Panel
+                </div>
+                <div className="flex items-center text-sm sm:text-base text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
+                  <span className="text-lg mr-2">👥</span>
+                  Hire Staff
+                </div>
+                <div className="flex items-center text-sm sm:text-base text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
+                  <span className="text-lg mr-2">📋</span>
+                  User Records
+                </div>
+                <div className="flex items-center text-sm sm:text-base text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
+                  <span className="text-lg mr-2">📅</span>
+                  Scheduling
+                </div>
+              </div>
+
+              {/* Trust Badge */}
+              <div className="flex items-center justify-center mb-6 sm:mb-8 p-3 bg-gray-800/50 rounded-lg border border-gray-700/50">
+                <Shield className="h-4 w-4 text-blue-400 mr-2" />
+                <span className="text-xs sm:text-sm text-gray-300">Institution verification required</span>
+              </div>
               
-              {/* CTA */}
-              <div className="flex items-center justify-center text-blue-400 font-semibold text-sm sm:text-base">
-                Register Institution <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 ml-2" />
+              {/* Consistent CTA */}
+              <div className="flex items-center justify-center text-blue-400 group-hover:text-blue-300 font-semibold text-sm sm:text-base bg-blue-500/10 group-hover:bg-blue-500/20 py-3 px-6 rounded-xl transition-all duration-300">
+                Register as Hospital <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
               </div>
             </div>
           </motion.div>
@@ -201,14 +243,14 @@ const RegistrationSystemPage = () => {
     </div>
   );
 
-  // Patient Registration Form - Mobile-First Responsive
-  const PatientForm = () => (
+  // New User Registration Form - Mobile-First Responsive
+  const UserForm = () => (
     <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="bg-gradient-to-br from-gray-900/95 to-gray-800/95 backdrop-blur-lg rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 border border-gray-700/50 shadow-2xl">
         {/* Header */}
         <div className="text-center mb-8 sm:mb-10">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-3 sm:mb-4">
-            👤 Patient Registration
+            👤 New User
           </h2>
           <p className="text-sm sm:text-base text-gray-400 leading-relaxed">
             Join MediVolt to access AI health tools and book appointments
@@ -399,7 +441,7 @@ const RegistrationSystemPage = () => {
               type="submit"
               className="w-full bg-gradient-to-r from-purple-600 to-purple-700 text-white py-4 sm:py-5 px-6 rounded-xl hover:from-purple-500 hover:to-purple-600 transition-all duration-300 font-semibold text-base sm:text-lg shadow-lg hover:shadow-purple-500/25 touch-manipulation min-h-[56px]"
             >
-              Create Patient Account
+              Create New User Account
             </button>
             
             <div className="text-center">
@@ -977,9 +1019,9 @@ const RegistrationSystemPage = () => {
   return (
     <div className="min-h-screen bg-black">
       {step === 'account-type' && <AccountTypeSelection />}
-      {step === 'form' && accountType === 'patient' && (
+      {step === 'form' && accountType === 'User' && (
         <div className="py-12 px-6">
-          <PatientForm />
+          <User Form />
         </div>
       )}
       {step === 'form' && accountType === 'freelancer' && (

@@ -1,69 +1,173 @@
 import React from 'react';
-import { Info, Users, Award, Heart, Clock, Globe } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Brain, Heart, Shield, Users, Award, Zap, Target, Globe } from 'lucide-react';
 
 export default function AboutUsPage() {
+  const stats = [
+    { number: '10K+', label: 'Healthcare Professionals', icon: Users },
+    { number: '50K+', label: 'Patients Served', icon: Heart },
+    { number: '99.9%', label: 'Uptime Guarantee', icon: Shield },
+    { number: '24/7', label: 'AI Support', icon: Brain }
+  ];
+
+  const values = [
+    {
+      icon: Heart,
+      title: 'Patient-Centered Care',
+      description: 'Every decision we make is guided by what\'s best for patient outcomes and experiences.'
+    },
+    {
+      icon: Shield,
+      title: 'Data Security',
+      description: 'We maintain the highest standards of data protection and privacy compliance.'
+    },
+    {
+      icon: Zap,
+      title: 'Innovation',
+      description: 'Continuously pushing the boundaries of what\'s possible in healthcare technology.'
+    },
+    {
+      icon: Globe,
+      title: 'Accessibility',
+      description: 'Making quality healthcare accessible to everyone, everywhere.'
+    }
+  ];
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-600 to-indigo-800 text-white p-4 py-20">
-      <div className="max-w-6xl mx-auto">
-        {/* Hero Section */}
-        <div className="text-center mb-16">
-          <Info size={64} className="mx-auto text-white mb-4 animate-bounce" />
-          <h1 className="text-5xl font-extrabold mb-4 drop-shadow-lg">About MediVolt</h1>
-          <p className="text-xl font-light opacity-90 max-w-3xl mx-auto">We are a passionate team dedicated to revolutionizing healthcare through AI-powered technology, making healthcare more accessible, personalized, and effective for everyone.</p>
-        </div>
-        
-        {/* Mission & Vision */}
-        <div className="grid md:grid-cols-2 gap-8 mb-16">
-          <div className="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl shadow-xl p-8 transform transition-all duration-500 ease-in-out hover:scale-105">
-            <Users size={48} className="text-white mb-4 animate-pulse" />
-            <h2 className="text-2xl font-semibold mb-4">Our Mission</h2>
-            <p className="text-lg opacity-90">To empower individuals with accessible, reliable, and innovative health solutions that enhance well-being and simplify healthcare management through cutting-edge AI technology.</p>
-          </div>
-          
-          <div className="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl shadow-xl p-8 transform transition-all duration-500 ease-in-out hover:scale-105">
-            <Globe size={48} className="text-white mb-4 animate-pulse" />
-            <h2 className="text-2xl font-semibold mb-4">Our Vision</h2>
-            <p className="text-lg opacity-90">A world where everyone has access to personalized healthcare insights, empowering them to make informed decisions about their health and well-being regardless of location or resources.</p>
-          </div>
-        </div>
-        
-        {/* Core Values */}
-        <div className="mb-16">
-          <h2 className="text-3xl font-bold text-center mb-10">Our Core Values</h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl shadow-xl p-6 text-center">
-              <Award size={40} className="mx-auto text-white mb-3" />
-              <h3 className="text-xl font-semibold mb-2">Excellence</h3>
-              <p className="opacity-90">We strive for excellence in every aspect of our service, from AI algorithms to user experience.</p>
+    <div className="min-h-screen bg-black relative overflow-hidden">
+      {/* Background Effects */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-500/8 via-transparent to-transparent"></div>
+      <div className="absolute top-10 left-10 w-96 h-96 bg-purple-500/6 rounded-full blur-3xl animate-pulse"></div>
+      <div className="absolute bottom-10 right-10 w-80 h-80 bg-purple-600/4 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
+
+      <div className="relative z-10 pt-20 pb-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          {/* Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center mb-16"
+          >
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <div className="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center">
+                <Brain className="h-7 w-7 text-purple-400" />
+              </div>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white">
+                About <span className="text-purple-400">MediVolt</span>
+              </h1>
             </div>
-            
-            <div className="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl shadow-xl p-6 text-center">
-              <Heart size={40} className="mx-auto text-white mb-3" />
-              <h3 className="text-xl font-semibold mb-2">Compassion</h3>
-              <p className="opacity-90">We approach healthcare with empathy, understanding the personal nature of health concerns.</p>
+            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+              Revolutionizing healthcare through AI-powered technology, connecting patients, doctors, and hospitals in one seamless platform.
+            </p>
+          </motion.div>
+
+          {/* Mission Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="mb-20"
+          >
+            <div className="bg-gradient-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-lg rounded-2xl border border-gray-700/50 p-8 lg:p-12">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                  <h2 className="text-3xl font-bold text-white mb-6">Our Mission</h2>
+                  <p className="text-gray-300 text-lg leading-relaxed mb-6">
+                    At MediVolt, we believe that everyone deserves access to quality healthcare. Our mission is to bridge the gap between patients and healthcare providers through innovative AI technology, making medical care more accessible, efficient, and personalized.
+                  </p>
+                  <p className="text-gray-400 leading-relaxed">
+                    We're building the future of healthcare - one where artificial intelligence enhances human expertise, where distance doesn't limit access to care, and where every patient receives personalized attention.
+                  </p>
+                </div>
+                <div className="flex items-center justify-center">
+                  <div className="w-64 h-64 bg-gradient-to-br from-purple-500/20 to-blue-500/20 rounded-full flex items-center justify-center">
+                    <Target className="h-32 w-32 text-purple-400" />
+                  </div>
+                </div>
+              </div>
             </div>
-            
-            <div className="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl shadow-xl p-6 text-center">
-              <Clock size={40} className="mx-auto text-white mb-3" />
-              <h3 className="text-xl font-semibold mb-2">Innovation</h3>
-              <p className="opacity-90">We continuously innovate to provide cutting-edge solutions that address evolving healthcare needs.</p>
+          </motion.div>
+
+          {/* Stats Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="mb-20"
+          >
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {stats.map((stat, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 + index * 0.1 }}
+                  className="bg-gradient-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-lg rounded-xl border border-gray-700/50 p-6 text-center"
+                >
+                  <div className="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center mx-auto mb-4">
+                    <stat.icon className="h-6 w-6 text-purple-400" />
+                  </div>
+                  <div className="text-3xl font-bold text-white mb-2">{stat.number}</div>
+                  <div className="text-gray-400 text-sm">{stat.label}</div>
+                </motion.div>
+              ))}
             </div>
-          </div>
-        </div>
-        
-        {/* Our Story */}
-        <div className="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl shadow-xl p-8 mb-16">
-          <h2 className="text-3xl font-bold mb-6 text-center">Our Story</h2>
-          <p className="text-lg mb-4">MediVolt was founded in 2021 by a team of healthcare professionals, AI specialists, and technology enthusiasts who recognized the potential of artificial intelligence to transform healthcare delivery.</p>
-          <p className="text-lg mb-4">Frustrated by the complexity and inaccessibility of healthcare information, our founders set out to create a platform that would make medical knowledge more accessible and personalized for everyone.</p>
-          <p className="text-lg">Today, MediVolt serves thousands of users across India, helping them understand their health better, interpret medical reports, and make informed decisions about their well-being.</p>
-        </div>
-        
-        {/* Join Us CTA */}
-        <div className="text-center">
-          <h2 className="text-3xl font-bold mb-4">Join Us on Our Mission</h2>
-          <p className="text-xl mb-6 max-w-3xl mx-auto">Whether you're a healthcare professional, AI enthusiast, or someone passionate about making healthcare better, we'd love to connect with you.</p>
-          <a href="/contact" className="inline-block bg-white text-blue-700 font-semibold px-8 py-3 rounded-full hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105">Contact Us</a>
+          </motion.div>
+
+          {/* Values Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
+            className="mb-20"
+          >
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-white mb-4">Our Values</h2>
+              <p className="text-gray-400 max-w-2xl mx-auto">
+                These core values guide everything we do and shape the way we build our platform.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {values.map((value, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.7 + index * 0.1 }}
+                  className="bg-gradient-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-lg rounded-xl border border-gray-700/50 p-6"
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <value.icon className="h-6 w-6 text-purple-400" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-semibold text-white mb-2">{value.title}</h3>
+                      <p className="text-gray-400 leading-relaxed">{value.description}</p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Team Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8 }}
+          >
+            <div className="bg-gradient-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-lg rounded-2xl border border-gray-700/50 p-8 lg:p-12 text-center">
+              <div className="w-16 h-16 bg-purple-500/20 rounded-lg flex items-center justify-center mx-auto mb-6">
+                <Award className="h-8 w-8 text-purple-400" />
+              </div>
+              <h2 className="text-3xl font-bold text-white mb-4">Built by Healthcare Experts</h2>
+              <p className="text-gray-300 text-lg max-w-3xl mx-auto leading-relaxed">
+                Our team combines decades of healthcare experience with cutting-edge technology expertise. 
+                We're doctors, nurses, engineers, and designers united by a common goal: transforming healthcare for the better.
+              </p>
+            </div>
+          </motion.div>
         </div>
       </div>
     </div>

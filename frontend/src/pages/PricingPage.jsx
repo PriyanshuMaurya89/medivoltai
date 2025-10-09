@@ -11,7 +11,7 @@ export default function PricingPage() {
       price: '₹0',
       period: 'month',
       buttonText: 'Try Now (Free)',
-      buttonLink: '/register',
+      buttonLink: '/registration',
       buttonStyle: 'bg-gradient-to-r from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700',
       icon: <Zap className="h-8 w-8 text-gray-400" />,
       features: [
@@ -33,7 +33,7 @@ export default function PricingPage() {
       yearlyPrice: '₹1,499',
       yearlyPeriod: 'year',
       buttonText: 'Most Popular (Upgrade)',
-      buttonLink: '/register?plan=pro',
+      buttonLink: '/registration?plan=pro',
       buttonStyle: 'bg-gradient-to-r from-primary to-accent hover:bg-primary-600',
       highlight: true,
       icon: <Star className="h-8 w-8 text-yellow-400" />,
@@ -57,7 +57,7 @@ export default function PricingPage() {
       yearlyPrice: '₹3,999',
       yearlyPeriod: 'year',
       buttonText: 'For Families (Best Value)',
-      buttonLink: '/register?plan=premium',
+      buttonLink: '/registration?plan=premium',
       buttonStyle: 'bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700',
       icon: <Award className="h-8 w-8 text-purple-400" />,
       features: [

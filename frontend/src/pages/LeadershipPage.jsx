@@ -1,5 +1,6 @@
 import React from 'react';
 import { Crown, Users, Briefcase, Lightbulb } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export default function LeadershipPage() {
   const leadershipTeam = [
@@ -42,14 +43,36 @@ export default function LeadershipPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-600 to-indigo-800 text-white p-4 py-20">
-      <div className="max-w-6xl mx-auto">
+    <div className="min-h-screen bg-black text-white relative overflow-hidden">
+      {/* Purple Background Effects */}
+      <div className="absolute inset-0">
+        <div className="absolute top-20 left-20 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-20 w-80 h-80 bg-purple-600/8 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-purple-400/5 rounded-full blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
+      </div>
+
+      <div className="section-content-zoom relative z-10 py-20">
         {/* Hero Section */}
-        <div className="text-center mb-16">
-          <Crown size={64} className="mx-auto text-white mb-4 animate-pulse" />
-          <h1 className="text-5xl font-extrabold mb-4 drop-shadow-lg">Our Leadership</h1>
-          <p className="text-xl font-light opacity-90 max-w-3xl mx-auto">Meet the visionary leaders guiding Medivolt's mission to transform healthcare through innovative AI solutions.</p>
-        </div>
+        <motion.div 
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <motion.div
+            className="inline-flex items-center gap-3 px-6 py-3 bg-purple-500/20 backdrop-blur-sm rounded-full border border-purple-500/30 mb-6"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            <Crown className="h-5 w-5 text-purple-300" />
+            <span className="text-purple-200 font-semibold tracking-wide">LEADERSHIP</span>
+          </motion.div>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+            Meet Our <span className="bg-gradient-to-r from-purple-400 to-purple-300 bg-clip-text text-transparent">Leadership Team</span>
+          </h1>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">Meet the visionary leaders guiding MediVolt's mission to transform healthcare through innovative AI solutions.</p>
+        </motion.div>
 
         {/* Leadership Team Section */}
         <div className="mb-16">

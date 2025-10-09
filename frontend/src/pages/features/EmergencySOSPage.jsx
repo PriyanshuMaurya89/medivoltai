@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { AlertTriangle, MapPin, PhoneCall, Heart, Zap, Shield, Clock, Mic, Phone, Truck, Building2, Users } from 'lucide-react';
+import { AlertTriangle, MapPin, PhoneCall, Heart, Zap, Shield, Clock, Mic, Phone, Truck, Building2, Users, Crown, Lock } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export default function EmergencySOSPage() {
   const [status, setStatus] = useState(null);
@@ -8,6 +9,9 @@ export default function EmergencySOSPage() {
   const [countdown, setCountdown] = useState(0);
   const [testMode, setTestMode] = useState(false);
   const [voiceActivated, setVoiceActivated] = useState(false);
+  
+  // Mock premium status - in real app, this would come from user context/API
+  const [isPremium, setIsPremium] = useState(false);
 
   const triggerSOS = () => {
     if (testMode) {
@@ -46,6 +50,117 @@ export default function EmergencySOSPage() {
   const callEmergency = (number) => {
     window.open(`tel:${number}`, '_self');
   };
+
+  // Premium Access Gate Component
+  const PremiumAccessGate = () => (
+    <div className="min-h-screen bg-black relative overflow-hidden flex items-center justify-center">
+      {/* Background Effects */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-500/8 via-transparent to-transparent"></div>
+      <div className="absolute top-10 left-10 w-96 h-96 bg-purple-500/6 rounded-full blur-3xl animate-pulse"></div>
+      <div className="absolute bottom-10 right-10 w-80 h-80 bg-purple-600/4 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
+      
+      <div className="container mx-auto px-4 relative z-10">
+        <motion.div
+          className="max-w-2xl mx-auto text-center"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          {/* Premium Lock Icon */}
+          <motion.div
+            className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-purple-500/20 to-blue-500/20 rounded-full border border-purple-500/30 mb-8"
+            initial={{ scale: 0.8 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <Lock className="w-10 h-10 text-purple-400" />
+          </motion.div>
+
+          {/* Premium Required Message */}
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
+            Premium Feature
+            <br />
+            <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+              Emergency SOS
+            </span>
+          </h1>
+
+          <p className="text-gray-400 text-lg mb-8 leading-relaxed">
+            Emergency SOS is a premium feature that provides instant medical alerts, 
+            location sharing, and emergency contact notifications. Upgrade to access 
+            life-saving emergency services.
+          </p>
+
+          {/* Premium Features List */}
+          <div className="bg-gradient-to-br from-gray-900/80 to-gray-800/80 backdrop-blur-lg rounded-2xl p-6 sm:p-8 border border-gray-700/50 mb-8">
+            <div className="flex items-center gap-3 mb-6">
+              <Crown className="w-6 h-6 text-yellow-400" />
+              <h3 className="text-xl font-semibold text-white">Premium Emergency Features</h3>
+            </div>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left">
+              {[
+                { icon: "🚨", text: "Instant SOS Alerts" },
+                { icon: "📍", text: "Real-time Location Sharing" },
+                { icon: "👨‍⚕️", text: "Direct Doctor Contact" },
+                { icon: "👨‍👩‍👧‍👦", text: "Family Notifications" },
+                { icon: "🏥", text: "Hospital Integration" },
+                { icon: "📱", text: "Voice-Activated Emergency" },
+                { icon: "⏰", text: "24/7 Emergency Support" },
+                { icon: "🔒", text: "Secure Medical Data Access" }
+              ].map((feature, index) => (
+                <motion.div
+                  key={index}
+                  className="flex items-center gap-3 p-3 bg-gray-800/50 rounded-lg"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  <span className="text-lg">{feature.icon}</span>
+                  <span className="text-gray-300">{feature.text}</span>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              to="/pricing"
+              className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 shadow-lg hover:shadow-purple-500/25 hover:scale-105"
+            >
+              <Crown className="w-5 h-5 inline mr-2" />
+              Upgrade to Premium
+            </Link>
+            
+            <button
+              onClick={() => setIsPremium(true)}
+              className="bg-gray-700/50 hover:bg-gray-600/50 text-gray-300 hover:text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 border border-gray-600/50 hover:border-gray-500/50"
+            >
+              Try Demo Mode
+            </button>
+          </div>
+
+          {/* Emergency Note */}
+          <div className="mt-8 p-4 bg-red-500/10 border border-red-500/30 rounded-lg">
+            <div className="flex items-center gap-2 text-red-400 mb-2">
+              <AlertTriangle className="w-5 h-5" />
+              <span className="font-semibold">Emergency Note</span>
+            </div>
+            <p className="text-red-300 text-sm">
+              In case of immediate emergency, please call your local emergency services directly: 
+              <strong className="text-red-200"> 911 (US), 112 (EU), 100 (India)</strong>
+            </p>
+          </div>
+        </motion.div>
+      </div>
+    </div>
+  );
+
+  // If not premium, show the access gate
+  if (!isPremium) {
+    return <PremiumAccessGate />;
+  }
 
   return (
     <div className="min-h-screen bg-black relative overflow-hidden">

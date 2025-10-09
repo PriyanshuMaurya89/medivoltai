@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Brain, Menu, X, ChevronDown } from 'lucide-react';
+import { Brain, Menu, X, ChevronDown, Crown } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { useAuth } from '../../contexts/AuthContext';
 
@@ -39,8 +39,8 @@ export default function Navbar() {
   ];
 
   return (
-    <header className="responsive-nav">
-      <div className="responsive-nav-container">
+    <header className="navbar-zoom-fix bg-black/95 backdrop-blur-lg border-b border-gray-800/50">
+      <div className="navbar-content-zoom">
         {/* Logo - Left Side - Mobile Optimized */}
         <Link className="flex items-center gap-2 sm:gap-3 touch-manipulation" to="/">
           <div className="w-8 h-8 sm:w-10 sm:h-10 bg-primary rounded-lg flex items-center justify-center">
@@ -67,7 +67,7 @@ export default function Navbar() {
             onMouseLeave={() => setIsFeaturesDropdownOpen(false)}
           >
             <button className="flex items-center gap-1 text-gray-300 hover:text-white transition-colors font-medium text-sm">
-              About
+              AI
               <ChevronDown className="h-3 w-3" />
             </button>
 
@@ -99,15 +99,9 @@ export default function Navbar() {
           >
             Emergency
           </Link>
-          <Link
-            className="bg-gradient-to-r from-purple-600 to-purple-700 text-white px-4 py-2 rounded-lg hover:from-purple-500 hover:to-purple-600 transition-all duration-300 font-medium text-sm shadow-lg hover:shadow-purple-500/25"
-            to="/hire-doctors"
-          >
-            👨‍⚕️ Hire Doctors & Nurses
-          </Link>
         </nav>
 
-        {/* Right Side - Get In Touch Button */}
+        {/* Right Side - Hire Doctors & Register Buttons */}
         <div className="flex items-center gap-4">
           {/* Mobile menu button */}
           <button
@@ -121,13 +115,22 @@ export default function Navbar() {
             )}
           </button>
 
+          {/* Hire Doctors & Nurses Button - Hidden on mobile, shown on desktop */}
+          <Link
+            className="hidden lg:inline-flex bg-gradient-to-r from-purple-600 to-purple-700 text-white px-4 py-2 rounded-lg hover:from-purple-500 hover:to-purple-600 transition-all duration-300 font-medium text-sm shadow-lg hover:shadow-purple-500/25 items-center gap-2"
+            to="/hire-doctors"
+          >
+            👨‍⚕️ Hire Doctors & Nurses
+          </Link>
+
+
           {/* Register Button - Properly Sized */}
           <Button
             size="sm"
             className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white px-4 py-2 rounded-full font-medium text-sm transition-all duration-300 shadow-lg hover:shadow-purple-500/25 min-h-[40px]"
             asChild
           >
-            <Link to="/registration" className="touch-manipulation">Register</Link>
+            <Link to="/smart-registration" className="touch-manipulation">Register</Link>
           </Button>
 
           {isAuthenticated && (
@@ -185,13 +188,24 @@ export default function Navbar() {
               ))}
             </div>
 
-            {/* Mobile Register Button - Properly Sized */}
-            <div className="pt-6 border-t border-gray-700">
+            {/* Mobile Action Buttons */}
+            <div className="pt-6 border-t border-gray-700 space-y-4">
+              {/* Hire Doctors & Nurses Button */}
+              <Button
+                className="w-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white rounded-lg font-medium shadow-lg text-base py-3 min-h-[48px]"
+                asChild
+              >
+                <Link to="/hire-doctors" onClick={() => setIsMobileMenuOpen(false)} className="touch-manipulation flex items-center justify-center gap-2">
+                  👨‍⚕️ Hire Doctors & Nurses
+                </Link>
+              </Button>
+
+              {/* Register Button */}
               <Button
                 className="w-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white rounded-full font-medium shadow-lg text-base py-3 min-h-[48px]"
                 asChild
               >
-                <Link to="/registration" onClick={() => setIsMobileMenuOpen(false)} className="touch-manipulation">
+                <Link to="/smart-registration" onClick={() => setIsMobileMenuOpen(false)} className="touch-manipulation">
                   Register
                 </Link>
               </Button>

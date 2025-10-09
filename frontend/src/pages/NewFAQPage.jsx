@@ -1,0 +1,195 @@
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Plus, HelpCircle } from 'lucide-react';
+
+export default function NewFAQPage() {
+  const [activeQuestion, setActiveQuestion] = useState(null);
+
+  const faqs = [
+    {
+      question: "How does MediVolt's AI analyze my medical reports?",
+      answer: "Our AI uses advanced machine learning algorithms and natural language processing to analyze medical reports. It extracts key information such as test results, diagnoses, and recommendations, then translates complex medical terminology into simple, understandable language. The AI cross-references your data with medical databases to provide personalized insights and health recommendations while maintaining complete privacy and security."
+    },
+    {
+      question: "What do I need to get started?",
+      answer: "To get started with MediVolt, you just need to create a free account. No medical background required! Our AI will guide you through uploading your medical reports, symptoms, or health questions. You can start using basic features immediately, and premium features are available with a subscription."
+    },
+    {
+      question: "What kind of customization is available?",
+      answer: "MediVolt offers extensive customization options including: personalized health dashboards, custom medication reminders, tailored nutrition plans, preferred language settings (Hindi/English), notification preferences, family member profiles, and specialized health tracking for chronic conditions."
+    },
+    {
+      question: "How easy is it to edit for beginners?",
+      answer: "MediVolt is designed to be extremely user-friendly! Our AI speaks in simple Hindi and English, explains medical terms clearly, and guides you step-by-step. No technical knowledge needed - just ask questions naturally like you would to a doctor."
+    },
+    {
+      question: "Let me know more about moneyback guarantee?",
+      answer: "We offer a 30-day money-back guarantee on all premium subscriptions. If you're not completely satisfied with MediVolt's AI analysis and features, simply contact our support team within 30 days of purchase for a full refund. No questions asked."
+    },
+    {
+      question: "Do I need to know how to code?",
+      answer: "Absolutely not! MediVolt is built for everyone - patients, families, and healthcare workers. No coding or technical knowledge required. Our AI interface is designed like having a conversation with a knowledgeable doctor."
+    },
+    {
+      question: "What will I get after purchasing the premium plan?",
+      answer: "After subscribing to MediVolt Premium, you'll receive: unlimited AI medical report analysis, personalized health insights, symptom checker with recommendations, medication interaction alerts, nutrition planning, emergency SOS features, and priority customer support."
+    }
+  ];
+
+  const toggleQuestion = (index) => {
+    setActiveQuestion(activeQuestion === index ? null : index);
+  };
+
+  return (
+    <div className="min-h-screen bg-black relative overflow-hidden">
+      {/* Background Effects */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-500/8 via-transparent to-transparent"></div>
+      <div className="absolute top-10 left-10 w-96 h-96 bg-purple-500/6 rounded-full blur-3xl animate-pulse"></div>
+      <div className="absolute bottom-10 right-10 w-80 h-80 bg-purple-600/4 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
+
+      <div className="relative z-10 min-h-screen">
+        <div className="container mx-auto px-6 py-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-7xl mx-auto">
+            
+            {/* Left Side - Header */}
+            <motion.div
+              className="lg:sticky lg:top-12 h-fit"
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              {/* FAQ Badge */}
+              <motion.div 
+                className="inline-flex items-center gap-2 bg-purple-500/20 border border-purple-500/30 rounded-full px-4 py-2 mb-8"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+              >
+                <HelpCircle className="w-5 h-5 text-purple-400" />
+                <span className="text-purple-300 font-medium">FAQ</span>
+              </motion.div>
+
+              {/* Main Heading */}
+              <motion.h1 
+                className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
+                Frequently
+                <br />
+                <span className="text-gray-400">Asked Questions</span>
+              </motion.h1>
+
+              {/* Description */}
+              <motion.p 
+                className="text-gray-400 text-lg leading-relaxed mb-8 max-w-md"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+              >
+                Have questions? Our FAQ section has you covered with quick answers to the most common inquiries.
+              </motion.p>
+
+              {/* Decorative Element */}
+              <motion.div 
+                className="w-16 h-1 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full"
+                initial={{ width: 0 }}
+                animate={{ width: 64 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+              />
+            </motion.div>
+
+            {/* Right Side - FAQ Items */}
+            <motion.div
+              className="space-y-3"
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+            >
+              {faqs.map((faq, index) => (
+                <motion.div
+                  key={index}
+                  className="bg-gray-900/40 backdrop-blur-sm border border-gray-800/50 rounded-xl overflow-hidden"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.1 * index }}
+                >
+                  {/* Question Button */}
+                  <button
+                    onClick={() => toggleQuestion(index)}
+                    className="w-full px-6 py-5 text-left flex items-center justify-between group hover:bg-gray-800/30 transition-colors focus:outline-none"
+                  >
+                    <span className="text-white font-medium text-lg pr-4">
+                      {faq.question}
+                    </span>
+                    <motion.div
+                      animate={{ rotate: activeQuestion === index ? 45 : 0 }}
+                      transition={{ duration: 0.2 }}
+                      className="flex-shrink-0"
+                    >
+                      <Plus className="w-5 h-5 text-gray-400 group-hover:text-purple-400 transition-colors" />
+                    </motion.div>
+                  </button>
+                  
+                  {/* Answer - Only shows when active */}
+                  <AnimatePresence>
+                    {activeQuestion === index && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                        className="overflow-hidden"
+                      >
+                        <div className="px-6 pb-5 border-t border-gray-800/50">
+                          <motion.p 
+                            className="text-gray-300 leading-relaxed pt-4"
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.3, delay: 0.1 }}
+                          >
+                            {faq.answer}
+                          </motion.p>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+              ))}
+
+              {/* Contact Section */}
+              <motion.div
+                className="mt-12 p-8 bg-gradient-to-br from-purple-900/20 to-gray-900/50 border border-purple-500/30 rounded-2xl backdrop-blur-sm"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.8 }}
+              >
+                <h3 className="text-xl font-bold text-white mb-3">Still have questions?</h3>
+                <p className="text-gray-400 mb-6">
+                  Can't find the answer you're looking for? Our support team is here to help 24/7.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <motion.button
+                    className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white px-6 py-3 rounded-xl font-medium transition-all duration-300 shadow-lg shadow-purple-500/25"
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    Contact Support
+                  </motion.button>
+                  <motion.button
+                    className="border border-purple-500/50 hover:bg-purple-500/10 text-purple-300 hover:text-purple-200 px-6 py-3 rounded-xl font-medium transition-all duration-300"
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    Live Chat
+                  </motion.button>
+                </div>
+              </motion.div>
+            </motion.div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
