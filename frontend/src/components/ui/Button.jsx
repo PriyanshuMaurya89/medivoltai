@@ -10,14 +10,14 @@ export function Button({
   ...props
 }) {
   const baseClasses = 'btn';
-  
+
   const variantClasses = {
     primary: 'btn-primary',
     secondary: 'btn-secondary',
     outline: 'btn-outline',
     ghost: 'btn-ghost',
   };
-  
+
   const sizeClasses = {
     sm: 'px-2 py-1 text-xs',
     md: 'px-4 py-2 text-sm',
