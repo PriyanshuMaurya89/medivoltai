@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus } from "lucide-react";
-import { Button } from "../components/ui/Button";
+import { Button } from "../components/ui/button";
 import { Card } from "../components/ui/Card";
 // import { PremiumCard, FeatureCard } from "../components/ui/PremiumCard";
 // import { ExpandableCard } from "../components/ui/ExpandableCard";

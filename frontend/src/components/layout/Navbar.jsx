@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Brain, Menu, X, ChevronDown, Crown } from 'lucide-react';
-import { Button } from '../ui/Button';
+import { Button } from '../ui/button';
 import { useAuth } from '../../contexts/AuthContext';
 
 export default function Navbar() {

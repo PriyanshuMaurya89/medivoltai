@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { User, Mail, Lock, AlertCircle } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
-import { Button } from '../components/ui/Button';
+import { Button } from '../components/ui/button';
 
 export default function RegisterPage() {
   const [name, setName] = useState('');

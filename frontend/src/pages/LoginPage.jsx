@@ -3,7 +3,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Lock, Mail, AlertCircle, Brain, Phone, Eye, EyeOff } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useAuth } from '../contexts/AuthContext';
-import { Button } from '../components/ui/Button';
+import { Button } from '../components/ui/button';
 
 export default function LoginPage() {
   const [emailOrPhone, setEmailOrPhone] = useState('');

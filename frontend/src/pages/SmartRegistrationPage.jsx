@@ -6,7 +6,7 @@ import {
   Phone, MapPin, Calendar, Briefcase, GraduationCap, Award,
   Users, Stethoscope, Heart, Shield, CheckCircle, Eye, EyeOff
 } from 'lucide-react';
-import { Button } from '../components/ui/Button';
+import { Button } from '../components/ui/button';
 
 export default function SmartRegistrationPage() {
   const [currentStep, setCurrentStep] = useState('role-selection');

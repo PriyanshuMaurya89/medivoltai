@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Card } from '../../components/ui/Card';
-import { Button } from '../../components/ui/Button';
+import { Button } from '../../components/ui/button';
 import { Input } from '../../components/ui/Input';
 import { Pill, Search, Camera, Info, AlertTriangle, CheckCircle, IndianRupee, Clock, Heart, Shield } from 'lucide-react';
 

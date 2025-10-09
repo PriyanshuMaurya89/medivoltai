@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Card } from '../../components/ui/Card';
-import { Button } from '../../components/ui/Button';
+import { Button } from '../../components/ui/button';
 import { BookOpen, Search } from 'lucide-react';
 
 export default function HealthLiteracyPage() {

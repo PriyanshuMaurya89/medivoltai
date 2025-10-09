@@ -19,7 +19,7 @@ import {
   Eye,
   Stethoscope
 } from 'lucide-react';
-import { Button } from '../components/ui/Button';
+import { Button } from '../components/ui/button';
 
 export default function AppointmentBookingPage() {
   const [searchQuery, setSearchQuery] = useState('');

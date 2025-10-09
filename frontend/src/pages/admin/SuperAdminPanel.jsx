@@ -7,7 +7,7 @@ import {
   Server, Database, Lock, Key, Mail, Phone, MapPin, Star,
   CheckCircle, XCircle, AlertTriangle, Clock, Zap, Target
 } from 'lucide-react';
-import { Button } from '../../components/ui/Button';
+import { Button } from '../../components/ui/button';
 
 // Super Admin Dashboard Overview
 const SuperAdminDashboard = ({ setActiveTab }) => {
