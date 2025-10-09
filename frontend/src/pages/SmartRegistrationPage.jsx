@@ -20,7 +20,7 @@ export default function SmartRegistrationPage() {
     confirmPassword: '',
     phone: '',
     
-    // Patient specific
+    // New User specific
     dateOfBirth: '',
     gender: '',
     emergencyContact: '',
@@ -77,7 +77,7 @@ export default function SmartRegistrationPage() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-        {/* Patient Card */}
+        {/* New User Card */}
         <motion.button
           whileHover={{ scale: 1.02, y: -5 }}
           whileTap={{ scale: 0.98 }}
@@ -87,7 +87,7 @@ export default function SmartRegistrationPage() {
           <div className="w-16 h-16 bg-blue-500/20 rounded-xl flex items-center justify-center mb-6 group-hover:bg-blue-500/30 transition-colors">
             <User className="h-8 w-8 text-blue-400" />
           </div>
-          <h3 className="text-2xl font-bold text-white mb-3">Patient</h3>
+          <h3 className="text-2xl font-bold text-white mb-3">New User</h3>
           <p className="text-gray-400 mb-4">Get personalized healthcare, book appointments, and manage your health records</p>
           <ul className="space-y-2 text-sm text-gray-500">
             <li className="flex items-center gap-2">
@@ -116,11 +116,11 @@ export default function SmartRegistrationPage() {
             <UserCheck className="h-8 w-8 text-green-400" />
           </div>
           <h3 className="text-2xl font-bold text-white mb-3">Doctor/Nurse</h3>
-          <p className="text-gray-400 mb-4">Manage your practice, connect with patients, and provide quality healthcare</p>
+          <p className="text-gray-400 mb-4">Manage your practice, connect with new users, and provide quality healthcare</p>
           <ul className="space-y-2 text-sm text-gray-500">
             <li className="flex items-center gap-2">
               <CheckCircle className="h-4 w-4 text-green-400" />
-              Patient management
+              User management
             </li>
             <li className="flex items-center gap-2">
               <CheckCircle className="h-4 w-4 text-green-400" />
@@ -144,7 +144,7 @@ export default function SmartRegistrationPage() {
             <Building2 className="h-8 w-8 text-purple-400" />
           </div>
           <h3 className="text-2xl font-bold text-white mb-3">Hospital/Clinic</h3>
-          <p className="text-gray-400 mb-4">Streamline operations, manage staff, and enhance patient care delivery</p>
+          <p className="text-gray-400 mb-4">Streamline operations, manage staff, and enhance user care delivery</p>
           <ul className="space-y-2 text-sm text-gray-500">
             <li className="flex items-center gap-2">
               <CheckCircle className="h-4 w-4 text-green-400" />
@@ -172,7 +172,7 @@ export default function SmartRegistrationPage() {
   );
 
   // New User Registration Form
-  const PatientForm = () => (
+  const NewUserForm = () => (
     <div className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
@@ -490,14 +490,14 @@ export default function SmartRegistrationPage() {
     const roleConfig = {
       patient: {
         title: 'New User',
-        subtitle: 'Join thousands of patients managing their health with MediVolt',
+        subtitle: 'Join thousands of users managing their health with MediVolt',
         icon: User,
         color: 'blue',
-        form: PatientForm
+        form: NewUserForm
       },
       doctor: {
         title: 'Doctor/Nurse Registration',
-        subtitle: 'Connect with patients and grow your practice',
+        subtitle: 'Connect with users and grow your practice',
         icon: UserCheck,
         color: 'green',
         form: DoctorForm
