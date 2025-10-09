@@ -38,7 +38,6 @@ import {
   AIProcessingIndicator,
 } from "../components/ui/AITypingAnimation";
 import { Apple, Play } from "lucide-react";
-import AboutButton from '../components/AboutButton';
 
 export default function HomePage() {
   // State to track which card is currently expanded
