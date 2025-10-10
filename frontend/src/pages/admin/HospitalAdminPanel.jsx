@@ -10,7 +10,7 @@ import {
   MapPin, Award, Target, Wifi, WifiOff, Monitor, Tablet, Smartphone
 } from 'lucide-react';
 
-import { Button } from '../../components/ui/button';
+import { Button } from '../../components/ui/button.jsx';
 
 // Dashboard Overview Component
 const DashboardOverview = ({ setActiveTab }) => {

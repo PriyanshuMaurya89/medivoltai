@@ -6,7 +6,7 @@ import {
   XCircle, Plus, Eye, Edit, Phone, Mail, Video, MessageSquare,
   Brain, Heart, Zap, Star, TrendingUp, FileText, Shield, Award
 } from 'lucide-react';
-import { Button } from '../../components/ui/button';
+import { Button } from '../../components/ui/button.jsx';
 
 // Dashboard Overview Component
 const DoctorDashboard = ({ setActiveTab }) => {

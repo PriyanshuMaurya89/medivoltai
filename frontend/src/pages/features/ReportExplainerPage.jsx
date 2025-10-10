@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button } from '../../components/ui/button';
+import { Button } from '../../components/ui/button.jsx';
 import { Card } from '../../components/ui/Card';
 import { Input } from '../../components/ui/Input';
 import { FileText, Upload, Languages, Brain, CheckCircle, AlertCircle, Download } from 'lucide-react';

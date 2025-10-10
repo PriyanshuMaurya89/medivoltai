@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Card } from '../../components/ui/Card';
-import { Button } from '../../components/ui/button';
+import { Button } from '../../components/ui/button.jsx';
 import { Input } from '../../components/ui/Input';
 import { Apple, Camera, Search } from 'lucide-react';
 

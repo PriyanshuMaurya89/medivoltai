@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Card } from '../../components/ui/Card';
-import { Button } from '../../components/ui/button';
+import { Button } from '../../components/ui/button.jsx';
 import { Dumbbell, Sun, Footprints, Wind } from 'lucide-react';
 
 export default function FitnessPlannerPage() {

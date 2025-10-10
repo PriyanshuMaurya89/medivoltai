@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Send, MessageCircle, Clock, Brain } from 'lucide-react';
-import { Button } from '../components/ui/button';
+import { Button } from '../components/ui/button.jsx';
 
 export default function ContactUsPage() {
   const [formData, setFormData] = useState({
