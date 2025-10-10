@@ -18,6 +18,7 @@ import EmergencySOSPage from './pages/features/EmergencySOSPage';
 import FitnessPlannerPage from './pages/features/FitnessPlannerPage';
 import HealthLiteracyPage from './pages/features/HealthLiteracyPage';
 import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import UserDashboardPage from './pages/UserDashboardPage';
 import PrivacyPage from './pages/PrivacyPage';
@@ -77,7 +78,8 @@ function App() {
               <Route path="/fitness-planner" element={<FitnessPlannerPage />} />
               <Route path="/health-literacy" element={<HealthLiteracyPage />} />
               <Route path="/login" element={<LoginPage />} />
-              <Route path="/register" element={<Navigate to="/registration" replace />} />
+              <Route path="/register" element={<RegisterPage />} />
+              <Route path="/registration" element={<RegisterPage />} />
               <Route path="/forgot-password" element={<ForgotPasswordPage />} />
               <Route path="/dashboard" element={<UserDashboardPage />} />
               <Route path="/contact" element={<ContactUsPage />} />
@@ -92,7 +94,7 @@ function App() {
               <Route path="/super-admin" element={<SuperAdminPanel />} />
               <Route path="/smart-registration" element={<SmartRegistrationPage />} />
               <Route path="/hire-doctors" element={<HireDoctorsPage />} />
-              <Route path="/registration" element={<RegistrationSystemPage />} />
+              <Route path="/registration-system" element={<RegistrationSystemPage />} />
               <Route path="/shipping" element={<ShippingPolicyPage />} />
               <Route path="/ai-features" element={<TenAIFeaturesPage />} />
               <Route path="/why-medivolt" element={<WhyMedivoltPage />} />
