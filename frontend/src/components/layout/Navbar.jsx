@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Brain, Menu, X, ChevronDown, Crown } from 'lucide-react';
-import { Button } from '../ui/button';
+import { Button } from '../ui/Button';
 import { useAuth } from '../../contexts/AuthContext';
 
 export default function Navbar() {
@@ -130,7 +130,7 @@ export default function Navbar() {
             className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white px-4 py-2 rounded-full font-medium text-sm transition-all duration-300 shadow-lg hover:shadow-purple-500/25 min-h-[40px]"
             asChild
           >
-            <Link to="/smart-registration" className="touch-manipulation">Register</Link>
+            <Link to="/registration" className="touch-manipulation">Register</Link>
           </Button>
 
           {isAuthenticated && (
@@ -205,7 +205,7 @@ export default function Navbar() {
                 className="w-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white rounded-full font-medium shadow-lg text-base py-3 min-h-[48px]"
                 asChild
               >
-                <Link to="/smart-registration" onClick={() => setIsMobileMenuOpen(false)} className="touch-manipulation">
+                <Link to="/registration" onClick={() => setIsMobileMenuOpen(false)} className="touch-manipulation">
                   Register
                 </Link>
               </Button>

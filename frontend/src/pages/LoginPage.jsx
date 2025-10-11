@@ -3,7 +3,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Lock, Mail, AlertCircle, Brain, Phone, Eye, EyeOff } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useAuth } from '../contexts/AuthContext';
-import { Button } from '../components/ui/button.jsx';
+import { Button } from '../components/ui/Button';
 
 export default function LoginPage() {
   const [emailOrPhone, setEmailOrPhone] = useState('');
@@ -199,7 +199,7 @@ export default function LoginPage() {
             <div className="mt-8 text-center">
               <p className="text-gray-400 text-sm mb-4">Don't have an account?</p>
               <Link
-                to="/register"
+                to="/registration"
                 className="inline-flex items-center justify-center w-full py-3 px-4 border border-gray-600/50 rounded-lg text-gray-300 hover:text-white hover:border-purple-500/50 hover:bg-purple-500/10 transition-all duration-300 font-medium"
               >
                 Create Account

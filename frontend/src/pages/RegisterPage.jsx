@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { User, Mail, Lock, AlertCircle } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
-import { Button } from '../components/ui/button.jsx';
+import { Button } from '../components/ui/Button';
 
 export default function RegisterPage() {
   const [name, setName] = useState('');
@@ -53,7 +53,7 @@ export default function RegisterPage() {
         </div>
         <div className="p-8">
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-gray-800">Create User Account</h2>
+            <h2 className="text-3xl font-bold text-gray-800">Create an Account</h2>
             <p className="text-gray-600 mt-2">Sign up to get started with MediVolt</p>
           </div>
 

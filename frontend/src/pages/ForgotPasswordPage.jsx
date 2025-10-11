@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Mail, AlertCircle, ArrowLeft, CheckCircle, Brain, Send } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { Button } from '../components/ui/button.jsx';
+import { Button } from '../components/ui/Button';
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState('');
