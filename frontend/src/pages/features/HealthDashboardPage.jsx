@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
 import { Card } from '../../components/ui/Card';
 import { PremiumCard } from '../../components/ui/PremiumCard';
 import { Button } from '../../components/ui/Button';
 import { HeartPulse, Activity, Moon, Sun, Utensils, Brain, BatteryCharging, Award, Sparkles, TrendingUp } from 'lucide-react';
 
 export default function HealthDashboardPage() {
-  const [metrics, setMetrics] = useState({
+  const [metrics] = useState({
     steps: 5200,
     sleep: 6.5,
     water: 6,
@@ -212,22 +211,6 @@ export default function HealthDashboardPage() {
                   <span className="text-white/70">Water Intake:</span>
                   <span className="text-white font-medium">{metrics.water} glasses</span>
                 </div>
-                <div className="text-xs text-white/50">Goal: 8 glasses</div>
-              </div>
-            </PremiumCard>
-          </motion.div>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1.0 }}
-          >
-            <PremiumCard className="p-6" hover={true} gradient={true}>
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center">
-                  <Brain className="h-5 w-5 text-white" />
-                </div>
-                <h3 className="font-semibold text-white">AI Tips</h3>
               </div>
               <ul className="space-y-3 text-sm">
                 <li className="flex items-start gap-2 text-white/80">
@@ -246,11 +229,7 @@ export default function HealthDashboardPage() {
             </PremiumCard>
           </motion.div>
           
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 1.2 }}
-          >
+          <div>
             <PremiumCard className="p-6" hover={true} gradient={true}>
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-10 h-10 bg-gradient-to-r from-green-500 to-emerald-500 rounded-lg flex items-center justify-center">
@@ -259,24 +238,24 @@ export default function HealthDashboardPage() {
                 <h3 className="font-semibold text-white">Quick Actions</h3>
               </div>
               <div className="space-y-3">
-                <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                <div>
                   <Button className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white shadow-lg">
                     💧 Log Water +1
                   </Button>
-                </motion.div>
-                <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                </div>
+                <div>
                   <Button className="w-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white shadow-lg">
                     🚶 Add Steps
                   </Button>
-                </motion.div>
-                <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                </div>
+                <div>
                   <Button className="w-full bg-gradient-to-r from-purple-500 to-indigo-500 hover:from-purple-600 hover:to-indigo-600 text-white shadow-lg">
                     📊 View Trends
                   </Button>
-                </motion.div>
+                </div>
               </div>
             </PremiumCard>
-          </motion.div>
+          </div>
         </div>
       </div>
     </div>
