@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { 
-  User, Stethoscope, Building, ArrowRight, Upload, 
+import { Link } from 'react-router-dom';
+import {
+  User, Stethoscope, Building, ArrowRight, Upload,
   Phone, Mail, Lock, MapPin, Calendar, Heart,
   Shield, CheckCircle, Clock, AlertTriangle,
   Camera, FileText, GraduationCap, DollarSign
@@ -22,10 +23,22 @@ const RegistrationSystemPage = () => {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-12"
+          className="text-center mb-8"
         >
           <h1 className="text-4xl font-bold text-white mb-4">Join MediVolt</h1>
           <p className="text-gray-400 text-lg">Choose your account type to get started</p>
+
+          {/* Login Link */}
+          <div className="mt-6 p-4 bg-purple-500/10 border border-purple-500/30 rounded-xl max-w-md mx-auto">
+            <p className="text-gray-300 text-sm mb-3">Already have an account?</p>
+            <Link
+              to="/login"
+              className="inline-flex items-center justify-center w-full py-3 px-4 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white rounded-lg font-medium transition-all duration-300 shadow-lg hover:shadow-purple-500/25"
+            >
+              <Lock className="h-4 w-4 mr-2" />
+              Sign In to Your Account
+            </Link>
+          </div>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
