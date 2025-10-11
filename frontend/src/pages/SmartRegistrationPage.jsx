@@ -6,11 +6,11 @@ import {
   Phone, MapPin, Calendar, Briefcase, GraduationCap, Award,
   Users, Stethoscope, Heart, Shield, CheckCircle, Eye, EyeOff
 } from 'lucide-react';
-import { Button } from '../components/ui/button';
+import { Button } from '../components/ui/Button';
 
 export default function SmartRegistrationPage() {
   const [currentStep, setCurrentStep] = useState('role-selection');
-  const [selectedRole, setSelectedRole] = useState('patient');
+  const [selectedRole, setSelectedRole] = useState('new user');
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     // Common fields
@@ -81,7 +81,7 @@ export default function SmartRegistrationPage() {
         <motion.button
           whileHover={{ scale: 1.02, y: -5 }}
           whileTap={{ scale: 0.98 }}
-          onClick={() => handleRoleSelection('patient')}
+          onClick={() => handleRoleSelection('new user')}
           className="bg-gradient-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-lg rounded-2xl border border-gray-700/50 p-8 text-left hover:border-purple-500/50 transition-all duration-300 group"
         >
           <div className="w-16 h-16 bg-blue-500/20 rounded-xl flex items-center justify-center mb-6 group-hover:bg-blue-500/30 transition-colors">
@@ -116,7 +116,7 @@ export default function SmartRegistrationPage() {
             <UserCheck className="h-8 w-8 text-green-400" />
           </div>
           <h3 className="text-2xl font-bold text-white mb-3">Doctor/Nurse</h3>
-          <p className="text-gray-400 mb-4">Manage your practice, connect with patients, and provide quality healthcare</p>
+          <p className="text-gray-400 mb-4">Manage your practice, connect with new users, and provide quality healthcare</p>
           <ul className="space-y-2 text-sm text-gray-500">
             <li className="flex items-center gap-2">
               <CheckCircle className="h-4 w-4 text-green-400" />
@@ -144,7 +144,7 @@ export default function SmartRegistrationPage() {
             <Building2 className="h-8 w-8 text-purple-400" />
           </div>
           <h3 className="text-2xl font-bold text-white mb-3">Hospital/Clinic</h3>
-          <p className="text-gray-400 mb-4">Streamline operations, manage staff, and enhance patient care delivery</p>
+          <p className="text-gray-400 mb-4">Streamline operations, manage staff, and enhance new user care delivery</p>
           <ul className="space-y-2 text-sm text-gray-500">
             <li className="flex items-center gap-2">
               <CheckCircle className="h-4 w-4 text-green-400" />
@@ -488,16 +488,16 @@ export default function SmartRegistrationPage() {
   // Registration Form Screen
   const RegistrationFormScreen = () => {
     const roleConfig = {
-      patient: {
+      'new user': {
         title: 'New User',
-        subtitle: 'Join thousands of patients managing their health with MediVolt',
+        subtitle: 'Join thousands of new users managing their health with MediVolt',
         icon: User,
         color: 'blue',
         form: PatientForm
       },
       doctor: {
         title: 'Doctor/Nurse Registration',
-        subtitle: 'Connect with patients and grow your practice',
+        subtitle: 'Connect with new users and grow your practice',
         icon: UserCheck,
         color: 'green',
         form: DoctorForm
@@ -575,10 +575,10 @@ export default function SmartRegistrationPage() {
                     Register as Hospital/Clinic
                   </button>
                 )}
-                {selectedRole !== 'patient' && (
+                {selectedRole !== 'new user' && (
                   <button
                     type="button"
-                    onClick={() => setSelectedRole('patient')}
+                    onClick={() => setSelectedRole('new user')}
                     className="text-purple-400 hover:text-purple-300 font-medium"
                   >
                     Register as New User

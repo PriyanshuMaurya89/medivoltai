@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Card } from '../../components/ui/Card';
 import { PremiumCard } from '../../components/ui/PremiumCard';
-import { Button } from '../../components/ui/button.jsx';
+import { Button } from '../../components/ui/Button';
 import { HeartPulse, Activity, Moon, Sun, Utensils, Brain, BatteryCharging, Award, Sparkles, TrendingUp } from 'lucide-react';
 
 export default function HealthDashboardPage() {

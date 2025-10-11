@@ -35,7 +35,7 @@ const RegistrationSystemPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
             whileHover={{ y: -8, scale: 1.02 }}
-            onClick={() => { setAccountType('patient'); setStep('form'); }}
+            onClick={() => { setAccountType('new users'); setStep('form'); }}
             className="relative bg-gradient-to-br from-gray-900/80 to-gray-800/80 backdrop-blur-lg rounded-2xl p-8 border border-gray-700/50 cursor-pointer hover:border-purple-500/50 transition-all duration-300"
           >
             <div className="absolute inset-0 bg-gradient-to-br from-purple-600/10 to-blue-600/10 rounded-2xl"></div>
@@ -43,7 +43,7 @@ const RegistrationSystemPage = () => {
               <div className="w-16 h-16 bg-purple-500/20 rounded-full flex items-center justify-center mb-6 mx-auto">
                 <User className="h-8 w-8 text-purple-400" />
               </div>
-              <h3 className="text-2xl font-bold text-white mb-4 text-center">👤 Patient</h3>
+              <h3 className="text-2xl font-bold text-white mb-4 text-center">👤 New Users</h3>
               <p className="text-gray-300 text-center mb-6">For individuals using MediVolt's AI tools & booking appointments</p>
               <ul className="space-y-2 text-sm text-gray-400 mb-6">
                 <li>• AI Health Tools</li>
@@ -117,7 +117,7 @@ const RegistrationSystemPage = () => {
     </div>
   );
 
-  // Patient Registration Form
+  // New User Registration Form
   const PatientForm = () => (
     <div className="max-w-5xl mx-auto">
       <div className="bg-gradient-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-lg rounded-2xl p-8 border border-gray-700/50 shadow-2xl">
@@ -126,7 +126,7 @@ const RegistrationSystemPage = () => {
             <div className="w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center mr-4">
               <User className="h-6 w-6 text-purple-400" />
             </div>
-            <h2 className="text-3xl font-bold text-white">👤 Patient Registration</h2>
+            <h2 className="text-3xl font-bold text-white">👤 New User Registration</h2>
           </div>
           <div className="flex items-center space-x-3">
             <span className="text-sm text-gray-400">Step {currentStep} of 3</span>
@@ -334,7 +334,7 @@ const RegistrationSystemPage = () => {
               
               <div className="space-y-6">
                 <div className="bg-purple-500/10 border border-purple-500/30 rounded-xl p-6">
-                  <h4 className="text-lg font-semibold text-white mb-4">🎉 What You Get with Patient Account:</h4>
+                  <h4 className="text-lg font-semibold text-white mb-4">🎉 What You Get with New User Account:</h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="flex items-center space-x-3">
                       <div className="w-8 h-8 bg-purple-500/20 rounded-full flex items-center justify-center">
@@ -396,7 +396,7 @@ const RegistrationSystemPage = () => {
               >
                 <div className="flex items-center justify-center">
                   <CheckCircle className="h-5 w-5 mr-2" />
-                  Create Patient Account - Get Instant Access
+                  Create New User Account - Get Instant Access
                 </div>
               </motion.button>
             </div>
@@ -1028,7 +1028,7 @@ const RegistrationSystemPage = () => {
                 />
                 <div className="text-sm text-gray-300">
                   <p>I accept the <a href="/terms" className="text-blue-400 hover:text-blue-300 underline">Terms & Conditions</a> and <a href="/privacy" className="text-blue-400 hover:text-blue-300 underline">Privacy Policy</a></p>
-                  <p className="text-xs text-gray-400 mt-1">I understand that after verification, our hospital will get Admin Panel Access for appointments, freelancer hiring, and patient management.</p>
+                  <p className="text-xs text-gray-400 mt-1">I understand that after verification, our hospital will get Admin Panel Access for appointments, freelancer hiring, and new users management.</p>
                 </div>
               </div>
             </div>
@@ -1067,23 +1067,23 @@ const RegistrationSystemPage = () => {
   // Verification Status Page
   const VerificationPage = () => {
     const getStatusColor = () => {
-      if (accountType === 'patient') return 'purple';
+      if (accountType === 'new users') return 'purple';
       if (accountType === 'freelancer') return 'green';
       return 'blue';
     };
 
     const getStatusIcon = () => {
-      if (accountType === 'patient') return <CheckCircle className="h-8 w-8 text-green-400" />;
+      if (accountType === 'new users') return <CheckCircle className="h-8 w-8 text-green-400" />;
       return <Clock className="h-8 w-8 text-yellow-400" />;
     };
 
     const getStatusMessage = () => {
-      if (accountType === 'patient') {
+      if (accountType === 'new users') {
         return {
           title: "Account Created Successfully! ✅",
-          message: "Welcome to MediVolt! Your patient account is ready to use.",
+          message: "Welcome to MediVolt! Your new users account is ready to use.",
           status: "✅ Active - Ready to Use",
-          access: "🎉 You now have instant access to all patient features!"
+          access: "🎉 You now have instant access to all new users features!"
         };
       }
       
@@ -1108,7 +1108,7 @@ const RegistrationSystemPage = () => {
             animate={{ opacity: 1, scale: 1 }}
             className="bg-gradient-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-lg rounded-2xl p-8 border border-gray-700/50 shadow-2xl"
           >
-            <div className={`w-20 h-20 bg-${accountType === 'patient' ? 'green' : 'yellow'}-500/20 rounded-full flex items-center justify-center mx-auto mb-6`}>
+            <div className={`w-20 h-20 bg-${accountType === 'new users' ? 'green' : 'yellow'}-500/20 rounded-full flex items-center justify-center mx-auto mb-6`}>
               {getStatusIcon()}
             </div>
             
@@ -1122,7 +1122,7 @@ const RegistrationSystemPage = () => {
                 <div className="flex items-center justify-between p-3 bg-gray-800/30 rounded-lg">
                   <span className="text-gray-300 font-medium">Account Type:</span>
                   <span className="text-white font-semibold capitalize flex items-center">
-                    {accountType === 'patient' && '👤'}
+                    {accountType === 'new users' && '👤'}
                     {accountType === 'freelancer' && '👨‍⚕️'}
                     {accountType === 'hospital' && '🏥'}
                     <span className="ml-2">{accountType}</span>
@@ -1132,14 +1132,14 @@ const RegistrationSystemPage = () => {
                 <div className="flex items-center justify-between p-3 bg-gray-800/30 rounded-lg">
                   <span className="text-gray-300 font-medium">Status:</span>
                   <span className="flex items-center space-x-2">
-                    <span className={`w-3 h-3 bg-${accountType === 'patient' ? 'green' : 'yellow'}-400 rounded-full ${accountType !== 'patient' ? 'animate-pulse' : ''}`}></span>
-                    <span className={`text-${accountType === 'patient' ? 'green' : 'yellow'}-400 font-semibold`}>
+                    <span className={`w-3 h-3 bg-${accountType === 'new users' ? 'green' : 'yellow'}-400 rounded-full ${accountType !== 'new users' ? 'animate-pulse' : ''}`}></span>
+                    <span className={`text-${accountType === 'new users' ? 'green' : 'yellow'}-400 font-semibold`}>
                       {statusInfo.status}
                     </span>
                   </span>
                 </div>
                 
-                {accountType !== 'patient' && (
+                {accountType !== 'new users' && (
                   <div className="flex items-center justify-between p-3 bg-gray-800/30 rounded-lg">
                     <span className="text-gray-300 font-medium">Expected Time:</span>
                     <span className="text-white font-semibold">24-48 hours</span>
@@ -1162,7 +1162,7 @@ const RegistrationSystemPage = () => {
                 {statusInfo.access}
               </p>
               
-              {accountType !== 'patient' && (
+              {accountType !== 'new users' && (
                 <div className="mt-4 space-y-2 text-sm text-gray-400">
                   <p>• Our verification team will review your documents</p>
                   <p>• You'll receive an email notification once verified</p>
@@ -1172,7 +1172,7 @@ const RegistrationSystemPage = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              {accountType === 'patient' ? (
+              {accountType === 'new users' ? (
                 <motion.button
                   onClick={() => window.location.href = '/'}
                   whileHover={{ scale: 1.02 }}
@@ -1218,7 +1218,7 @@ const RegistrationSystemPage = () => {
   return (
     <div className="min-h-screen bg-black">
       {step === 'account-type' && <AccountTypeSelection />}
-      {step === 'form' && accountType === 'patient' && (
+      {step === 'form' && accountType === 'new users' && (
         <div className="py-12 px-6">
           <PatientForm />
         </div>
