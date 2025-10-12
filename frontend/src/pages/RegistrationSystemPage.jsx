@@ -1187,26 +1187,38 @@ const RegistrationSystemPage = () => {
             <div className="flex flex-col sm:flex-row gap-4">
               {accountType === 'new users' ? (
                 <motion.button
-                  onClick={() => window.location.href = '/'}
+                  onClick={() => window.location.href = '/dashboard/new-user'}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   className="flex-1 bg-gradient-to-r from-green-600 via-green-700 to-blue-600 text-white py-4 px-6 rounded-xl hover:from-green-500 hover:via-green-600 hover:to-blue-500 transition-all duration-300 font-semibold text-lg shadow-lg hover:shadow-green-500/25"
                 >
                   <div className="flex items-center justify-center">
                     <CheckCircle className="h-5 w-5 mr-2" />
-                    Start Using MediVolt
+                    Go to Your Dashboard
                   </div>
                 </motion.button>
-              ) : (
+              ) : accountType === 'freelancer' ? (
                 <motion.button
-                  onClick={() => window.location.href = '/'}
+                  onClick={() => window.location.href = '/dashboard/doctor'}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   className={`flex-1 bg-gradient-to-r from-${colorClass}-600 to-${colorClass}-700 text-white py-4 px-6 rounded-xl hover:from-${colorClass}-500 hover:to-${colorClass}-600 transition-all duration-300 font-semibold text-lg shadow-lg`}
                 >
                   <div className="flex items-center justify-center">
                     <Clock className="h-5 w-5 mr-2" />
-                    Go to Dashboard
+                    Go to Doctor Dashboard
+                  </div>
+                </motion.button>
+              ) : (
+                <motion.button
+                  onClick={() => window.location.href = '/dashboard/hospital'}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className={`flex-1 bg-gradient-to-r from-${colorClass}-600 to-${colorClass}-700 text-white py-4 px-6 rounded-xl hover:from-${colorClass}-500 hover:to-${colorClass}-600 transition-all duration-300 font-semibold text-lg shadow-lg`}
+                >
+                  <div className="flex items-center justify-center">
+                    <Clock className="h-5 w-5 mr-2" />
+                    Go to Hospital Dashboard
                   </div>
                 </motion.button>
               )}
