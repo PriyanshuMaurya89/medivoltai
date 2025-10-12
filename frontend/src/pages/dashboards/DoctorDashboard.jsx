@@ -1,15 +1,29 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   User, Bell, MessageCircle, DollarSign, Calendar,
   Video, CheckCircle, Clock, Users, TrendingUp,
-  Shield, Star, Settings, Phone, FileText
+  Shield, Star, Settings, Phone, FileText, X,
+  Edit, Save, Eye, Search, Filter, Plus
 } from 'lucide-react';
 
 const DoctorDashboard = () => {
   const [doctorName] = useState('Dr. Rajesh Kumar');
   const [isOnline, setIsOnline] = useState(true);
   const [weeklyEarnings] = useState(2850);
+  const [showNotifications, setShowNotifications] = useState(false);
+  const [showMessages, setShowMessages] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
+  const [notifications, setNotifications] = useState([
+    { id: 1, title: 'New Appointment Request', message: 'Priya Sharma requested an appointment for tomorrow', time: '5 min ago', read: false, type: 'appointment' },
+    { id: 2, title: 'Payment Received', message: 'You received ₹500 from consultation with Amit Singh', time: '1 hour ago', read: false, type: 'payment' },
+    { id: 3, title: 'Job Offer', message: 'Apollo Hospital sent you a job offer', time: '2 hours ago', read: true, type: 'job' }
+  ]);
+  const [messages, setMessages] = useState([
+    { id: 1, from: 'Priya Sharma', message: 'Thank you for the consultation, Doctor!', time: '10 min ago', read: false },
+    { id: 2, from: 'Amit Singh', message: 'Can I reschedule my appointment?', time: '30 min ago', read: false },
+    { id: 3, from: 'Apollo Hospital', message: 'We have a new position available', time: '1 hour ago', read: true }
+  ]);
 
   const todayStats = {
     patientsToday: 12,
@@ -18,7 +32,7 @@ const DoctorDashboard = () => {
     earnings: 1200
   };
 
-  const todaySchedule = [
+  const [todaySchedule, setTodaySchedule] = useState([
     {
       id: 1,
       patient: 'Priya Sharma',
@@ -43,7 +57,7 @@ const DoctorDashboard = () => {
       condition: 'Diabetes Management',
       status: 'upcoming'
     }
-  ];
+  ]);
 
   const recentPatients = [
     {
@@ -69,26 +83,6 @@ const DoctorDashboard = () => {
     }
   ];
 
-  const notifications = [
-    {
-      id: 1,
-      type: 'appointment',
-      message: 'New appointment request from Priya Sharma',
-      time: '5 min ago'
-    },
-    {
-      id: 2,
-      type: 'payment',
-      message: 'Payment received: ₹500',
-      time: '1 hour ago'
-    },
-    {
-      id: 3,
-      type: 'job',
-      message: 'Job offer from Apollo Hospital',
-      time: '2 hours ago'
-    }
-  ];
 
   return (
     <div className="min-h-screen bg-black text-white">
@@ -118,13 +112,27 @@ const DoctorDashboard = () => {
             </div>
             
             <div className="flex items-center space-x-4">
-              <button className="relative p-2 text-gray-400 hover:text-white transition-colors">
+              <button 
+                onClick={() => setShowNotifications(!showNotifications)}
+                className="relative p-2 text-gray-400 hover:text-white transition-colors"
+              >
                 <Bell className="h-5 w-5" />
-                <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></span>
+                {notifications.filter(n => !n.read).length > 0 && (
+                  <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full flex items-center justify-center text-xs text-white">
+                    {notifications.filter(n => !n.read).length}
+                  </span>
+                )}
               </button>
-              <button className="relative p-2 text-gray-400 hover:text-white transition-colors">
+              <button 
+                onClick={() => setShowMessages(!showMessages)}
+                className="relative p-2 text-gray-400 hover:text-white transition-colors"
+              >
                 <MessageCircle className="h-5 w-5" />
-                <span className="absolute -top-1 -right-1 w-3 h-3 bg-blue-500 rounded-full"></span>
+                {messages.filter(m => !m.read).length > 0 && (
+                  <span className="absolute -top-1 -right-1 w-3 h-3 bg-blue-500 rounded-full flex items-center justify-center text-xs text-white">
+                    {messages.filter(m => !m.read).length}
+                  </span>
+                )}
               </button>
               <button className="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg font-medium transition-colors flex items-center space-x-2">
                 <DollarSign className="h-4 w-4" />
@@ -237,13 +245,28 @@ const DoctorDashboard = () => {
                     <span className="text-sm text-gray-300">{appointment.time}</span>
                     <div className="flex space-x-2">
                       {appointment.type === 'Video Consultation' && (
-                        <button className="bg-green-600 hover:bg-green-700 px-3 py-1 rounded text-xs font-medium transition-colors flex items-center space-x-1">
+                        <button 
+                          onClick={() => alert(`Joining video call with ${appointment.patient}...`)}
+                          className="bg-green-600 hover:bg-green-700 px-3 py-1 rounded text-xs font-medium transition-colors flex items-center space-x-1"
+                        >
                           <Video className="h-3 w-3" />
                           <span>Join</span>
                         </button>
                       )}
-                      <button className="bg-purple-600 hover:bg-purple-700 px-3 py-1 rounded text-xs font-medium transition-colors">
-                        Mark Done
+                      <button 
+                        onClick={() => {
+                          setTodaySchedule(prev => 
+                            prev.map(apt => 
+                              apt.id === appointment.id 
+                                ? {...apt, status: 'completed'} 
+                                : apt
+                            )
+                          );
+                          alert(`Appointment with ${appointment.patient} marked as completed!`);
+                        }}
+                        className="bg-purple-600 hover:bg-purple-700 px-3 py-1 rounded text-xs font-medium transition-colors"
+                      >
+                        {appointment.status === 'completed' ? 'Completed' : 'Mark Done'}
                       </button>
                     </div>
                   </div>
@@ -308,7 +331,14 @@ const DoctorDashboard = () => {
                 <DollarSign className="h-5 w-5 mr-2 text-purple-400" />
                 Earnings & Payments
               </h3>
-              <button className="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+              <button 
+                onClick={() => {
+                  if (confirm('Withdraw ₹1,250 to your bank account?')) {
+                    alert('Withdrawal request submitted! Funds will be transferred within 24 hours.');
+                  }
+                }}
+                className="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+              >
                 Withdraw Funds
               </button>
             </div>
@@ -359,7 +389,10 @@ const DoctorDashboard = () => {
                 <span className="font-medium text-green-400">Verified Professional</span>
               </div>
               <p className="text-sm text-gray-400">Your profile is verified and active in the marketplace</p>
-              <button className="text-green-400 hover:text-green-300 text-sm font-medium mt-2">
+              <button 
+                onClick={() => setShowSettings(true)}
+                className="text-green-400 hover:text-green-300 text-sm font-medium mt-2"
+              >
                 Edit Profile
               </button>
             </div>
@@ -374,12 +407,266 @@ const DoctorDashboard = () => {
               ))}
             </div>
 
-            <button className="w-full mt-4 bg-gray-800 hover:bg-gray-700 py-2 px-4 rounded-lg text-sm transition-colors">
+            <button 
+              onClick={() => setShowNotifications(true)}
+              className="w-full mt-4 bg-gray-800 hover:bg-gray-700 py-2 px-4 rounded-lg text-sm transition-colors"
+            >
               View All Notifications
             </button>
           </motion.div>
         </div>
       </div>
+
+      {/* Notifications Modal */}
+      <AnimatePresence>
+        {showNotifications && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-start justify-end p-6"
+            onClick={() => setShowNotifications(false)}
+          >
+            <motion.div
+              initial={{ x: 300, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: 300, opacity: 0 }}
+              className="bg-gray-900 rounded-2xl p-6 w-96 max-h-96 overflow-y-auto border border-gray-700"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-semibold text-white">Notifications</h3>
+                <button 
+                  onClick={() => setShowNotifications(false)}
+                  className="p-1 text-gray-400 hover:text-white transition-colors"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+              
+              <div className="space-y-3">
+                {notifications.map((notification) => (
+                  <div 
+                    key={notification.id} 
+                    className={`p-3 rounded-lg border transition-colors cursor-pointer ${
+                      notification.read 
+                        ? 'bg-gray-800/50 border-gray-700' 
+                        : notification.type === 'appointment' 
+                        ? 'bg-blue-500/10 border-blue-500/30'
+                        : notification.type === 'payment'
+                        ? 'bg-green-500/10 border-green-500/30'
+                        : 'bg-orange-500/10 border-orange-500/30'
+                    }`}
+                    onClick={() => {
+                      setNotifications(prev => 
+                        prev.map(n => n.id === notification.id ? {...n, read: true} : n)
+                      );
+                    }}
+                  >
+                    <div className="flex items-start justify-between mb-1">
+                      <h4 className="font-medium text-white text-sm">{notification.title}</h4>
+                      <span className="text-xs text-gray-400">{notification.time}</span>
+                    </div>
+                    <p className="text-sm text-gray-300">{notification.message}</p>
+                    {!notification.read && (
+                      <div className={`w-2 h-2 rounded-full mt-2 ${
+                        notification.type === 'appointment' ? 'bg-blue-400' :
+                        notification.type === 'payment' ? 'bg-green-400' : 'bg-orange-400'
+                      }`}></div>
+                    )}
+                  </div>
+                ))}
+              </div>
+              
+              <button 
+                onClick={() => {
+                  setNotifications(prev => prev.map(n => ({...n, read: true})));
+                }}
+                className="w-full mt-4 bg-green-600 hover:bg-green-700 py-2 px-4 rounded-lg text-sm font-medium transition-colors"
+              >
+                Mark All as Read
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Messages Modal */}
+      <AnimatePresence>
+        {showMessages && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-start justify-end p-6"
+            onClick={() => setShowMessages(false)}
+          >
+            <motion.div
+              initial={{ x: 300, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: 300, opacity: 0 }}
+              className="bg-gray-900 rounded-2xl p-6 w-96 max-h-96 overflow-y-auto border border-gray-700"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-semibold text-white">Messages</h3>
+                <button 
+                  onClick={() => setShowMessages(false)}
+                  className="p-1 text-gray-400 hover:text-white transition-colors"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+              
+              <div className="space-y-3">
+                {messages.map((message) => (
+                  <div 
+                    key={message.id} 
+                    className={`p-3 rounded-lg border transition-colors cursor-pointer ${
+                      message.read 
+                        ? 'bg-gray-800/50 border-gray-700' 
+                        : 'bg-blue-500/10 border-blue-500/30'
+                    }`}
+                    onClick={() => {
+                      setMessages(prev => 
+                        prev.map(m => m.id === message.id ? {...m, read: true} : m)
+                      );
+                    }}
+                  >
+                    <div className="flex items-start justify-between mb-1">
+                      <h4 className="font-medium text-white text-sm">{message.from}</h4>
+                      <span className="text-xs text-gray-400">{message.time}</span>
+                    </div>
+                    <p className="text-sm text-gray-300">{message.message}</p>
+                    {!message.read && (
+                      <div className="w-2 h-2 bg-blue-400 rounded-full mt-2"></div>
+                    )}
+                  </div>
+                ))}
+              </div>
+              
+              <button 
+                onClick={() => {
+                  setMessages(prev => prev.map(m => ({...m, read: true})));
+                }}
+                className="w-full mt-4 bg-blue-600 hover:bg-blue-700 py-2 px-4 rounded-lg text-sm font-medium transition-colors"
+              >
+                Mark All as Read
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Settings Modal */}
+      <AnimatePresence>
+        {showSettings && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-6"
+            onClick={() => setShowSettings(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="bg-gray-900 rounded-2xl p-6 w-full max-w-md border border-gray-700"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-lg font-semibold text-white">Professional Settings</h3>
+                <button 
+                  onClick={() => setShowSettings(false)}
+                  className="p-1 text-gray-400 hover:text-white transition-colors"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+              
+              <div className="space-y-4">
+                <div className="bg-gray-800/50 rounded-lg p-4">
+                  <h4 className="font-medium text-white mb-2">Profile Information</h4>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex justify-between">
+                      <span className="text-gray-400">Specialization:</span>
+                      <span className="text-white">Cardiologist</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-400">Experience:</span>
+                      <span className="text-white">8 years</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-400">Consultation Fee:</span>
+                      <span className="text-white">₹500</span>
+                    </div>
+                  </div>
+                  <button className="w-full mt-3 bg-green-600 hover:bg-green-700 py-2 px-4 rounded-lg text-sm font-medium transition-colors flex items-center justify-center space-x-2">
+                    <Edit className="h-4 w-4" />
+                    <span>Edit Profile</span>
+                  </button>
+                </div>
+                
+                <div className="bg-gray-800/50 rounded-lg p-4">
+                  <h4 className="font-medium text-white mb-2">Availability</h4>
+                  <div className="space-y-2">
+                    <label className="flex items-center space-x-2">
+                      <input type="checkbox" defaultChecked className="rounded" />
+                      <span className="text-sm text-gray-300">Available for consultations</span>
+                    </label>
+                    <label className="flex items-center space-x-2">
+                      <input type="checkbox" defaultChecked className="rounded" />
+                      <span className="text-sm text-gray-300">Accept new patients</span>
+                    </label>
+                    <label className="flex items-center space-x-2">
+                      <input type="checkbox" className="rounded" />
+                      <span className="text-sm text-gray-300">Emergency consultations</span>
+                    </label>
+                  </div>
+                </div>
+                
+                <div className="bg-gray-800/50 rounded-lg p-4">
+                  <h4 className="font-medium text-white mb-2">Notifications</h4>
+                  <div className="space-y-2">
+                    <label className="flex items-center space-x-2">
+                      <input type="checkbox" defaultChecked className="rounded" />
+                      <span className="text-sm text-gray-300">New appointment requests</span>
+                    </label>
+                    <label className="flex items-center space-x-2">
+                      <input type="checkbox" defaultChecked className="rounded" />
+                      <span className="text-sm text-gray-300">Payment notifications</span>
+                    </label>
+                    <label className="flex items-center space-x-2">
+                      <input type="checkbox" className="rounded" />
+                      <span className="text-sm text-gray-300">Job offers</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="flex space-x-3 mt-6">
+                <button 
+                  onClick={() => {
+                    alert('Settings saved successfully!');
+                    setShowSettings(false);
+                  }}
+                  className="flex-1 bg-green-600 hover:bg-green-700 py-2 px-4 rounded-lg text-sm font-medium transition-colors flex items-center justify-center space-x-2"
+                >
+                  <Save className="h-4 w-4" />
+                  <span>Save Changes</span>
+                </button>
+                <button 
+                  onClick={() => setShowSettings(false)}
+                  className="flex-1 bg-gray-700 hover:bg-gray-600 py-2 px-4 rounded-lg text-sm font-medium transition-colors"
+                >
+                  Cancel
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

@@ -1,14 +1,23 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   User, Bell, Settings, AlertTriangle, Heart, Calendar,
   Activity, Brain, Stethoscope, TrendingUp, MapPin,
-  Phone, Upload, Plus, Clock, CheckCircle, Star
+  Phone, Upload, Plus, Clock, CheckCircle, Star, X,
+  Edit, Save, Eye, Download, Share, Filter
 } from 'lucide-react';
 
 const NewUserDashboard = () => {
   const [userName] = useState('Priya Sharma');
   const [healthScore] = useState(84);
+  const [showNotifications, setShowNotifications] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
+  const [notifications, setNotifications] = useState([
+    { id: 1, title: 'Appointment Reminder', message: 'You have an appointment with Dr. Rajesh Kumar at 2:30 PM today', time: '10 min ago', read: false },
+    { id: 2, title: 'Health Report Ready', message: 'Your blood test results are now available', time: '1 hour ago', read: false },
+    { id: 3, title: 'Medication Reminder', message: 'Time to take your evening medication', time: '2 hours ago', read: true }
+  ]);
+  const [selectedFilter, setSelectedFilter] = useState('Today');
 
   const vitals = {
     heartRate: 72,
@@ -73,11 +82,21 @@ const NewUserDashboard = () => {
             </div>
             
             <div className="flex items-center space-x-4">
-              <button className="relative p-2 text-gray-400 hover:text-white transition-colors">
+              <button 
+                onClick={() => setShowNotifications(!showNotifications)}
+                className="relative p-2 text-gray-400 hover:text-white transition-colors"
+              >
                 <Bell className="h-5 w-5" />
-                <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></span>
+                {notifications.filter(n => !n.read).length > 0 && (
+                  <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full flex items-center justify-center text-xs text-white">
+                    {notifications.filter(n => !n.read).length}
+                  </span>
+                )}
               </button>
-              <button className="p-2 text-gray-400 hover:text-white transition-colors">
+              <button 
+                onClick={() => setShowSettings(!showSettings)}
+                className="p-2 text-gray-400 hover:text-white transition-colors"
+              >
                 <Settings className="h-5 w-5" />
               </button>
               <button className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg font-medium transition-colors flex items-center space-x-2">
@@ -212,15 +231,19 @@ const NewUserDashboard = () => {
             </div>
 
             <div className="flex space-x-2 mt-4">
-              <button className="flex-1 bg-gray-800 hover:bg-gray-700 py-2 px-4 rounded-lg text-sm transition-colors">
-                Today
-              </button>
-              <button className="flex-1 bg-gray-800 hover:bg-gray-700 py-2 px-4 rounded-lg text-sm transition-colors">
-                This Week
-              </button>
-              <button className="flex-1 bg-gray-800 hover:bg-gray-700 py-2 px-4 rounded-lg text-sm transition-colors">
-                All
-              </button>
+              {['Today', 'This Week', 'All'].map((filter) => (
+                <button 
+                  key={filter}
+                  onClick={() => setSelectedFilter(filter)}
+                  className={`flex-1 py-2 px-4 rounded-lg text-sm transition-colors ${
+                    selectedFilter === filter 
+                      ? 'bg-purple-600 text-white' 
+                      : 'bg-gray-800 hover:bg-gray-700 text-gray-300'
+                  }`}
+                >
+                  {filter}
+                </button>
+              ))}
             </div>
           </motion.div>
 
@@ -271,10 +294,30 @@ const NewUserDashboard = () => {
                 <TrendingUp className="h-5 w-5 mr-2 text-green-400" />
                 Health Tracking
               </h3>
-              <button className="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center space-x-2">
-                <Upload className="h-4 w-4" />
-                <span>Upload Reports</span>
-              </button>
+              <div className="flex space-x-2">
+                <button 
+                  onClick={() => document.getElementById('file-upload').click()}
+                  className="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center space-x-2"
+                >
+                  <Upload className="h-4 w-4" />
+                  <span>Upload Reports</span>
+                </button>
+                <button className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg text-sm font-medium transition-colors flex items-center space-x-2">
+                  <Download className="h-4 w-4" />
+                  <span>Export</span>
+                </button>
+              </div>
+              <input 
+                id="file-upload" 
+                type="file" 
+                accept=".pdf,.jpg,.png,.jpeg" 
+                className="hidden" 
+                onChange={(e) => {
+                  if (e.target.files[0]) {
+                    alert(`File "${e.target.files[0].name}" uploaded successfully!`);
+                  }
+                }}
+              />
             </div>
 
             <div className="bg-gray-800/50 rounded-lg p-4 h-40 flex items-center justify-center">
@@ -299,7 +342,14 @@ const NewUserDashboard = () => {
             </h3>
 
             <div className="space-y-4">
-              <button className="w-full bg-red-600 hover:bg-red-700 py-4 px-6 rounded-lg font-medium transition-colors flex items-center justify-center space-x-2">
+              <button 
+                onClick={() => {
+                  if (confirm('Are you sure you want to call emergency services?')) {
+                    alert('Calling 108... Emergency services have been notified!');
+                  }
+                }}
+                className="w-full bg-red-600 hover:bg-red-700 py-4 px-6 rounded-lg font-medium transition-colors flex items-center justify-center space-x-2"
+              >
                 <Phone className="h-5 w-5" />
                 <span>Call for Help - 108</span>
               </button>
@@ -328,6 +378,165 @@ const NewUserDashboard = () => {
           </motion.div>
         </div>
       </div>
+
+      {/* Notifications Modal */}
+      <AnimatePresence>
+        {showNotifications && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-start justify-end p-6"
+            onClick={() => setShowNotifications(false)}
+          >
+            <motion.div
+              initial={{ x: 300, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: 300, opacity: 0 }}
+              className="bg-gray-900 rounded-2xl p-6 w-96 max-h-96 overflow-y-auto border border-gray-700"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-semibold text-white">Notifications</h3>
+                <button 
+                  onClick={() => setShowNotifications(false)}
+                  className="p-1 text-gray-400 hover:text-white transition-colors"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+              
+              <div className="space-y-3">
+                {notifications.map((notification) => (
+                  <div 
+                    key={notification.id} 
+                    className={`p-3 rounded-lg border transition-colors cursor-pointer ${
+                      notification.read 
+                        ? 'bg-gray-800/50 border-gray-700' 
+                        : 'bg-purple-500/10 border-purple-500/30'
+                    }`}
+                    onClick={() => {
+                      setNotifications(prev => 
+                        prev.map(n => n.id === notification.id ? {...n, read: true} : n)
+                      );
+                    }}
+                  >
+                    <div className="flex items-start justify-between mb-1">
+                      <h4 className="font-medium text-white text-sm">{notification.title}</h4>
+                      <span className="text-xs text-gray-400">{notification.time}</span>
+                    </div>
+                    <p className="text-sm text-gray-300">{notification.message}</p>
+                    {!notification.read && (
+                      <div className="w-2 h-2 bg-purple-400 rounded-full mt-2"></div>
+                    )}
+                  </div>
+                ))}
+              </div>
+              
+              <button 
+                onClick={() => {
+                  setNotifications(prev => prev.map(n => ({...n, read: true})));
+                }}
+                className="w-full mt-4 bg-purple-600 hover:bg-purple-700 py-2 px-4 rounded-lg text-sm font-medium transition-colors"
+              >
+                Mark All as Read
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Settings Modal */}
+      <AnimatePresence>
+        {showSettings && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-6"
+            onClick={() => setShowSettings(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="bg-gray-900 rounded-2xl p-6 w-full max-w-md border border-gray-700"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-lg font-semibold text-white">Settings</h3>
+                <button 
+                  onClick={() => setShowSettings(false)}
+                  className="p-1 text-gray-400 hover:text-white transition-colors"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+              
+              <div className="space-y-4">
+                <div className="bg-gray-800/50 rounded-lg p-4">
+                  <h4 className="font-medium text-white mb-2">Profile Settings</h4>
+                  <button className="w-full bg-purple-600 hover:bg-purple-700 py-2 px-4 rounded-lg text-sm font-medium transition-colors flex items-center justify-center space-x-2">
+                    <Edit className="h-4 w-4" />
+                    <span>Edit Profile</span>
+                  </button>
+                </div>
+                
+                <div className="bg-gray-800/50 rounded-lg p-4">
+                  <h4 className="font-medium text-white mb-2">Notifications</h4>
+                  <div className="space-y-2">
+                    <label className="flex items-center space-x-2">
+                      <input type="checkbox" defaultChecked className="rounded" />
+                      <span className="text-sm text-gray-300">Email notifications</span>
+                    </label>
+                    <label className="flex items-center space-x-2">
+                      <input type="checkbox" defaultChecked className="rounded" />
+                      <span className="text-sm text-gray-300">Push notifications</span>
+                    </label>
+                    <label className="flex items-center space-x-2">
+                      <input type="checkbox" className="rounded" />
+                      <span className="text-sm text-gray-300">SMS reminders</span>
+                    </label>
+                  </div>
+                </div>
+                
+                <div className="bg-gray-800/50 rounded-lg p-4">
+                  <h4 className="font-medium text-white mb-2">Privacy</h4>
+                  <div className="space-y-2">
+                    <label className="flex items-center space-x-2">
+                      <input type="checkbox" defaultChecked className="rounded" />
+                      <span className="text-sm text-gray-300">Share health data with doctors</span>
+                    </label>
+                    <label className="flex items-center space-x-2">
+                      <input type="checkbox" className="rounded" />
+                      <span className="text-sm text-gray-300">Allow data for research</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="flex space-x-3 mt-6">
+                <button 
+                  onClick={() => {
+                    alert('Settings saved successfully!');
+                    setShowSettings(false);
+                  }}
+                  className="flex-1 bg-green-600 hover:bg-green-700 py-2 px-4 rounded-lg text-sm font-medium transition-colors flex items-center justify-center space-x-2"
+                >
+                  <Save className="h-4 w-4" />
+                  <span>Save Changes</span>
+                </button>
+                <button 
+                  onClick={() => setShowSettings(false)}
+                  className="flex-1 bg-gray-700 hover:bg-gray-600 py-2 px-4 rounded-lg text-sm font-medium transition-colors"
+                >
+                  Cancel
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
