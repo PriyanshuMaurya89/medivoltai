@@ -56,7 +56,7 @@ import AppointmentBookingPage from './pages/AppointmentBookingPage';
 import FAQPage from './pages/FAQPage';
 import NewUserDashboard from './pages/dashboards/NewUserDashboard';
 import DoctorDashboard from './pages/dashboards/DoctorDashboard';
-// import HospitalDashboard from './pages/dashboards/HospitalDashboard';
+import HospitalDashboard from './pages/dashboards/HospitalDashboard';
 
 function App() {
   return (
@@ -120,7 +120,7 @@ function App() {
               <Route path="/faq" element={<FAQPage />} />
               <Route path="/dashboard/new-user" element={<NewUserDashboard />} />
               <Route path="/dashboard/doctor" element={<DoctorDashboard />} />
-              {/* <Route path="/dashboard/hospital" element={<HospitalDashboard />} /> */}
+              <Route path="/dashboard/hospital" element={<HospitalDashboard />} />
             </Routes>
           </main>
           <Footer />

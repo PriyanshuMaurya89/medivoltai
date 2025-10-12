@@ -568,165 +568,167 @@ const HospitalDashboard = () => {
               className="bg-gray-900 rounded-2xl p-6 w-96 max-h-96 overflow-y-auto border border-gray-700"
               onClick={(e) => e.stopPropagation()}
             >
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-semibold text-white">Hospital Notifications</h3>
-            <button 
-              onClick={() => setShowNotifications(false)}
-              className="p-1 text-gray-400 hover:text-white transition-colors"
-            >
-              <X className="h-5 w-5" />
-            </button>
-          </div>
-          
-          <div className="space-y-3">
-            {notifications.map((notification) => (
-              <div 
-                key={notification.id} 
-                className={`p-3 rounded-lg border transition-colors cursor-pointer ${
-                  notification.read 
-                    ? 'bg-gray-800/50 border-gray-700' 
-                    : 'bg-blue-500/10 border-blue-500/30'
-                }`}
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-semibold text-white">Hospital Notifications</h3>
+                <button 
+                  onClick={() => setShowNotifications(false)}
+                  className="p-1 text-gray-400 hover:text-white transition-colors"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+              
+              <div className="space-y-3">
+                {notifications.map((notification) => (
+                  <div 
+                    key={notification.id} 
+                    className={`p-3 rounded-lg border transition-colors cursor-pointer ${
+                      notification.read 
+                        ? 'bg-gray-800/50 border-gray-700' 
+                        : 'bg-blue-500/10 border-blue-500/30'
+                    }`}
+                    onClick={() => {
+                      setNotifications(prev => 
+                        prev.map(n => n.id === notification.id ? {...n, read: true} : n)
+                      );
+                    }}
+                  >
+                    <div className="flex items-start justify-between mb-1">
+                      <h4 className="font-medium text-white text-sm">{notification.title}</h4>
+                      <span className="text-xs text-gray-400">{notification.time}</span>
+                    </div>
+                    <p className="text-sm text-gray-300">{notification.message}</p>
+                    {!notification.read && (
+                      <div className="w-2 h-2 bg-blue-400 rounded-full mt-2"></div>
+                    )}
+                  </div>
+                ))}
+              </div>
+              
+              <button 
                 onClick={() => {
-                  setNotifications(prev => 
-                    prev.map(n => n.id === notification.id ? {...n, read: true} : n)
-                  );
+                  setNotifications(prev => prev.map(n => ({...n, read: true})));
                 }}
+                className="w-full mt-4 bg-blue-600 hover:bg-blue-700 py-2 px-4 rounded-lg text-sm font-medium transition-colors"
               >
-                <div className="flex items-start justify-between mb-1">
-                  <h4 className="font-medium text-white text-sm">{notification.title}</h4>
-                  <span className="text-xs text-gray-400">{notification.time}</span>
-                </div>
-                <p className="text-sm text-gray-300">{notification.message}</p>
-                {!notification.read && (
-                  <div className="w-2 h-2 bg-blue-400 rounded-full mt-2"></div>
-                )}
-              </div>
-            ))}
-          </div>
-          
-          <button 
-            onClick={() => {
-              setNotifications(prev => prev.map(n => ({...n, read: true})));
-            }}
-            className="w-full mt-4 bg-blue-600 hover:bg-blue-700 py-2 px-4 rounded-lg text-sm font-medium transition-colors"
-          >
-            Mark All as Read
-          </button>
-        </motion.div>
-      </motion.div>
-    )}
-  </AnimatePresence>
-
-  {/* Settings Modal */}
-  <AnimatePresence>
-    {showSettings && (
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-6"
-        onClick={() => setShowSettings(false)}
-      >
-        <motion.div
-          initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          exit={{ scale: 0.9, opacity: 0 }}
-          className="bg-gray-900 rounded-2xl p-6 w-full max-w-md border border-gray-700"
-          onClick={(e) => e.stopPropagation()}
-        >
-          <div className="flex items-center justify-between mb-6">
-            <h3 className="text-lg font-semibold text-white">Hospital Settings</h3>
-            <button 
-              onClick={() => setShowSettings(false)}
-              className="p-1 text-gray-400 hover:text-white transition-colors"
-            >
-              <X className="h-5 w-5" />
-            </button>
-          </div>
-          
-          <div className="space-y-4">
-            <div className="bg-gray-800/50 rounded-lg p-4">
-              <h4 className="font-medium text-white mb-2">Hospital Information</h4>
-              <div className="space-y-2 text-sm">
-                <div className="flex justify-between">
-                  <span className="text-gray-400">Name:</span>
-                  <span className="text-white">{hospitalName}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-400">Type:</span>
-                  <span className="text-white">Multi-Specialty</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-400">Departments:</span>
-                  <span className="text-white">15</span>
-                </div>
-              </div>
-              <button className="w-full mt-3 bg-blue-600 hover:bg-blue-700 py-2 px-4 rounded-lg text-sm font-medium transition-colors flex items-center justify-center space-x-2">
-                <Edit className="h-4 w-4" />
-                <span>Edit Hospital Info</span>
+                Mark All as Read
               </button>
-            </div>
-            
-            <div className="bg-gray-800/50 rounded-lg p-4">
-              <h4 className="font-medium text-white mb-2">System Settings</h4>
-              <div className="space-y-2">
-                <label className="flex items-center space-x-2">
-                  <input type="checkbox" defaultChecked className="rounded" />
-                  <span className="text-sm text-gray-300">Auto-assign doctors</span>
-                </label>
-                <label className="flex items-center space-x-2">
-                  <input type="checkbox" defaultChecked className="rounded" />
-                  <span className="text-sm text-gray-300">Email notifications</span>
-                </label>
-                <label className="flex items-center space-x-2">
-                  <input type="checkbox" className="rounded" />
-                  <span className="text-sm text-gray-300">SMS alerts</span>
-                </label>
-              </div>
-            </div>
-            
-            <div className="bg-gray-800/50 rounded-lg p-4">
-              <h4 className="font-medium text-white mb-2">Access Control</h4>
-              <div className="space-y-2">
-                <label className="flex items-center space-x-2">
-                  <input type="checkbox" defaultChecked className="rounded" />
-                  <span className="text-sm text-gray-300">Allow freelancer applications</span>
-                </label>
-                <label className="flex items-center space-x-2">
-                  <input type="checkbox" defaultChecked className="rounded" />
-                  <span className="text-sm text-gray-300">Patient self-registration</span>
-                </label>
-                <label className="flex items-center space-x-2">
-                  <input type="checkbox" className="rounded" />
-                  <span className="text-sm text-gray-300">Emergency access</span>
-                </label>
-              </div>
-            </div>
-          </div>
-          
-          <div className="flex space-x-3 mt-6">
-            <button 
-              onClick={() => {
-                alert('Hospital settings saved successfully!');
-                setShowSettings(false);
-              }}
-              className="flex-1 bg-blue-600 hover:bg-blue-700 py-2 px-4 rounded-lg text-sm font-medium transition-colors flex items-center justify-center space-x-2"
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Settings Modal */}
+      <AnimatePresence>
+        {showSettings && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-6"
+            onClick={() => setShowSettings(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="bg-gray-900 rounded-2xl p-6 w-full max-w-md border border-gray-700"
+              onClick={(e) => e.stopPropagation()}
             >
-              <Save className="h-4 w-4" />
-              <span>Save Changes</span>
-            </button>
-            <button 
-              onClick={() => setShowSettings(false)}
-              className="flex-1 bg-gray-700 hover:bg-gray-600 py-2 px-4 rounded-lg text-sm font-medium transition-colors"
-            >
-              Cancel
-            </button>
-          </div>
-        </motion.div>
-      </motion.div>
-    )}
-  </AnimatePresence>
-</div>
-</div>
-</div>
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-lg font-semibold text-white">Hospital Settings</h3>
+                <button 
+                  onClick={() => setShowSettings(false)}
+                  className="p-1 text-gray-400 hover:text-white transition-colors"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+              
+              <div className="space-y-4">
+                <div className="bg-gray-800/50 rounded-lg p-4">
+                  <h4 className="font-medium text-white mb-2">Hospital Information</h4>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex justify-between">
+                      <span className="text-gray-400">Name:</span>
+                      <span className="text-white">{hospitalName}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-400">Type:</span>
+                      <span className="text-white">Multi-Specialty</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-400">Departments:</span>
+                      <span className="text-white">15</span>
+                    </div>
+                  </div>
+                  <button className="w-full mt-3 bg-blue-600 hover:bg-blue-700 py-2 px-4 rounded-lg text-sm font-medium transition-colors flex items-center justify-center space-x-2">
+                    <Edit className="h-4 w-4" />
+                    <span>Edit Hospital Info</span>
+                  </button>
+                </div>
+                
+                <div className="bg-gray-800/50 rounded-lg p-4">
+                  <h4 className="font-medium text-white mb-2">System Settings</h4>
+                  <div className="space-y-2">
+                    <label className="flex items-center space-x-2">
+                      <input type="checkbox" defaultChecked className="rounded" />
+                      <span className="text-sm text-gray-300">Auto-assign doctors</span>
+                    </label>
+                    <label className="flex items-center space-x-2">
+                      <input type="checkbox" defaultChecked className="rounded" />
+                      <span className="text-sm text-gray-300">Email notifications</span>
+                    </label>
+                    <label className="flex items-center space-x-2">
+                      <input type="checkbox" className="rounded" />
+                      <span className="text-sm text-gray-300">SMS alerts</span>
+                    </label>
+                  </div>
+                </div>
+                
+                <div className="bg-gray-800/50 rounded-lg p-4">
+                  <h4 className="font-medium text-white mb-2">Access Control</h4>
+                  <div className="space-y-2">
+                    <label className="flex items-center space-x-2">
+                      <input type="checkbox" defaultChecked className="rounded" />
+                      <span className="text-sm text-gray-300">Allow freelancer applications</span>
+                    </label>
+                    <label className="flex items-center space-x-2">
+                      <input type="checkbox" defaultChecked className="rounded" />
+                      <span className="text-sm text-gray-300">Patient self-registration</span>
+                    </label>
+                    <label className="flex items-center space-x-2">
+                      <input type="checkbox" className="rounded" />
+                      <span className="text-sm text-gray-300">Emergency access</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="flex space-x-3 mt-6">
+                <button 
+                  onClick={() => {
+                    alert('Hospital settings saved successfully!');
+                    setShowSettings(false);
+                  }}
+                  className="flex-1 bg-blue-600 hover:bg-blue-700 py-2 px-4 rounded-lg text-sm font-medium transition-colors flex items-center justify-center space-x-2"
+                >
+                  <Save className="h-4 w-4" />
+                  <span>Save Changes</span>
+                </button>
+                <button 
+                  onClick={() => setShowSettings(false)}
+                  className="flex-1 bg-gray-700 hover:bg-gray-600 py-2 px-4 rounded-lg text-sm font-medium transition-colors"
+                >
+                  Cancel
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
+
+export default HospitalDashboard;
