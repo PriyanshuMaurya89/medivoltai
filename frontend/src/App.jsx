@@ -57,6 +57,7 @@ import FAQPage from './pages/FAQPage';
 import NewUserDashboard from './pages/dashboards/NewUserDashboard';
 import DoctorDashboard from './pages/dashboards/DoctorDashboard';
 import HospitalDashboard from './pages/dashboards/HospitalDashboard';
+import TestLogin from './components/TestLogin';
 
 function App() {
   return (
@@ -124,6 +125,7 @@ function App() {
             </Routes>
           </main>
           <Footer />
+          <TestLogin />
         </div>
       </Router>
     </AuthProvider>

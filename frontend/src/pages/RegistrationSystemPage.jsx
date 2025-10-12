@@ -1,20 +1,48 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   User, Stethoscope, Building, ArrowRight, Upload,
   Phone, Mail, Lock, MapPin, Calendar, Heart,
   Shield, CheckCircle, Clock, AlertTriangle,
   Camera, FileText, GraduationCap, DollarSign, Brain
 } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext';
 
 const RegistrationSystemPage = () => {
+  const { simulateLogin } = useAuth();
+  const navigate = useNavigate();
   const [step, setStep] = useState('account-type'); // 'account-type', 'form', 'verification', 'success'
   const [accountType, setAccountType] = useState('');
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({});
   const [otpSent, setOtpSent] = useState(false);
   const [documents, setDocuments] = useState({});
+
+  // Handle dashboard navigation with login simulation
+  const handleDashboardNavigation = () => {
+    // Map account types to roles
+    let role = 'new-user';
+    if (accountType === 'freelancer') {
+      role = 'doctor';
+    } else if (accountType === 'hospital') {
+      role = 'hospital';
+    }
+
+    // Simulate login with user data from form
+    const userData = {
+      name: formData.fullName || formData.hospitalName || 'User',
+      email: formData.email || 'user@example.com'
+    };
+
+    simulateLogin(role, userData);
+
+    // Navigate to appropriate dashboard
+    const dashboardUrl = role === 'doctor' ? '/dashboard/doctor' : 
+                        role === 'hospital' ? '/dashboard/hospital' : 
+                        '/dashboard/new-user';
+    navigate(dashboardUrl);
+  };
 
   // Account Type Selection
   const AccountTypeSelection = () => (
@@ -1187,7 +1215,7 @@ const RegistrationSystemPage = () => {
             <div className="flex flex-col sm:flex-row gap-4">
               {accountType === 'new users' ? (
                 <motion.button
-                  onClick={() => window.location.href = '/dashboard/new-user'}
+                  onClick={handleDashboardNavigation}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   className="flex-1 bg-gradient-to-r from-green-600 via-green-700 to-blue-600 text-white py-4 px-6 rounded-xl hover:from-green-500 hover:via-green-600 hover:to-blue-500 transition-all duration-300 font-semibold text-lg shadow-lg hover:shadow-green-500/25"
@@ -1199,7 +1227,7 @@ const RegistrationSystemPage = () => {
                 </motion.button>
               ) : accountType === 'freelancer' ? (
                 <motion.button
-                  onClick={() => window.location.href = '/dashboard/doctor'}
+                  onClick={handleDashboardNavigation}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   className={`flex-1 bg-gradient-to-r from-${colorClass}-600 to-${colorClass}-700 text-white py-4 px-6 rounded-xl hover:from-${colorClass}-500 hover:to-${colorClass}-600 transition-all duration-300 font-semibold text-lg shadow-lg`}
@@ -1211,7 +1239,7 @@ const RegistrationSystemPage = () => {
                 </motion.button>
               ) : (
                 <motion.button
-                  onClick={() => window.location.href = '/dashboard/hospital'}
+                  onClick={handleDashboardNavigation}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   className={`flex-1 bg-gradient-to-r from-${colorClass}-600 to-${colorClass}-700 text-white py-4 px-6 rounded-xl hover:from-${colorClass}-500 hover:to-${colorClass}-600 transition-all duration-300 font-semibold text-lg shadow-lg`}

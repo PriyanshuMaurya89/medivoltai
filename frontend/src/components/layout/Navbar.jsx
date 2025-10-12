@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Brain, Menu, X, ChevronDown, Crown } from 'lucide-react';
+import { Brain, Menu, X, ChevronDown, Crown, LayoutDashboard } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { useAuth } from '../../contexts/AuthContext';
 
@@ -23,6 +23,22 @@ export default function Navbar() {
   }, [featuresDropdownRef]);
   const handleLogout = async () => {
     await logout();
+  };
+
+  // Get dashboard URL based on user role
+  const getDashboardUrl = () => {
+    if (!user?.role) return '/dashboard/new-user';
+    
+    switch (user.role) {
+      case 'doctor':
+      case 'freelancer':
+        return '/dashboard/doctor';
+      case 'hospital':
+        return '/dashboard/hospital';
+      case 'new-user':
+      default:
+        return '/dashboard/new-user';
+    }
   };
 
   const aiFeatures = [
@@ -124,14 +140,27 @@ export default function Navbar() {
           </Link>
 
 
-          {/* Register Button - Properly Sized */}
-          <Button
-            size="sm"
-            className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white px-4 py-2 rounded-full font-medium text-sm transition-all duration-300 shadow-lg hover:shadow-purple-500/25 min-h-[40px]"
-            asChild
-          >
-            <Link to="/registration" className="touch-manipulation">Register</Link>
-          </Button>
+          {/* Register/Dashboard Button - Properly Sized */}
+          {!isAuthenticated ? (
+            <Button
+              size="sm"
+              className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white px-4 py-2 rounded-full font-medium text-sm transition-all duration-300 shadow-lg hover:shadow-purple-500/25 min-h-[40px]"
+              asChild
+            >
+              <Link to="/registration" className="touch-manipulation">Register</Link>
+            </Button>
+          ) : (
+            <Button
+              size="sm"
+              className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white px-4 py-2 rounded-full font-medium text-sm transition-all duration-300 shadow-lg hover:shadow-blue-500/25 min-h-[40px]"
+              asChild
+            >
+              <Link to={getDashboardUrl()} className="touch-manipulation flex items-center gap-2">
+                <LayoutDashboard className="h-4 w-4" />
+                Dashboard
+              </Link>
+            </Button>
+          )}
 
           {isAuthenticated && (
             <div className="hidden md:flex items-center gap-2">
@@ -200,15 +229,48 @@ export default function Navbar() {
                 </Link>
               </Button>
 
-              {/* Register Button */}
-              <Button
-                className="w-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white rounded-full font-medium shadow-lg text-base py-3 min-h-[48px]"
-                asChild
-              >
-                <Link to="/registration" onClick={() => setIsMobileMenuOpen(false)} className="touch-manipulation">
-                  Register
-                </Link>
-              </Button>
+              {/* Register/Dashboard Button */}
+              {!isAuthenticated ? (
+                <Button
+                  className="w-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white rounded-full font-medium shadow-lg text-base py-3 min-h-[48px]"
+                  asChild
+                >
+                  <Link to="/registration" onClick={() => setIsMobileMenuOpen(false)} className="touch-manipulation">
+                    Register
+                  </Link>
+                </Button>
+              ) : (
+                <Button
+                  className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white rounded-full font-medium shadow-lg text-base py-3 min-h-[48px]"
+                  asChild
+                >
+                  <Link to={getDashboardUrl()} onClick={() => setIsMobileMenuOpen(false)} className="touch-manipulation flex items-center justify-center gap-2">
+                    <LayoutDashboard className="h-5 w-5" />
+                    Dashboard
+                  </Link>
+                </Button>
+              )}
+
+              {/* Mobile Logout Button */}
+              {isAuthenticated && (
+                <div className="pt-4 border-t border-gray-700">
+                  <div className="text-center mb-3">
+                    <span className="text-sm text-gray-300">
+                      Welcome, {user?.name || user?.email}
+                    </span>
+                  </div>
+                  <Button
+                    variant="ghost"
+                    className="w-full text-gray-300 hover:text-white border border-gray-600 hover:border-gray-500"
+                    onClick={() => {
+                      handleLogout();
+                      setIsMobileMenuOpen(false);
+                    }}
+                  >
+                    Logout
+                  </Button>
+                </div>
+              )}
             </div>
           </div>
         </div>

@@ -11,14 +11,16 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     // Check for stored token and validate
     const token = localStorage.getItem('token');
+    const userRole = localStorage.getItem('userRole');
     if (token) {
       authAPI.getProfile()
         .then((userData) => {
-          setUser(userData.user);
+          setUser({...userData.user, role: userRole || 'new-user'});
           setIsAuthenticated(true);
         })
         .catch(() => {
           localStorage.removeItem('token');
+          localStorage.removeItem('userRole');
         })
         .finally(() => {
           setLoading(false);
@@ -42,12 +44,14 @@ export function AuthProvider({ children }) {
     }
   };
 
-  const register = async (email, password, name) => {
+  const register = async (email, password, name, role = 'new-user') => {
     setLoading(true);
     try {
       const response = await authAPI.register(email, password, name);
       localStorage.setItem('token', response.token);
-      setUser(response.user);
+      // Store user role in localStorage for persistence
+      localStorage.setItem('userRole', role);
+      setUser({...response.user, role});
       setIsAuthenticated(true);
     } catch (error) {
       throw error;
@@ -60,6 +64,7 @@ export function AuthProvider({ children }) {
     setLoading(true);
     try {
       localStorage.removeItem('token');
+      localStorage.removeItem('userRole');
       setUser(null);
       setIsAuthenticated(false);
     } finally {
@@ -67,8 +72,24 @@ export function AuthProvider({ children }) {
     }
   };
 
+  // Simulate login for testing (since we don't have a real backend)
+  const simulateLogin = (role, userData = {}) => {
+    const mockToken = 'mock-jwt-token-' + Date.now();
+    const mockUser = {
+      id: Date.now(),
+      name: userData.name || 'Test User',
+      email: userData.email || 'test@example.com',
+      role: role
+    };
+    
+    localStorage.setItem('token', mockToken);
+    localStorage.setItem('userRole', role);
+    setUser(mockUser);
+    setIsAuthenticated(true);
+  };
+
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated, loading, login, register, logout }}>
+    <AuthContext.Provider value={{ user, isAuthenticated, loading, login, register, logout, simulateLogin }}>
       {children}
     </AuthContext.Provider>
   );
