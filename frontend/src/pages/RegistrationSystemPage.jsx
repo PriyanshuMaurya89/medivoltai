@@ -338,7 +338,7 @@ const RegistrationSystemPage = () => {
         )}
 
         {currentStep === 3 && (
-          <form className="space-y-6">
+          <div className="space-y-6">
             <div className="bg-gray-800/30 rounded-xl p-6 border border-gray-700/30">
               <h3 className="text-lg font-semibold text-white mb-4 flex items-center">
                 <Shield className="h-5 w-5 mr-2 text-purple-400" />
@@ -417,7 +417,7 @@ const RegistrationSystemPage = () => {
             <div className="text-center text-sm text-gray-400">
               <p>✅ <strong>Instant Access:</strong> No verification needed - Start using MediVolt immediately!</p>
             </div>
-          </form>
+          </div>
         )}
       </div>
     </div>
