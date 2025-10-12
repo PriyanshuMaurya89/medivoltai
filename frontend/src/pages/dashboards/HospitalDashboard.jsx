@@ -52,7 +52,7 @@ const HospitalDashboard = () => {
     }
   ]);
 
-  const [staffMembers, setStaffMembers] = useState([
+  const [staffMembers, _setStaffMembers] = useState([
     {
       id: 1,
       name: 'Dr. Rajesh Kumar',
