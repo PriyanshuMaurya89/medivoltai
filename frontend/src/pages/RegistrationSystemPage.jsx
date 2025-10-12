@@ -5,7 +5,7 @@ import {
   User, Stethoscope, Building, ArrowRight, Upload,
   Phone, Mail, Lock, MapPin, Calendar, Heart,
   Shield, CheckCircle, Clock, AlertTriangle,
-  Camera, FileText, GraduationCap, DollarSign
+  Camera, FileText, GraduationCap, DollarSign, Brain
 } from 'lucide-react';
 
 const RegistrationSystemPage = () => {
