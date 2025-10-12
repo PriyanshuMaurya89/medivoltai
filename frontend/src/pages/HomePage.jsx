@@ -828,20 +828,23 @@ export default function HomePage() {
                   const x = Math.cos((angle * Math.PI) / 180) * radius;
                   const y = Math.sin((angle * Math.PI) / 180) * radius;
                   
-                  // Medical/Health related images for each AI tool (12 images for better spacing)
+                  // Medical/Health related images for each AI tool (15 images with backups)
                   const medicalImages = [
-                    'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=120&h=120&fit=crop', // Medical report/stethoscope
-                    'https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=120&h=120&fit=crop', // Insurance/shield
-                    'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=120&h=120&fit=crop', // Nutrition/food
-                    'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=120&h=120&fit=crop', // Government/building
-                    'https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=120&h=120&fit=crop', // Symptom checker/doctor
-                    'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=120&h=120&fit=crop', // Health education/books
-                    'https://images.unsplash.com/photo-1505751104628-5f2f4d0e5e0e?w=120&h=120&fit=crop', // Pills/medication
-                    'https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=120&h=120&fit=crop', // Hospital/medical care
-                    'https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?w=120&h=120&fit=crop', // Heart health/cardiology
-                    'https://images.unsplash.com/photo-1559757175-5700dde675bc?w=120&h=120&fit=crop', // Lab/testing
-                    'https://images.unsplash.com/photo-1551076805-e1869033e561?w=120&h=120&fit=crop', // Fitness/wellness
-                    'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=120&h=120&fit=crop' // Mental health/meditation
+                    'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=120&h=120&fit=crop&auto=format', // Medical report/stethoscope
+                    'https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=120&h=120&fit=crop&auto=format', // Insurance/shield
+                    'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=120&h=120&fit=crop&auto=format', // Nutrition/food
+                    'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=120&h=120&fit=crop&auto=format', // Government/building
+                    'https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=120&h=120&fit=crop&auto=format', // Symptom checker/doctor
+                    'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=120&h=120&fit=crop&auto=format', // Health education/books
+                    'https://images.unsplash.com/photo-1505751104628-5f2f4d0e5e0e?w=120&h=120&fit=crop&auto=format', // Pills/medication
+                    'https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=120&h=120&fit=crop&auto=format', // Hospital/medical care
+                    'https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?w=120&h=120&fit=crop&auto=format', // Heart health/cardiology
+                    'https://images.unsplash.com/photo-1559757175-5700dde675bc?w=120&h=120&fit=crop&auto=format', // Lab/testing
+                    'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=120&h=120&fit=crop&auto=format', // Fitness/wellness
+                    'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=120&h=120&fit=crop&auto=format', // Mental health/meditation
+                    'https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=120&h=120&fit=crop&auto=format', // Emergency/ambulance
+                    'https://images.unsplash.com/photo-1576671081837-49000212a370?w=120&h=120&fit=crop&auto=format', // Telemedicine/video call
+                    'https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=120&h=120&fit=crop&auto=format'  // Analytics/charts
                   ];
 
                   return (
@@ -871,7 +874,7 @@ export default function HomePage() {
                       <div 
                         className="w-full h-full bg-cover bg-center relative rounded-3xl shadow-2xl group-hover:shadow-[0_25px_60px_rgba(139,92,246,0.4)] transition-all duration-300 border border-white/20"
                         style={{ 
-                          backgroundImage: `url(${medicalImages[index % medicalImages.length]})`,
+                          backgroundImage: `url(${medicalImages[index % medicalImages.length]}), linear-gradient(135deg, ${feature.color}, ${feature.color}80)`,
                         }}
                       >
                         {/* Subtle overlay */}
