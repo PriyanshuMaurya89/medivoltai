@@ -69,7 +69,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-black relative overflow-hidden flex items-center justify-center px-4 py-8">
+    <div className="min-h-screen bg-black relative overflow-hidden flex items-center justify-center px-4 py-4 sm:py-8">
       {/* Background Effects */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-500/8 via-transparent to-transparent"></div>
       <div className="absolute top-10 left-10 w-96 h-96 bg-purple-500/6 rounded-full blur-3xl animate-pulse"></div>
@@ -83,20 +83,20 @@ export default function LoginPage() {
       >
         <div className="bg-gradient-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-lg rounded-2xl border border-gray-700/50 overflow-hidden shadow-2xl">
           {/* Header */}
-          <div className="bg-gradient-to-r from-purple-600 via-purple-700 to-blue-600 p-8">
+          <div className="bg-gradient-to-r from-purple-600 via-purple-700 to-blue-600 p-4 sm:p-6 lg:p-8">
             <div className="flex items-center justify-center gap-3 mb-3">
-              <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
-                <Brain className="h-7 w-7 text-white" />
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                <Brain className="h-6 w-6 sm:h-7 sm:w-7 text-white" />
               </div>
-              <h1 className="text-3xl font-bold text-white">MediVolt</h1>
+              <h1 className="text-2xl sm:text-3xl font-bold text-white">MediVolt</h1>
             </div>
-            <p className="text-purple-100 text-center">Your AI-Powered Healthcare Platform</p>
+            <p className="text-purple-100 text-center text-sm sm:text-base">Your AI-Powered Healthcare Platform</p>
           </div>
 
-          <div className="p-8">
-            <div className="text-center mb-8">
-              <h2 className="text-2xl font-bold text-white mb-2">Welcome Back! 👋</h2>
-              <p className="text-gray-400">Sign in to access your personalized healthcare dashboard</p>
+          <div className="p-4 sm:p-6 lg:p-8">
+            <div className="text-center mb-6 sm:mb-8">
+              <h2 className="text-xl sm:text-2xl font-bold text-white mb-2">Welcome Back! 👋</h2>
+              <p className="text-gray-400 text-sm sm:text-base">Sign in to access your personalized healthcare dashboard</p>
             </div>
 
             {error && (
@@ -110,14 +110,14 @@ export default function LoginPage() {
               </motion.div>
             )}
 
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="bg-gray-800/30 rounded-xl p-6 border border-gray-700/30">
-                <h3 className="text-lg font-semibold text-white mb-4 flex items-center">
-                  <Mail className="h-5 w-5 mr-2 text-purple-400" />
+            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+              <div className="bg-gray-800/30 rounded-xl p-4 sm:p-6 border border-gray-700/30">
+                <h3 className="text-base sm:text-lg font-semibold text-white mb-3 sm:mb-4 flex items-center">
+                  <Mail className="h-4 w-4 sm:h-5 sm:w-5 mr-2 text-purple-400" />
                   Login Credentials
                 </h3>
                 
-                <div className="space-y-4">
+                <div className="space-y-3 sm:space-y-4">
                   <div>
                     <label htmlFor="emailOrPhone" className="block text-sm font-medium text-gray-300 mb-2">
                       Email or Phone Number *
@@ -132,7 +132,7 @@ export default function LoginPage() {
                         type="text"
                         autoComplete="username"
                         required
-                        className="block w-full pl-10 pr-3 py-3 bg-gray-800/50 border border-gray-600/50 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 text-white placeholder-gray-400 transition-all duration-300"
+                        className="block w-full pl-10 pr-3 py-3 bg-gray-800/50 border border-gray-600/50 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 text-white placeholder-gray-400 transition-all duration-300 text-base sm:text-sm min-h-[48px]"
                         placeholder="Enter email or phone number"
                         value={emailOrPhone}
                         onChange={(e) => setEmailOrPhone(e.target.value)}
@@ -154,14 +154,14 @@ export default function LoginPage() {
                         type={showPassword ? "text" : "password"}
                         autoComplete="current-password"
                         required
-                        className="block w-full pl-10 pr-12 py-3 bg-gray-800/50 border border-gray-600/50 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 text-white placeholder-gray-400 transition-all duration-300"
+                        className="block w-full pl-10 pr-12 py-3 bg-gray-800/50 border border-gray-600/50 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 text-white placeholder-gray-400 transition-all duration-300 text-base sm:text-sm min-h-[48px]"
                         placeholder="Enter your password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                       />
                       <button
                         type="button"
-                        className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                        className="absolute inset-y-0 right-0 pr-3 flex items-center min-w-[44px] min-h-[44px] justify-center"
                         onClick={() => setShowPassword(!showPassword)}
                       >
                         {showPassword ? (
@@ -174,7 +174,7 @@ export default function LoginPage() {
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between mt-4">
+                <div className="flex items-center justify-between mt-3 sm:mt-4">
                   <div className="text-sm">
                     <Link to="/forgot-password" className="font-medium text-purple-400 hover:text-purple-300 transition-colors">
                       Forgot password?
@@ -184,12 +184,12 @@ export default function LoginPage() {
               </div>
 
               <motion.div
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                whileHover={{ scale: 1.01 }}
+                whileTap={{ scale: 0.99 }}
               >
                 <Button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-purple-600 via-purple-700 to-blue-600 hover:from-purple-500 hover:via-purple-600 hover:to-blue-500 text-white font-semibold py-4 px-6 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-900 transition-all duration-300 shadow-lg hover:shadow-purple-500/25 text-lg"
+                  className="w-full bg-gradient-to-r from-purple-600 via-purple-700 to-blue-600 hover:from-purple-500 hover:via-purple-600 hover:to-blue-500 text-white font-semibold py-3 sm:py-4 px-6 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-900 transition-all duration-300 shadow-lg hover:shadow-purple-500/25 text-base sm:text-lg min-h-[48px]"
                   disabled={loading}
                 >
                   {loading ? (
