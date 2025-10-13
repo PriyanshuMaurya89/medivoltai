@@ -789,8 +789,8 @@ export default function HomePage() {
           </motion.div>
 
           <div className="w-full max-w-7xl mx-auto">
-            {/* Packed with Innovation Layout */}
-            <div className="relative h-[500px] mb-16">
+            {/* Packed with Innovation Layout - Mobile Responsive */}
+            <div className="relative h-[400px] sm:h-[500px] mb-8 sm:mb-16">
               {/* Center Button Only */}
               <div className="absolute inset-0 flex flex-col items-center justify-center z-30">
                 <motion.div
@@ -801,7 +801,7 @@ export default function HomePage() {
                   className="text-center"
                 >
                   <Button 
-                    className="bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+                    className="bg-primary hover:bg-primary/90 text-white px-6 py-2.5 sm:px-8 sm:py-3 rounded-full text-base sm:text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
                     asChild
                   >
                     <Link to="/book-appointment">Book an Appointment</Link>
@@ -809,7 +809,7 @@ export default function HomePage() {
                 </motion.div>
               </div>
 
-              {/* Slowly Moving Circular App Icons */}
+              {/* Slowly Moving Circular App Icons - Responsive */}
               <motion.div 
                 className="absolute inset-0 z-10 flex items-center justify-center"
                 animate={{ rotate: 360 }}
@@ -819,12 +819,13 @@ export default function HomePage() {
                   ease: "linear"
                 }}
               >
-                <div className="relative w-full h-full max-w-2xl max-h-2xl">
+                <div className="relative w-full h-full max-w-sm sm:max-w-2xl max-h-sm sm:max-h-2xl">
                 {aiFeatures.map((feature, index) => {
                   const IconComponent = feature.icon;
-                  // Position icons around the center in a circular pattern
+                  // Position icons around the center in a circular pattern - Responsive radius
                   const angle = (index * 360) / aiFeatures.length;
-                  const radius = 250;
+                  // Use CSS custom properties for responsive radius
+                  const radius = 200; // Base radius, will be adjusted with CSS
                   const x = Math.cos((angle * Math.PI) / 180) * radius;
                   const y = Math.sin((angle * Math.PI) / 180) * radius;
                   
@@ -850,10 +851,12 @@ export default function HomePage() {
                   return (
                     <motion.div
                       key={feature.id}
-                      className="absolute w-20 h-20 cursor-pointer group"
+                      className="absolute w-14 h-14 sm:w-20 sm:h-20 cursor-pointer group"
                       style={{
-                        left: `calc(50% + ${x}px - 40px)`,
-                        top: `calc(50% + ${y}px - 40px)`,
+                        left: `calc(50% + ${x * 0.7}px - 28px)`,
+                        top: `calc(50% + ${y * 0.7}px - 28px)`,
+                        '--sm-left': `calc(50% + ${x}px - 40px)`,
+                        '--sm-top': `calc(50% + ${y}px - 40px)`,
                       }}
                       initial={{ opacity: 0, scale: 0 }}
                       whileInView={{ opacity: 1, scale: 1 }}
@@ -882,7 +885,7 @@ export default function HomePage() {
                         
                         {/* Icon overlay */}
                         <div className="absolute inset-0 flex items-center justify-center">
-                          <IconComponent className="h-8 w-8 text-white drop-shadow-lg" />
+                          <IconComponent className="h-6 w-6 sm:h-8 sm:w-8 text-white drop-shadow-lg" />
                         </div>
                       </div>
                     </motion.div>
@@ -906,33 +909,33 @@ export default function HomePage() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: index * 0.1 }}
                     className="w-full bg-gradient-to-b from-neutral-900/90 to-neutral-800/90 backdrop-blur-sm rounded-2xl border border-primary/20 overflow-hidden group hover:border-primary/40 transition-all duration-300 flex flex-col h-full"
-                    whileHover={{ y: -8, scale: 1.02 }}
+                    whileHover={{ y: -4, scale: 1.01 }}
                   >
                     {/* Card Header */}
-                    <div className="p-6 flex flex-col h-full">
-                      <div className="text-center mb-4">
-                        <div className="w-14 h-14 bg-primary/20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                          <IconComponent className="h-7 w-7 text-primary" />
+                    <div className="p-4 sm:p-6 flex flex-col h-full">
+                      <div className="text-center mb-3 sm:mb-4">
+                        <div className="w-12 h-12 sm:w-14 sm:h-14 bg-primary/20 rounded-2xl flex items-center justify-center mx-auto mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300">
+                          <IconComponent className="h-6 w-6 sm:h-7 sm:w-7 text-primary" />
                         </div>
-                        <h3 className="text-lg font-bold text-white mb-3 group-hover:text-primary-200 transition-colors">
+                        <h3 className="text-base sm:text-lg font-bold text-white mb-2 sm:mb-3 group-hover:text-primary-200 transition-colors leading-tight">
                           {feature.title}
                         </h3>
-                        <p className="text-neutral-400 text-sm leading-relaxed flex-grow">
+                        <p className="text-neutral-400 text-xs sm:text-sm leading-relaxed flex-grow">
                           {feature.description}
                         </p>
                       </div>
 
                       {/* Enhanced Preview Screen */}
                       <div className="mt-auto">
-                        <div className="bg-black/50 rounded-xl p-4 border border-primary/10 h-28 flex flex-col justify-between group-hover:border-primary/20 transition-colors duration-300">
-                          <div className="space-y-2">
-                            <div className="h-2 bg-primary/30 rounded w-3/4 group-hover:bg-primary/40 transition-colors"></div>
-                            <div className="h-2 bg-primary/20 rounded w-1/2 group-hover:bg-primary/30 transition-colors"></div>
-                            <div className="h-2 bg-primary/10 rounded w-2/3 group-hover:bg-primary/20 transition-colors"></div>
+                        <div className="bg-black/50 rounded-xl p-3 sm:p-4 border border-primary/10 h-20 sm:h-28 flex flex-col justify-between group-hover:border-primary/20 transition-colors duration-300">
+                          <div className="space-y-1.5 sm:space-y-2">
+                            <div className="h-1.5 sm:h-2 bg-primary/30 rounded w-3/4 group-hover:bg-primary/40 transition-colors"></div>
+                            <div className="h-1.5 sm:h-2 bg-primary/20 rounded w-1/2 group-hover:bg-primary/30 transition-colors"></div>
+                            <div className="h-1.5 sm:h-2 bg-primary/10 rounded w-2/3 group-hover:bg-primary/20 transition-colors"></div>
                           </div>
-                          <div className="flex items-center justify-between pt-2">
-                            <div className="w-6 h-6 bg-primary/20 rounded-full flex items-center justify-center group-hover:bg-primary/30 transition-colors">
-                              <IconComponent className="h-3 w-3 text-primary" />
+                          <div className="flex items-center justify-between pt-1 sm:pt-2">
+                            <div className="w-5 h-5 sm:w-6 sm:h-6 bg-primary/20 rounded-full flex items-center justify-center group-hover:bg-primary/30 transition-colors">
+                              <IconComponent className="h-2.5 w-2.5 sm:h-3 sm:w-3 text-primary" />
                             </div>
                             <div className="text-xs text-primary/60 font-medium">AI Powered</div>
                           </div>
@@ -940,9 +943,9 @@ export default function HomePage() {
                       </div>
 
                       {/* Try Now Button */}
-                      <div className="mt-4">
+                      <div className="mt-3 sm:mt-4">
                         <Button
-                          className="w-full bg-primary/10 hover:bg-primary/20 text-primary border border-primary/30 hover:border-primary/50 transition-all duration-300"
+                          className="w-full bg-primary/10 hover:bg-primary/20 text-primary border border-primary/30 hover:border-primary/50 transition-all duration-300 py-2 sm:py-2.5 text-sm sm:text-base"
                           asChild
                         >
                           <Link to={`/${feature.id}`}>

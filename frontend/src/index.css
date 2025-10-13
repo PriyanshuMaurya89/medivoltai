@@ -256,6 +256,15 @@
     gap: clamp(1rem, 2vw, 1.5rem);
     max-width: 950px;
     margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  @media (max-width: 640px) {
+    .grid-zoom-3 {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      padding: 0 0.5rem;
+    }
   }
 
   .grid-zoom-4 {
@@ -264,6 +273,40 @@
     gap: clamp(0.75rem, 1.5vw, 1.25rem);
     max-width: 1000px;
     margin: 0 auto;
+  }
+
+  /* Mobile-specific improvements */
+  @media (max-width: 640px) {
+    /* Improve touch targets */
+    button, a {
+      min-height: 44px;
+      min-width: 44px;
+    }
+    
+    /* Better text sizing on mobile */
+    .text-xs { font-size: 0.75rem; }
+    .text-sm { font-size: 0.875rem; }
+    .text-base { font-size: 1rem; }
+    
+    /* Reduce motion for better mobile performance */
+    * {
+      animation-duration: 0.3s !important;
+      transition-duration: 0.3s !important;
+    }
+    
+    /* Better spacing on mobile */
+    .section-content-zoom {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+
+  /* Responsive positioning for rotating icons */
+  @media (min-width: 640px) {
+    .absolute[style*="--sm-left"] {
+      left: var(--sm-left) !important;
+      top: var(--sm-top) !important;
+    }
   }
 
   /* Button and interactive element fixes */
