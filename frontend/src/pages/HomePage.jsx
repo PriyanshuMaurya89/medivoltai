@@ -1312,13 +1312,19 @@ export default function HomePage() {
               MediVolt comes with dedicated AI support to help you understand and maintain
               your health without confusion.
             </p>
-            <motion.button
-              className="bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-500 hover:to-primary-600 text-white px-8 py-3 rounded-lg font-medium transition-colors"
+            <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              View About MediVolt
-            </motion.button>
+              <Button
+                className="bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-500 hover:to-primary-600 text-white px-6 py-3 sm:px-8 rounded-lg font-medium transition-colors min-h-[48px] text-base sm:text-lg"
+                asChild
+              >
+                <Link to="/about">
+                  View About MediVolt
+                </Link>
+              </Button>
+            </motion.div>
           </motion.div>
 
           {/* Professional Feature Showcase */}
