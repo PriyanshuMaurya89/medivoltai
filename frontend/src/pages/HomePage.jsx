@@ -894,6 +894,68 @@ export default function HomePage() {
 
 
 
+            {/* Featured AI Tools Cards */}
+            <div className="grid-zoom-3 mb-16">
+              {aiFeatures.slice(0, 6).map((feature, index) => {
+                const IconComponent = feature.icon;
+                return (
+                  <motion.div
+                    key={feature.id}
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    className="w-full bg-gradient-to-b from-neutral-900/90 to-neutral-800/90 backdrop-blur-sm rounded-2xl border border-primary/20 overflow-hidden group hover:border-primary/40 transition-all duration-300 flex flex-col h-full"
+                    whileHover={{ y: -8, scale: 1.02 }}
+                  >
+                    {/* Card Header */}
+                    <div className="p-6 flex flex-col h-full">
+                      <div className="text-center mb-4">
+                        <div className="w-14 h-14 bg-primary/20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                          <IconComponent className="h-7 w-7 text-primary" />
+                        </div>
+                        <h3 className="text-lg font-bold text-white mb-3 group-hover:text-primary-200 transition-colors">
+                          {feature.title}
+                        </h3>
+                        <p className="text-neutral-400 text-sm leading-relaxed flex-grow">
+                          {feature.description}
+                        </p>
+                      </div>
+
+                      {/* Enhanced Preview Screen */}
+                      <div className="mt-auto">
+                        <div className="bg-black/50 rounded-xl p-4 border border-primary/10 h-28 flex flex-col justify-between group-hover:border-primary/20 transition-colors duration-300">
+                          <div className="space-y-2">
+                            <div className="h-2 bg-primary/30 rounded w-3/4 group-hover:bg-primary/40 transition-colors"></div>
+                            <div className="h-2 bg-primary/20 rounded w-1/2 group-hover:bg-primary/30 transition-colors"></div>
+                            <div className="h-2 bg-primary/10 rounded w-2/3 group-hover:bg-primary/20 transition-colors"></div>
+                          </div>
+                          <div className="flex items-center justify-between pt-2">
+                            <div className="w-6 h-6 bg-primary/20 rounded-full flex items-center justify-center group-hover:bg-primary/30 transition-colors">
+                              <IconComponent className="h-3 w-3 text-primary" />
+                            </div>
+                            <div className="text-xs text-primary/60 font-medium">AI Powered</div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Try Now Button */}
+                      <div className="mt-4">
+                        <Button
+                          className="w-full bg-primary/10 hover:bg-primary/20 text-primary border border-primary/30 hover:border-primary/50 transition-all duration-300"
+                          asChild
+                        >
+                          <Link to={`/${feature.id}`}>
+                            Try {feature.title.split(' ')[0]}
+                          </Link>
+                        </Button>
+                      </div>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+
             {/* Bottom Feature Highlights */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
               {[
