@@ -685,7 +685,7 @@ export default function HomePage() {
                   AI Performance
                 </span>
               </div>
-              <h3 className="text-xl font-semibold text-neutral-900">
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
                 Real-time processing power
               </h3>
             </div>

@@ -1,46 +1,40 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Lock, Shield, Eye, Database, ArrowLeft } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Lock, Shield, Eye, Database } from 'lucide-react';
 
 export default function PrivacyPage() {
   return (
-    <div className="min-h-screen bg-black text-white">
-      {/* Background Effects */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-500/8 via-transparent to-transparent"></div>
-      <div className="absolute top-10 left-10 w-96 h-96 bg-purple-500/6 rounded-full blur-3xl animate-pulse"></div>
-      <div className="absolute bottom-10 right-10 w-80 h-80 bg-purple-600/4 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
-      
-      <div className="relative z-10 px-4 sm:px-6 py-8 sm:py-12 lg:py-20">
-        <div className="max-w-4xl mx-auto">
-          {/* Back Button */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="mb-6"
-          >
-            <Link
-              to="/"
-              className="inline-flex items-center text-purple-400 hover:text-purple-300 transition-colors"
-            >
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Back to Home
-            </Link>
-          </motion.div>
+    <div className="min-h-screen bg-black text-white relative overflow-hidden">
+      {/* Purple Background Effects */}
+      <div className="absolute inset-0">
+        <div className="absolute top-20 left-20 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-20 w-80 h-80 bg-purple-600/8 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-purple-400/5 rounded-full blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
+      </div>
 
-          <div className="bg-gradient-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-lg border border-gray-700/50 rounded-2xl shadow-2xl p-6 sm:p-8 lg:p-12">
-            <motion.div
-              className="text-center mb-10"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <div className="w-16 h-16 bg-purple-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Lock size={32} className="text-purple-400" />
-              </div>
-              <h1 className="text-3xl sm:text-4xl font-extrabold mb-4 bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent">Privacy Policy</h1>
-              <p className="text-gray-400 text-sm sm:text-base">Last Updated: October 15, 2025</p>
-            </motion.div>
+      <div className="section-content-zoom relative z-10 py-20">
+        {/* Hero Section */}
+        <motion.div 
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <motion.div
+            className="inline-flex items-center gap-3 px-6 py-3 bg-purple-500/20 backdrop-blur-sm rounded-full border border-purple-500/30 mb-6"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            <Lock className="h-5 w-5 text-purple-300" />
+            <span className="text-purple-200 font-semibold tracking-wide">PRIVACY POLICY</span>
+          </motion.div>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+            Your <span className="bg-gradient-to-r from-purple-400 to-purple-300 bg-clip-text text-transparent">Privacy Matters</span>
+          </h1>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">Learn how we protect and handle your personal information with transparency and care.</p>
+          <p className="text-gray-400 mt-4">Last Updated: October 15, 2025</p>
+        </motion.div>
         
             <div className="space-y-8">
               <motion.section
