@@ -46,22 +46,22 @@ const RegistrationSystemPage = () => {
 
   // Account Type Selection
   const AccountTypeSelection = () => (
-    <div className="min-h-screen bg-black flex items-center justify-center px-6">
-      <div className="max-w-6xl mx-auto">
+    <div className="min-h-screen bg-black flex items-center justify-center px-4 sm:px-6 py-8">
+      <div className="max-w-6xl mx-auto w-full">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-8"
+          className="text-center mb-6 sm:mb-8"
         >
-          <h1 className="text-4xl font-bold text-white mb-4">Join MediVolt</h1>
-          <p className="text-gray-400 text-lg">Choose your account type to get started</p>
+          <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4">Join MediVolt</h1>
+          <p className="text-gray-400 text-base sm:text-lg">Choose your account type to get started</p>
 
           {/* Login Link */}
-          <div className="mt-6 p-4 bg-purple-500/10 border border-purple-500/30 rounded-xl max-w-md mx-auto">
+          <div className="mt-4 sm:mt-6 p-3 sm:p-4 bg-purple-500/10 border border-purple-500/30 rounded-xl max-w-md mx-auto">
             <p className="text-gray-300 text-sm mb-3">Already have an account?</p>
             <Link
               to="/login"
-              className="inline-flex items-center justify-center w-full py-3 px-4 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white rounded-lg font-medium transition-all duration-300 shadow-lg hover:shadow-purple-500/25"
+              className="inline-flex items-center justify-center w-full py-3 px-4 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white rounded-lg font-medium transition-all duration-300 shadow-lg hover:shadow-purple-500/25 min-h-[48px] text-sm sm:text-base"
             >
               <Lock className="h-4 w-4 mr-2" />
               Sign In to Your Account
@@ -69,31 +69,31 @@ const RegistrationSystemPage = () => {
           </div>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
           {/* Patient Card */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            whileHover={{ y: -8, scale: 1.02 }}
+            whileHover={{ y: -4, scale: 1.01 }}
             onClick={() => { setAccountType('new users'); setStep('form'); }}
-            className="relative bg-gradient-to-br from-gray-900/80 to-gray-800/80 backdrop-blur-lg rounded-2xl p-8 border border-gray-700/50 cursor-pointer hover:border-purple-500/50 transition-all duration-300"
+            className="relative bg-gradient-to-br from-gray-900/80 to-gray-800/80 backdrop-blur-lg rounded-xl sm:rounded-2xl p-6 sm:p-8 border border-gray-700/50 cursor-pointer hover:border-purple-500/50 transition-all duration-300 min-h-[48px] touch-manipulation"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-600/10 to-blue-600/10 rounded-2xl"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-purple-600/10 to-blue-600/10 rounded-xl sm:rounded-2xl"></div>
             <div className="relative z-10">
-              <div className="w-16 h-16 bg-purple-500/20 rounded-full flex items-center justify-center mb-6 mx-auto">
-                <User className="h-8 w-8 text-purple-400" />
+              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-purple-500/20 rounded-full flex items-center justify-center mb-4 sm:mb-6 mx-auto">
+                <User className="h-6 w-6 sm:h-8 sm:w-8 text-purple-400" />
               </div>
-              <h3 className="text-2xl font-bold text-white mb-4 text-center">👤 New Users</h3>
-              <p className="text-gray-300 text-center mb-6">For individuals using MediVolt's AI tools & booking appointments</p>
-              <ul className="space-y-2 text-sm text-gray-400 mb-6">
+              <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4 text-center">👤 New Users</h3>
+              <p className="text-gray-300 text-center mb-4 sm:mb-6 text-sm sm:text-base">For individuals using MediVolt's AI tools & booking appointments</p>
+              <ul className="space-y-1 sm:space-y-2 text-xs sm:text-sm text-gray-400 mb-4 sm:mb-6">
                 <li>• AI Health Tools</li>
                 <li>• Book Appointments</li>
                 <li>• Emergency SOS</li>
                 <li>• Health Tracking</li>
               </ul>
-              <div className="flex items-center justify-center text-purple-400 font-medium">
-                Get Started <ArrowRight className="h-4 w-4 ml-2" />
+              <div className="flex items-center justify-center text-purple-400 font-medium text-sm sm:text-base">
+                Get Started <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4 ml-2" />
               </div>
             </div>
           </motion.div>
@@ -103,25 +103,25 @@ const RegistrationSystemPage = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            whileHover={{ y: -8, scale: 1.02 }}
+            whileHover={{ y: -4, scale: 1.01 }}
             onClick={() => { setAccountType('freelancer'); setStep('form'); }}
-            className="relative bg-gradient-to-br from-gray-900/80 to-gray-800/80 backdrop-blur-lg rounded-2xl p-8 border border-gray-700/50 cursor-pointer hover:border-purple-500/50 transition-all duration-300"
+            className="relative bg-gradient-to-br from-gray-900/80 to-gray-800/80 backdrop-blur-lg rounded-xl sm:rounded-2xl p-6 sm:p-8 border border-gray-700/50 cursor-pointer hover:border-purple-500/50 transition-all duration-300 min-h-[48px] touch-manipulation"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-green-600/10 to-purple-600/10 rounded-2xl"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-green-600/10 to-purple-600/10 rounded-xl sm:rounded-2xl"></div>
             <div className="relative z-10">
-              <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mb-6 mx-auto">
-                <Stethoscope className="h-8 w-8 text-green-400" />
+              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-green-500/20 rounded-full flex items-center justify-center mb-4 sm:mb-6 mx-auto">
+                <Stethoscope className="h-6 w-6 sm:h-8 sm:w-8 text-green-400" />
               </div>
-              <h3 className="text-2xl font-bold text-white mb-4 text-center">👨‍⚕️ Doctor/Nurse</h3>
-              <p className="text-gray-300 text-center mb-6">For healthcare experts offering consultations or seeking employment</p>
-              <ul className="space-y-2 text-sm text-gray-400 mb-6">
+              <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4 text-center">👨‍⚕️ Doctor/Nurse</h3>
+              <p className="text-gray-300 text-center mb-4 sm:mb-6 text-sm sm:text-base">For healthcare experts offering consultations or seeking employment</p>
+              <ul className="space-y-1 sm:space-y-2 text-xs sm:text-sm text-gray-400 mb-4 sm:mb-6">
                 <li>• Freelancer Marketplace</li>
                 <li>• Set Consultation Fees</li>
                 <li>• Hospital Hiring</li>
                 <li>• Professional Verification</li>
               </ul>
-              <div className="flex items-center justify-center text-green-400 font-medium">
-                Join as Professional <ArrowRight className="h-4 w-4 ml-2" />
+              <div className="flex items-center justify-center text-green-400 font-medium text-sm sm:text-base">
+                Join as Professional <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4 ml-2" />
               </div>
             </div>
           </motion.div>
@@ -131,25 +131,25 @@ const RegistrationSystemPage = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            whileHover={{ y: -8, scale: 1.02 }}
+            whileHover={{ y: -4, scale: 1.01 }}
             onClick={() => { setAccountType('hospital'); setStep('form'); }}
-            className="relative bg-gradient-to-br from-gray-900/80 to-gray-800/80 backdrop-blur-lg rounded-2xl p-8 border border-gray-700/50 cursor-pointer hover:border-purple-500/50 transition-all duration-300"
+            className="relative bg-gradient-to-br from-gray-900/80 to-gray-800/80 backdrop-blur-lg rounded-xl sm:rounded-2xl p-6 sm:p-8 border border-gray-700/50 cursor-pointer hover:border-purple-500/50 transition-all duration-300 min-h-[48px] touch-manipulation"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 to-purple-600/10 rounded-2xl"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 to-purple-600/10 rounded-xl sm:rounded-2xl"></div>
             <div className="relative z-10">
-              <div className="w-16 h-16 bg-blue-500/20 rounded-full flex items-center justify-center mb-6 mx-auto">
-                <Building className="h-8 w-8 text-blue-400" />
+              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-blue-500/20 rounded-full flex items-center justify-center mb-4 sm:mb-6 mx-auto">
+                <Building className="h-6 w-6 sm:h-8 sm:w-8 text-blue-400" />
               </div>
-              <h3 className="text-2xl font-bold text-white mb-4 text-center">🏥 Hospital/Clinic</h3>
-              <p className="text-gray-300 text-center mb-6">For institutions managing appointments & hiring freelancers</p>
-              <ul className="space-y-2 text-sm text-gray-400 mb-6">
+              <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4 text-center">🏥 Hospital/Clinic</h3>
+              <p className="text-gray-300 text-center mb-4 sm:mb-6 text-sm sm:text-base">For institutions managing appointments & hiring freelancers</p>
+              <ul className="space-y-1 sm:space-y-2 text-xs sm:text-sm text-gray-400 mb-4 sm:mb-6">
                 <li>• Admin Panel Access</li>
                 <li>• Hire Freelancers</li>
                 <li>• Patient Management</li>
                 <li>• Appointment System</li>
               </ul>
-              <div className="flex items-center justify-center text-blue-400 font-medium">
-                Register Institution <ArrowRight className="h-4 w-4 ml-2" />
+              <div className="flex items-center justify-center text-blue-400 font-medium text-sm sm:text-base">
+                Register Institution <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4 ml-2" />
               </div>
             </div>
           </motion.div>
