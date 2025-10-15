@@ -117,7 +117,7 @@ export default function PricingPage() {
                 
                 <Link 
                   to={tier.buttonLink} 
-                  className={`mt-8 w-full inline-flex justify-center py-3 px-5 rounded-lg text-white font-medium ${tier.buttonStyle}`}
+                  className={`mt-8 w-full inline-flex justify-center py-3 px-5 rounded-lg text-white font-medium min-h-[48px] items-center text-base sm:text-sm ${tier.buttonStyle}`}
                 >
                   {tier.buttonText}
                 </Link>

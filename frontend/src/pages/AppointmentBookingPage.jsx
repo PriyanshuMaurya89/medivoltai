@@ -111,74 +111,74 @@ export default function AppointmentBookingPage() {
 
   const DoctorCard = ({ doctor }) => (
     <motion.div
-      className="bg-gradient-to-br from-gray-900/90 via-gray-800/90 to-gray-900/90 border border-gray-600/30 rounded-3xl p-8 hover:border-primary-500/50 hover:shadow-2xl hover:shadow-primary-500/20 transition-all duration-500 backdrop-blur-sm group max-w-4xl mx-auto"
-      whileHover={{ y: -8, scale: 1.01 }}
+      className="bg-gradient-to-br from-gray-900/90 via-gray-800/90 to-gray-900/90 border border-gray-600/30 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 hover:border-primary-500/50 hover:shadow-2xl hover:shadow-primary-500/20 transition-all duration-500 backdrop-blur-sm group max-w-4xl mx-auto"
+      whileHover={{ y: -4, scale: 1.005 }}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
     >
-      <div className="flex items-start gap-6">
-        <div className="relative">
+      <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6">
+        <div className="relative flex-shrink-0">
           <img
             src={doctor.photo}
             alt={doctor.name}
-            className="w-20 h-20 rounded-2xl object-cover border-3 border-primary-500/40 shadow-lg group-hover:border-primary-400/60 transition-all duration-300"
+            className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl sm:rounded-2xl object-cover border-3 border-primary-500/40 shadow-lg group-hover:border-primary-400/60 transition-all duration-300"
           />
-          <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-green-500 border-2 border-gray-900 rounded-full"></div>
+          <div className="absolute -bottom-1 -right-1 w-5 h-5 sm:w-6 sm:h-6 bg-green-500 border-2 border-gray-900 rounded-full"></div>
         </div>
         
-        <div className="flex-1">
-          <div className="flex items-start justify-between mb-3">
-            <div>
-              <h3 className="text-white font-bold text-xl mb-1 group-hover:text-primary-200 transition-colors">{doctor.name}</h3>
-              <p className="text-primary-300 text-base font-semibold">{doctor.specialty}</p>
-              <p className="text-gray-400 text-sm flex items-center gap-1 mt-1">
-                <MapPin className="h-3 w-3" />
-                {doctor.hospital} • {doctor.location}
+        <div className="flex-1 w-full">
+          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-3 gap-2 sm:gap-0">
+            <div className="flex-1">
+              <h3 className="text-white font-bold text-lg sm:text-xl mb-1 group-hover:text-primary-200 transition-colors">{doctor.name}</h3>
+              <p className="text-primary-300 text-sm sm:text-base font-semibold">{doctor.specialty}</p>
+              <p className="text-gray-400 text-xs sm:text-sm flex items-center gap-1 mt-1">
+                <MapPin className="h-3 w-3 flex-shrink-0" />
+                <span className="truncate">{doctor.hospital} • {doctor.location}</span>
               </p>
             </div>
             
-            <div className="text-right">
+            <div className="text-left sm:text-right flex-shrink-0">
               <div className="text-white mb-1">
-                <span className="text-2xl font-bold text-primary-300">₹{doctor.fee}</span>
-                <span className="text-gray-400 text-sm ml-1">/ session</span>
+                <span className="text-xl sm:text-2xl font-bold text-primary-300">₹{doctor.fee}</span>
+                <span className="text-gray-400 text-xs sm:text-sm ml-1">/ session</span>
               </div>
-              <div className="flex items-center gap-1 text-accent-400 text-sm">
+              <div className="flex items-center gap-1 text-accent-400 text-xs sm:text-sm">
                 <Clock className="h-3 w-3" />
                 <span className="font-medium">{doctor.nextSlot}</span>
               </div>
             </div>
           </div>
           
-          <div className="flex items-center gap-6 mb-4">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 mb-4">
             <div className="flex items-center gap-1">
               <div className="flex">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} className={`h-4 w-4 ${i < Math.floor(doctor.rating) ? 'text-yellow-400 fill-current' : 'text-gray-600'}`} />
+                  <Star key={i} className={`h-3 w-3 sm:h-4 sm:w-4 ${i < Math.floor(doctor.rating) ? 'text-yellow-400 fill-current' : 'text-gray-600'}`} />
                 ))}
               </div>
-              <span className="text-white text-sm font-semibold ml-1">{doctor.rating}</span>
-              <span className="text-gray-400 text-sm">({doctor.reviews}+ reviews)</span>
+              <span className="text-white text-xs sm:text-sm font-semibold ml-1">{doctor.rating}</span>
+              <span className="text-gray-400 text-xs sm:text-sm">({doctor.reviews}+ reviews)</span>
             </div>
             
-            <div className="flex items-center gap-1 text-gray-400 text-sm">
+            <div className="flex items-center gap-1 text-gray-400 text-xs sm:text-sm">
               <User className="h-3 w-3" />
               <span>{doctor.experience} experience</span>
             </div>
           </div>
 
-          <div className="flex items-center justify-between">
-            <div className="flex gap-2">
-              <span className="px-3 py-1 bg-primary-500/20 text-primary-300 text-xs font-medium rounded-full border border-primary-500/30">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-0">
+            <div className="flex flex-wrap gap-2">
+              <span className="px-2 py-1 sm:px-3 bg-primary-500/20 text-primary-300 text-xs font-medium rounded-full border border-primary-500/30">
                 Available Today
               </span>
-              <span className="px-3 py-1 bg-accent-500/20 text-accent-300 text-xs font-medium rounded-full border border-accent-500/30">
+              <span className="px-2 py-1 sm:px-3 bg-accent-500/20 text-accent-300 text-xs font-medium rounded-full border border-accent-500/30">
                 Video Consultation
               </span>
             </div>
             
             <Button
               onClick={() => handleBookAppointment(doctor)}
-              className="bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-400 hover:to-primary-500 text-white px-8 py-3 rounded-2xl font-semibold transition-all duration-300 shadow-xl shadow-primary-500/30 hover:shadow-2xl hover:shadow-primary-500/40 transform hover:scale-105"
+              className="bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-400 hover:to-primary-500 text-white px-4 py-3 sm:px-6 lg:px-8 rounded-xl sm:rounded-2xl font-semibold transition-all duration-300 shadow-xl shadow-primary-500/30 hover:shadow-2xl hover:shadow-primary-500/40 transform hover:scale-105 text-sm sm:text-base min-h-[48px] w-full sm:w-auto"
             >
               Book Appointment
             </Button>
@@ -386,11 +386,11 @@ export default function AppointmentBookingPage() {
 
   return (
     <div className="min-h-screen bg-black text-white">
-      <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 lg:py-12">
         {/* Premium Header */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-8 sm:mb-12">
           <motion.h1 
-            className="text-5xl font-bold bg-gradient-to-r from-white via-primary-200 to-accent-300 bg-clip-text text-transparent mb-4"
+            className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-white via-primary-200 to-accent-300 bg-clip-text text-transparent mb-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -398,7 +398,7 @@ export default function AppointmentBookingPage() {
             Book an Appointment
           </motion.h1>
           <motion.p 
-            className="text-gray-400 text-lg max-w-2xl mx-auto"
+            className="text-gray-400 text-sm sm:text-base lg:text-lg max-w-2xl mx-auto px-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -408,18 +408,18 @@ export default function AppointmentBookingPage() {
         </div>
 
         {/* Premium Search Bar */}
-        <div className="mb-8">
-          <div className="relative bg-gradient-to-r from-gray-900/95 via-gray-800/95 to-gray-900/95 border border-primary-500/30 rounded-2xl shadow-2xl shadow-primary-500/10 overflow-hidden backdrop-blur-sm max-w-2xl mx-auto">
-            <div className="flex items-center px-6 py-4 gap-3">
-              <div className="w-10 h-10 bg-gradient-to-r from-primary-500 to-primary-600 rounded-xl flex items-center justify-center shadow-lg shadow-primary-500/25">
-                <Search className="h-5 w-5 text-white" />
+        <div className="mb-6 sm:mb-8">
+          <div className="relative bg-gradient-to-r from-gray-900/95 via-gray-800/95 to-gray-900/95 border border-primary-500/30 rounded-xl sm:rounded-2xl shadow-2xl shadow-primary-500/10 overflow-hidden backdrop-blur-sm max-w-2xl mx-auto">
+            <div className="flex items-center px-4 sm:px-6 py-3 sm:py-4 gap-3">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-primary-500 to-primary-600 rounded-lg sm:rounded-xl flex items-center justify-center shadow-lg shadow-primary-500/25 flex-shrink-0">
+                <Search className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
               </div>
               <input
                 type="text"
                 placeholder="Search doctors, hospitals, or symptoms"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="flex-1 bg-transparent text-white placeholder-gray-400 text-base focus:outline-none focus:placeholder-primary-300"
+                className="flex-1 bg-transparent text-white placeholder-gray-400 text-sm sm:text-base focus:outline-none focus:placeholder-primary-300 min-h-[44px]"
               />
             </div>
           </div>
