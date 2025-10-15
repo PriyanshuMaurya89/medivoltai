@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   User, Bell, Settings, AlertTriangle, Heart, Calendar,
   Activity, Brain, Stethoscope, TrendingUp, MapPin,
@@ -69,22 +69,22 @@ const NewUserDashboard = () => {
     <div className="min-h-screen bg-black text-white">
       {/* Top Navigation */}
       <div className="bg-gray-900/50 backdrop-blur-lg border-b border-gray-800">
-        <div className="max-w-7xl mx-auto px-6 py-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <div className="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center">
-                <User className="h-6 w-6 text-white" />
+            <div className="flex items-center space-x-3 sm:space-x-4">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-purple-500 rounded-full flex items-center justify-center">
+                <User className="h-4 w-4 sm:h-6 sm:w-6 text-white" />
               </div>
               <div>
-                <h1 className="text-lg font-semibold">{userName}</h1>
-                <p className="text-sm text-gray-400">New User</p>
+                <h1 className="text-base sm:text-lg font-semibold">{userName}</h1>
+                <p className="text-xs sm:text-sm text-gray-400">New User</p>
               </div>
             </div>
             
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2 sm:space-x-4">
               <button 
                 onClick={() => setShowNotifications(!showNotifications)}
-                className="relative p-2 text-gray-400 hover:text-white transition-colors"
+                className="relative p-2 text-gray-400 hover:text-white transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
               >
                 <Bell className="h-5 w-5" />
                 {notifications.filter(n => !n.read).length > 0 && (
@@ -95,13 +95,14 @@ const NewUserDashboard = () => {
               </button>
               <button 
                 onClick={() => setShowSettings(!showSettings)}
-                className="p-2 text-gray-400 hover:text-white transition-colors"
+                className="p-2 text-gray-400 hover:text-white transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
               >
                 <Settings className="h-5 w-5" />
               </button>
-              <button className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg font-medium transition-colors flex items-center space-x-2">
+              <button className="bg-red-600 hover:bg-red-700 px-3 py-2 sm:px-4 rounded-lg font-medium transition-colors flex items-center space-x-1 sm:space-x-2 text-sm sm:text-base min-h-[44px]">
                 <AlertTriangle className="h-4 w-4" />
-                <span>Emergency SOS</span>
+                <span className="hidden sm:inline">Emergency SOS</span>
+                <span className="sm:hidden">SOS</span>
               </button>
             </div>
           </div>
@@ -109,15 +110,15 @@ const NewUserDashboard = () => {
       </div>
 
       {/* Main Dashboard */}
-      <div className="max-w-7xl mx-auto px-6 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 sm:py-8">
         {/* Welcome Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-8"
+          className="mb-6 sm:mb-8"
         >
-          <h2 className="text-3xl font-bold mb-2">Good Morning, {userName.split(' ')[0]}! 🌅</h2>
-          <p className="text-gray-400">Here's your health overview for today</p>
+          <h2 className="text-2xl sm:text-3xl font-bold mb-2">Good Morning, {userName.split(' ')[0]}! 🌅</h2>
+          <p className="text-gray-400 text-sm sm:text-base">Here's your health overview for today</p>
         </motion.div>
 
         {/* Health Summary Card */}
@@ -125,18 +126,18 @@ const NewUserDashboard = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="bg-gradient-to-r from-purple-900/50 to-blue-900/50 backdrop-blur-lg rounded-2xl p-6 mb-8 border border-purple-500/20"
+          className="bg-gradient-to-r from-purple-900/50 to-blue-900/50 backdrop-blur-lg rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8 border border-purple-500/20"
         >
-          <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center justify-between mb-4 sm:mb-6">
             <div>
-              <h3 className="text-xl font-semibold mb-2">Your Health Score</h3>
+              <h3 className="text-lg sm:text-xl font-semibold mb-2">Your Health Score</h3>
               <div className="flex items-center space-x-2">
-                <div className="text-3xl font-bold text-green-400">{healthScore}%</div>
-                <div className="text-sm text-gray-400">Excellent</div>
+                <div className="text-2xl sm:text-3xl font-bold text-green-400">{healthScore}%</div>
+                <div className="text-xs sm:text-sm text-gray-400">Excellent</div>
               </div>
             </div>
-            <div className="w-20 h-20 relative">
-              <svg className="w-20 h-20 transform -rotate-90">
+            <div className="w-16 h-16 sm:w-20 sm:h-20 relative">
+              <svg className="w-16 h-16 sm:w-20 sm:h-20 transform -rotate-90">
                 <circle
                   cx="40"
                   cy="40"
@@ -190,20 +191,20 @@ const NewUserDashboard = () => {
           </div>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 mb-6 sm:mb-8">
           {/* Appointments Panel */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
-            className="bg-gray-900/50 backdrop-blur-lg rounded-2xl p-6 border border-gray-800"
+            className="bg-gray-900/50 backdrop-blur-lg rounded-2xl p-4 sm:p-6 border border-gray-800"
           >
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-xl font-semibold flex items-center">
-                <Calendar className="h-5 w-5 mr-2 text-purple-400" />
+            <div className="flex items-center justify-between mb-4 sm:mb-6">
+              <h3 className="text-lg sm:text-xl font-semibold flex items-center">
+                <Calendar className="h-4 w-4 sm:h-5 sm:w-5 mr-2 text-purple-400" />
                 Appointments
               </h3>
-              <button className="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+              <button className="bg-purple-600 hover:bg-purple-700 px-3 py-2 sm:px-4 rounded-lg text-xs sm:text-sm font-medium transition-colors min-h-[44px]">
                 Book New
               </button>
             </div>
