@@ -197,7 +197,7 @@ const RegistrationSystemPage = () => {
                   <label className="block text-sm font-medium text-gray-300 mb-2">Full Name *</label>
                   <input
                     type="text"
-                    className="w-full px-4 py-3 bg-gray-800/50 border border-gray-600/50 rounded-lg text-white focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300"
+                    className="w-full px-4 py-3 bg-gray-800/50 border border-gray-600/50 rounded-lg text-white focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300 min-h-[48px]"
                     placeholder="Enter your full name"
                     required
                   />
@@ -206,7 +206,7 @@ const RegistrationSystemPage = () => {
                   <label className="block text-sm font-medium text-gray-300 mb-2">Email Address *</label>
                   <input
                     type="email"
-                    className="w-full px-4 py-3 bg-gray-800/50 border border-gray-600/50 rounded-lg text-white focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300"
+                    className="w-full px-4 py-3 bg-gray-800/50 border border-gray-600/50 rounded-lg text-white focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300 min-h-[48px]"
                     placeholder="your@email.com"
                     required
                   />
@@ -216,16 +216,16 @@ const RegistrationSystemPage = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-300 mb-2">Mobile Number *</label>
-                  <div className="flex">
+                  <div className="flex flex-col sm:flex-row gap-2 sm:gap-0">
                     <input
                       type="tel"
-                      className="flex-1 px-4 py-3 bg-gray-800/50 border border-gray-600/50 rounded-l-lg text-white focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300"
+                      className="flex-1 px-4 py-3 bg-gray-800/50 border border-gray-600/50 rounded-lg sm:rounded-l-lg sm:rounded-r-none text-white focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300 min-h-[48px]"
                       placeholder="+91 9876543210"
                       required
                     />
                     <button
                       type="button"
-                      className="px-6 py-3 bg-gradient-to-r from-purple-600 to-purple-700 text-white rounded-r-lg hover:from-purple-500 hover:to-purple-600 transition-all duration-300 font-medium shadow-lg"
+                      className="px-4 py-3 sm:px-6 bg-gradient-to-r from-purple-600 to-purple-700 text-white rounded-lg sm:rounded-l-none sm:rounded-r-lg hover:from-purple-500 hover:to-purple-600 transition-all duration-300 font-medium shadow-lg text-sm sm:text-base min-h-[48px] whitespace-nowrap"
                     >
                       Send OTP
                     </button>
@@ -235,7 +235,7 @@ const RegistrationSystemPage = () => {
                   <label className="block text-sm font-medium text-gray-300 mb-2">Password *</label>
                   <input
                     type="password"
-                    className="w-full px-4 py-3 bg-gray-800/50 border border-gray-600/50 rounded-lg text-white focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300"
+                    className="w-full px-4 py-3 bg-gray-800/50 border border-gray-600/50 rounded-lg text-white focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300 min-h-[48px]"
                     placeholder="Create strong password"
                     required
                   />
