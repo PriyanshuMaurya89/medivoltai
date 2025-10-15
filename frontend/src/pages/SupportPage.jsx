@@ -1,16 +1,46 @@
 import React from 'react';
-import { LifeBuoy, Headset, BookOpen, MessageSquare, Phone } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { LifeBuoy, Headset, BookOpen, MessageSquare, Phone, ArrowLeft, Mail, Clock } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export default function SupportPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-600 to-indigo-800 text-white p-4 py-20">
-      <div className="max-w-6xl mx-auto">
-        {/* Hero Section */}
-        <div className="text-center mb-16">
-          <LifeBuoy size={64} className="mx-auto text-white mb-4 animate-pulse" />
-          <h1 className="text-5xl font-extrabold mb-4 drop-shadow-lg">Support Center</h1>
-          <p className="text-xl font-light opacity-90 max-w-3xl mx-auto">We're here to help! Find answers to your questions, troubleshoot issues, and get the most out of Medivolt.</p>
-        </div>
+    <div className="min-h-screen bg-black text-white">
+      {/* Background Effects */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-500/8 via-transparent to-transparent"></div>
+      <div className="absolute top-10 left-10 w-96 h-96 bg-purple-500/6 rounded-full blur-3xl animate-pulse"></div>
+      <div className="absolute bottom-10 right-10 w-80 h-80 bg-purple-600/4 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
+      
+      <div className="relative z-10 px-4 sm:px-6 py-8 sm:py-12 lg:py-20">
+        <div className="max-w-6xl mx-auto">
+          {/* Back Button */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="mb-6"
+          >
+            <Link
+              to="/"
+              className="inline-flex items-center text-purple-400 hover:text-purple-300 transition-colors"
+            >
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              Back to Home
+            </Link>
+          </motion.div>
+
+          {/* Hero Section */}
+          <motion.div
+            className="text-center mb-12 sm:mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="w-20 h-20 bg-purple-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
+              <LifeBuoy size={40} className="text-purple-400 animate-pulse" />
+            </div>
+            <h1 className="text-4xl sm:text-5xl font-extrabold mb-4 bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent">Support Center</h1>
+            <p className="text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">We're here to help! Find answers to your questions, troubleshoot issues, and get the most out of MediVolt.</p>
+          </motion.div>
 
         {/* Support Options Section */}
         <div className="grid md:grid-cols-3 gap-8 mb-16">

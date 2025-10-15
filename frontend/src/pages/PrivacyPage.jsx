@@ -1,25 +1,64 @@
 import React from 'react';
-import { Lock, Shield, Eye, Database } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Lock, Shield, Eye, Database, ArrowLeft } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export default function PrivacyPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-600 to-indigo-800 text-white p-4 py-20">
-      <div className="max-w-4xl mx-auto bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl shadow-xl p-8">
-        <div className="text-center mb-10">
-          <Lock size={64} className="mx-auto text-white mb-4" />
-          <h1 className="text-4xl font-extrabold mb-4">Privacy Policy</h1>
-          <p className="text-lg opacity-90">Last Updated: June 15, 2023</p>
-        </div>
+    <div className="min-h-screen bg-black text-white">
+      {/* Background Effects */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-500/8 via-transparent to-transparent"></div>
+      <div className="absolute top-10 left-10 w-96 h-96 bg-purple-500/6 rounded-full blur-3xl animate-pulse"></div>
+      <div className="absolute bottom-10 right-10 w-80 h-80 bg-purple-600/4 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
+      
+      <div className="relative z-10 px-4 sm:px-6 py-8 sm:py-12 lg:py-20">
+        <div className="max-w-4xl mx-auto">
+          {/* Back Button */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="mb-6"
+          >
+            <Link
+              to="/"
+              className="inline-flex items-center text-purple-400 hover:text-purple-300 transition-colors"
+            >
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              Back to Home
+            </Link>
+          </motion.div>
+
+          <div className="bg-gradient-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-lg border border-gray-700/50 rounded-2xl shadow-2xl p-6 sm:p-8 lg:p-12">
+            <motion.div
+              className="text-center mb-10"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="w-16 h-16 bg-purple-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Lock size={32} className="text-purple-400" />
+              </div>
+              <h1 className="text-3xl sm:text-4xl font-extrabold mb-4 bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent">Privacy Policy</h1>
+              <p className="text-gray-400 text-sm sm:text-base">Last Updated: October 15, 2025</p>
+            </motion.div>
         
-        <div className="space-y-8">
-          <section>
-            <h2 className="text-2xl font-bold mb-4 flex items-center">
-              <Shield className="mr-2" size={24} />
-              1. Introduction
-            </h2>
-            <p className="mb-3">At MediVolt, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our service.</p>
-            <p>Please read this privacy policy carefully. If you do not agree with the terms of this privacy policy, please do not access the application.</p>
-          </section>
+            <div className="space-y-8">
+              <motion.section
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+              >
+                <h2 className="text-xl sm:text-2xl font-bold mb-4 flex items-center text-white">
+                  <div className="w-8 h-8 bg-purple-500/20 rounded-lg flex items-center justify-center mr-3">
+                    <Shield className="h-4 w-4 text-purple-400" />
+                  </div>
+                  1. Introduction
+                </h2>
+                <div className="ml-11 space-y-3">
+                  <p className="text-gray-300 leading-relaxed">At MediVolt, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our service.</p>
+                  <p className="text-gray-300 leading-relaxed">Please read this privacy policy carefully. If you do not agree with the terms of this privacy policy, please do not access the application.</p>
+                </div>
+              </motion.section>
           
           <section>
             <h2 className="text-2xl font-bold mb-4 flex items-center">
@@ -139,11 +178,13 @@ export default function PrivacyPage() {
               <Shield className="mr-2" size={24} />
               8. Contact Us
             </h2>
-            <p>If you have any questions about this Privacy Policy, please contact us:</p>
-            <p className="mt-2">
-              <a href="mailto:privacy@medivolt.com" className="text-blue-300 hover:text-blue-100 underline">privacy@medivolt.com</a>
-            </p>
+            <p className="mb-3 text-gray-300">If you have any questions about this Privacy Policy, please contact us:</p>
+            <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
+              <a href="mailto:privacy@medivolt.com" className="text-purple-400 hover:text-purple-300 underline font-medium">privacy@medivolt.com</a>
+            </div>
           </section>
+        </div>
+          </div>
         </div>
       </div>
     </div>
